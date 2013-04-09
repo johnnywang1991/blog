@@ -2,25 +2,9 @@
     <div class="navbar-inner">
         <a class="brand" href="/">{{ site.title }}</a>
         <ul class="nav">
-            {% for num in (1..5) %}
-                {% if page.title == num %}
-                    <li class="active">
-                {% else %}
-                    <li>
-                {% endif %}
-                {% case num %}
-                    {% when 1 %}
-                    <a href="/category.html">分类</a></li>
-                    {% when 2 %}
-                        <a href="/tag.html">标签</a></li>
-                    {% when 3 %}
-                        <a href="/about.html">关于</a></li>
-                    {% when 4 %}
-                        <a href="/archive.html">存档</a></li>
-                    {% when 5 %}
-                        <a href="/rss.html">RSS</a></li>
-                {% endcase %}
-            {% endfor %}
+            {% assign pages_list = site.pages %}
+            {% assign group = 'navigation' %}
+            {% include JB/pages_list %}
         </ul>
         <form class="navbar-search pull-right">
             <input type="text" class="search-query" placeholder="搜索">
