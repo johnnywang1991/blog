@@ -1,5 +1,10 @@
 ---
-layout: post
-title: 3
+layout: page
+title : 关于
+header : 关于
+group: navigation
 ---
-关于
+{% include JB/setup %}
+
+{% assign posts_collate = site.posts %}
+{% include JB/posts_collate %}
