@@ -1,15 +1,7 @@
 ---
 layout: nil
 title : RSS
-group: navigation
 ---
-{% include JB/setup %}
-
-<ul>
-{% assign pages_list = site.pages %}
-{% include JB/pages_list %}
-</ul>
-
 <h2>All Pages</h2>
 <?xml version="1.0" encoding="UTF-8" ?>
 <rss version="2.0">
