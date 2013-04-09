@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: post
 title : 关于
 header : 关于
 group: navigation
