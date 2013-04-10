@@ -6,7 +6,7 @@ baseurl: /
 author: xiao_cang
 description: Take some notes.
 
-markdown: rdiscount 
+markdown: maruku
 paginate: 5
 exclude: [.*,css/style.css,css/css.pl,_post/template.html]
 

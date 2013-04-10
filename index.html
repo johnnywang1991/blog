@@ -15,7 +15,7 @@ excerpt: true
     {% if post.excerpt %}<p><a href="{{ post.url }}/#more">阅读全文 →</a></p>
     {% else %}
       {% unless post.tags == empty %}
-      <ul class="tag_box inline">{% assign tags_list = post.tags %}{% include tags_list %}</ul>
+      <ul class="tag_box inline">{% include setup %}{% include tags_list %}</ul>
       {% endunless %}
     {% endif %}
   </div><!-- wrapper -->
