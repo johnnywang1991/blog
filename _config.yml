@@ -1,5 +1,5 @@
-auto: true
-safe: true
+safe: false
+server: true
 
 title: 笔记整理
 url: http://192.168.0.100:4000
