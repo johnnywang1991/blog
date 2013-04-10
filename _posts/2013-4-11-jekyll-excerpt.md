@@ -21,13 +21,14 @@ Goolge了一下，果然很快就找到相关插件：
 
 正当我有点小失望的时候，找到了这篇文章：[Post excerpts in Jekyll](http://foldl.me/2012/jekyll-excerpts/)
 <!-- more -->
+
+只要利用Liquid模板语言中的一个filter就可以实现：
+
 {% capture text%}{%raw%}{{ post.content | split: '<!-- more -->' | first }}{%endraw%}{% endcapture %}
 {% include liquid_raw%}
 
 然后在截断的文章后加上`阅读全文`
 
     <p><a href="{{ post.url }}#more">阅读全文 →</a></p>
-
-只要利用Liquid模板语言中的一个filter就可以实现。
 
 这样，即使是托管在Github上的Jekyll也能截断输出了。
