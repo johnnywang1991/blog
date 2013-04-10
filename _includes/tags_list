@@ -1,0 +1,18 @@
+{% if site.JW.tags_list == "custom" %}
+  {% include custom/tags_list %}
+{% else %}
+  {% if tags_list.first[0] == null %}
+    <ul class="tag_box inline">
+    {% for tag in tags_list %} 
+    	<li><a href="{{ BASE_PATH }}{{ tags_path }}#{{ tag }}-ref">{{ tag }} <span>{{ site.tags[tag].size }}</span></a></li>
+    {% endfor %}
+    </ul>
+  {% else %}
+    <ul class="tag_box inline">
+    {% for tag in tags_list %} 
+    	<li><a href="{{ BASE_PATH }}{{ tags_path }}#{{ tag[0] }}-ref">{{ tag[0] }} <span>{{ tag[1].size }}</span></a></li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endif %}
+{% assign tags_list = nil %}

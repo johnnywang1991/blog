@@ -1,0 +1,13 @@
+{% if site.JW.pages_list == 'custom' %}
+  {% include custom/pages_list %}
+{% else %}
+  {% for node in pages_list %}
+      {% if node.group == 'navigation' %}
+        {% if node.title == page.title %}
+          <li class="active"><a href="{{ node.url }}">{{ node.title }}</a></li>
+        {% else %}
+          <li><a href="{{ node.url }}">{{ node.title }}</a></li>
+        {% endif %}
+      {% endif %}
+  {% endfor %}
+{% endif %}

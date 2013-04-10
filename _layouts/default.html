@@ -1,17 +1,52 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        {% include header.html %}
-    </head>
-    <body>
-        {% include JB/setup %}
-        {% include nav.html %}
-        <div class="container">
-            <div class="content">
-                {{ content }}
-            </div>
-        </div>
-        {% include footer.html%}
-    </body>
-</html>
+  <head>
+    <title>{{ page.title }}</title>
+    <meta charset="utf8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="{{ site.author }}" />
+    {% if site.description %}<meta name="description" content="{{ site.description }}" />{% endif %}
+    <meta name="robots" content="noodp, nydir" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="/css/style.min.css" rel="stylesheet" media="screen" />
+  </head>
+  <body>
 
+    <!-- Navbar -->
+    <div class="navbar navbar-inverse">
+      <div class="navbar-inner">
+        <a class="brand" href="/">{{ site.title }}</a>
+        <ul class="nav">
+          {% include setup %}{% include pages_list %}
+        </ul>
+        <form class="navbar-search pull-right">
+          <input type="text" class="search-query" placeholder="搜索">
+        </form>
+      </div><!-- navbar navbar-inverse -->
+    </div><!-- navbar-inner -->
+
+    <!-- content -->
+    <div class="container">
+      <div class="content">
+        {{ content }}
+      </div><!-- container -->
+    </div><!-- content -->
+
+    <!-- Pager -->
+    <div class="content"><div class="wrapper">
+      <ul class="pager">
+        <div id="post-pagination" class="pagination">
+          {% if paginator.previous_page %}<p class="previous">{% if paginator.previous_page == 1 %}<a href="/">上一页</a>{% else %}<a href="/page{{paginator.previous_page}}">上一页</a>{% endif %}<!-- paginator.previous_page == 1 --></p>
+          {% else %}<p class="previous disabled"><span>上一页</span></p>
+          {% endif %}
+          {% if paginator.next_page %}<p class="next"><a href="/page{{paginator.next_page}}">下一页</a></p>
+          {% else %}<p class="next disabled"><span>下一页</span></p>
+          {% endif %}
+        </div><!-- content -->
+      </ul>
+    <script src="http://code.jquery.com/jquery.js"></script>
+    </div><!-- navbar-inner -->
+    <small><center> &copy; xiao_cang 2013 with help from <a href="https://github.com/mojombo/jekyll">Jekyll</a> and <a href="http://twitter.github.io/bootstrap/">twitter Bootstrap</a> </center></small>
+    </div><!-- wrapper -->
+  </body>
+</html>

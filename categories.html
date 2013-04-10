@@ -1,0 +1,18 @@
+---
+layout: pages
+title: 分类
+group: navigation
+---
+{% include setup %}
+{% include categories_list %}
+
+{% include setup %}
+{% for category in categories_list %}
+  <h2 id="{{ category[0] }}-ref">{{ category[0] | join: "/" }}</h2>
+  <ul class="postsList">
+    {% assign posts_list = category[1] %}
+    {% for node in posts_list %}
+          <li><a href="{{ node.url }}">{{ node.title }}</a></li>
+    {% endfor %}
+  </ul>
+{% endfor %}
