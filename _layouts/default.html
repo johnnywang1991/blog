@@ -33,6 +33,7 @@
     </div><!-- content -->
 
     <!-- Pager -->
+    {% if page.title == site.title %}
     <div class="content"><div class="wrapper">
       <ul class="pager">
         <div id="post-pagination" class="pagination">
@@ -44,8 +45,9 @@
           {% endif %}
         </div><!-- content -->
       </ul>
-    <script src="http://code.jquery.com/jquery.js"></script>
+    {% endif %}
     </div><!-- navbar-inner -->
+    <script src="http://code.jquery.com/jquery.js"></script>
     <small><center> &copy; xiao_cang 2013 with help from <a href="https://github.com/mojombo/jekyll">Jekyll</a> and <a href="http://twitter.github.io/bootstrap/">twitter Bootstrap</a> </center></small>
     </div><!-- wrapper -->
   </body>
