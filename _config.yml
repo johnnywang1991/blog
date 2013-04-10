@@ -1,12 +1,10 @@
-safe: false
-server: true
-
 title: 笔记整理
 url: http://192.168.0.100:4000
 baseurl: /
 author: xiao_cang
 description: Take some notes.
 
+pygments: true
 markdown: rdiscount
 paginate: 5
 exclude: [.*,css/style.css,css/css.pl,_post/template.html]

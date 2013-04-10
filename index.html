@@ -8,15 +8,8 @@ excerpt: true
     <article>
       <h1><a href="{{ post.url }}">{{ post.title }}</a>
       <small class="pull-right">{{ post.date | date:"%b %e, %Y" }}</small></h1>
-      {% if post.excerpt %}{{ post.excerpt }}
-      {% else %}{{ post.content | only_first_p }}
-      {% endif %}
+    {{ post.content |  split: '<!-- more -->' | first  }}
     </article>
-    {% if post.excerpt %}<p><a href="{{ post.url }}/#more">阅读全文 →</a></p>
-    {% else %}
-      {% unless post.tags == empty %}
-      <ul class="tag_box inline">{% include setup %}{% include tags_list %}</ul>
-      {% endunless %}
-    {% endif %}
+    <p><a href="{{ post.url }}/#more">阅读全文 →</a></p>
   </div><!-- wrapper -->
 {% endfor %}
