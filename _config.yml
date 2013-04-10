@@ -1,5 +1,5 @@
 auto: true
-safe: false
+safe: true
 
 title: 笔记整理
 url: http://192.168.0.100:4000
@@ -7,7 +7,7 @@ baseurl: /
 author: xiao_cang
 description: Take some notes.
 
-markdown: maruku
+markdown: rdiscount
 paginate: 5
 exclude: [.*,css/style.css,css/css.pl,_post/template.html]
 
