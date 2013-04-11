@@ -3,6 +3,7 @@ url: http://192.168.0.100:4000
 baseurl: /
 author: xiao_cang
 description: Take some notes.
+auto: true
 
 pygments: true
 markdown: rdiscount
