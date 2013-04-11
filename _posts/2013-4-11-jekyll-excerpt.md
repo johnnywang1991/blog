@@ -1,9 +1,9 @@
 ---
 layout: post
-title: 如何在Jekyll中使用截断输出
+title: 在Jekyll中使用截断输出
 category : Jekyll
 tagline: "Supporting tagline"
-tags : [excerpt, jekyll, github, tutorial]
+tags : [excerpt, jekyll, github]
 ---
 
 因为之前一直用的是[WordPress](http://wordpress.org)，转到Jekyll后自然的就想去找一个可以识别`<!-- more -->`来截断输出的方法
@@ -16,7 +16,7 @@ Goolge了一下，果然很快就找到相关插件：
 -   [`excerpt.rb`](https://gist.github.com/stympy/986665)：可以识别`<!-- more -->`的插件
 
 不过如果你的Jekyll也是托管在Github上的话，那么就不能用插件的方法了。
-出于安全原因，Github在运行Jekyll的时候用了`--safe`的参数，第三方插件通通无效。
+出于安全考虑，Github在运行Jekyll的时候用了`--safe`的参数，第三方插件通通无效。
 ### Liquid
 
 正当我有点小失望的时候，找到了这篇文章：[Post excerpts in Jekyll](http://foldl.me/2012/jekyll-excerpts/)

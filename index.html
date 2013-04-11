@@ -10,6 +10,7 @@ excerpt: true
       <small class="pull-right">{{ post.date | date:"%b %e, %Y" }}</small></h1>
     {{ post.content |  split: '<!-- more -->' | first  }}
     </article>
+    <ul class="tag_box inline">{% assign tags_list = post.tags %}{% include tags_list %}</ul>
     <p><a href="{{ post.url }}#more">阅读全文 →</a></p>
   </div><!-- wrapper -->
 {% endfor %}
