@@ -1,18 +1,22 @@
 ---
-layout: pages
+layout: default
 title: 标签
 group: navigation
 ---
 {% include setup %}
-{% include tags_list %}
+{% include breadcrumb.html %}
 
-{% include setup %}
 {% for tag in tags_list %}
-  <h2 id="{{ tag[0] }}-ref">{{ tag[0] | join: "/" }}</h2>
-  <ul class="postsList">
-    {% assign posts_list = tag[1] %}
-    {% for node in posts_list %}
-          <li><a href="{{ node.url }}">{{ node.title }}</a></li>
-    {% endfor %}
-  </ul>
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <div class="panel-title" id="{{ tag[0] }}-ref">{{ tag[0] | join: "/" }}</div>
+    </div>
+    <div class="panel-body">
+        {% assign posts_list = tag[1] %}
+        {% for node in posts_list %}
+            <p><a href="{{ node.url }}">{{ node.title }}</a></p>
+        {% endfor %}
+    </div>
+</div>
 {% endfor %}
+

@@ -1,0 +1,11 @@
+<ul class="breadcrumb">
+    <li>
+        <a href="{{ site.baseurl }}"><span class="glyphicon glyphicon-home"></span></a>
+    </li>
+    {% if page.categories %}
+    <li><a href="/categories.html">{{ page.categories }}</a></li>
+    <li class="active">{{ page.title }}</li>
+    {% else %}
+    <li class="active">{{ page.title }}</li>
+    {% endif %}
+</ul>

@@ -20,6 +20,7 @@ Goolge了一下，果然很快就找到相关插件：
 ### Liquid
 
 正当我有点小失望的时候，找到了这篇文章：[Post excerpts in Jekyll](http://foldl.me/2012/jekyll-excerpts/)
+
 <!-- more -->
 
 只要利用Liquid模板语言中的一个filter就可以实现：

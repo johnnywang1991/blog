@@ -1,54 +1,46 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>{{ page.title }}</title>
-    <meta charset="utf8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="author" content="{{ site.author }}" />
-    {% if site.description %}<meta name="description" content="{{ site.description }}" />{% endif %}
-    <meta name="robots" content="noodp, nydir" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link href="/css/style.min.css" rel="stylesheet" media="screen" />
-  </head>
-  <body>
+    <head>
+        <title>{{ page.title }}</title>
 
-    <!-- Navbar -->
-    <div class="navbar navbar-inverse">
-      <div class="navbar-inner">
-        <a class="brand" href="/">{{ site.title }}</a>
-        <ul class="nav">
-          {% include setup %}{% include pages_list %}
-        </ul>
-        <!-- <form class="navbar-search pull-right">
-          <input type="text" class="search-query" placeholder="搜索">
-        </form> -->
-      </div><!-- navbar navbar-inverse -->
-    </div><!-- navbar-inner -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="author" content="@xiao_cang" />
+        {% if site.description %}<meta name="description" content="{{ site.description }}" />{% endif %}
 
-    <!-- content -->
-    <div class="container">
-      <div class="content">
-        {{ content }}
-      </div><!-- container -->
-    </div><!-- content -->
+        <link rel="icon" href="/assets/img/favicon.ico" mce_href="/assets/img/favicon.ico" type="image/x-icon">
+        <link rel="shortcut icon" href="/assets/img/favicon.ico" mce_href="/assets/img/favicon.ico" type="image/x-icon">
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="/assets/js/html5shiv.js"></script>
+            <script src="/assets/js/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-1 col-md-2"></div>
+                <div class="col-sm-10 col-md-8">
+                    {% include setup %}
+                    <!-- top nav bar -->
+                    {% include navbar.html %}
 
-    <!-- Pager -->
-    {% if page.title == site.title %}
-    <div class="content"><div class="wrapper">
-      <ul class="pager">
-        <div id="post-pagination" class="pagination">
-          {% if paginator.previous_page %}<p class="previous">{% if paginator.previous_page == 1 %}<a href="/">上一页</a>{% else %}<a href="/page{{paginator.previous_page}}">上一页</a>{% endif %}<!-- paginator.previous_page == 1 --></p>
-          {% else %}<p class="previous disabled"><span>上一页</span></p>
-          {% endif %}
-          {% if paginator.next_page %}<p class="next"><a href="/page{{paginator.next_page}}">下一页</a></p>
-          {% else %}<p class="next disabled"><span>下一页</span></p>
-          {% endif %}
-        </div><!-- content -->
-      </ul>
-    {% endif %}
-    </div><!-- navbar-inner -->
-    <script src="http://code.jquery.com/jquery.js"></script>
-    <small><center> &copy; xiao_cang 2013 with help from <a href="https://github.com/mojombo/jekyll">Jekyll</a> and <a href="http://twitter.github.io/bootstrap/">twitter Bootstrap</a> </center></small>
-    </div><!-- wrapper -->
-  </body>
+                    <!-- content -->
+                    {{ content }}
+
+                    <!-- footer -->
+                    {% include footer.html %}
+                </div>
+                <div class="col-sm-1 col-md-2">
+                </div>
+            </div>
+        </div>
+
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    </body>
 </html>

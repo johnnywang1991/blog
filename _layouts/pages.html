@@ -2,6 +2,12 @@
 layout: default
 group: layout
 ---
-<div class="wrapper">
-  {{ content }}
+<!-- breadcrumbs -->
+{% include breadcrumb.html %}
+
+<div class="panel panel-default">
+    <!-- content -->
+    <div class="panel-body">
+        {{ content }}
+    </div>
 </div>

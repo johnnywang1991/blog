@@ -5,4 +5,5 @@
 {% assign tags_list = site.tags %}
 {% assign tags_path = "/tags.html" %}
 {% assign posts_list = site.tags %}
+{% assign about_path = "/about.html" %}
 {% endcapture %}
