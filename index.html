@@ -11,7 +11,7 @@ title: 呵呵
         </h3>
         <div class="content">
             {{ post.content | split: '<!-- more -->' | first }}
-            <p class="pull-right"><a href="#more">阅读全文 →</a></p>
+            <p class="pull-right"><a href="{{ post.url }}">阅读全文 →</a></p>
             {% include setup %}{% include tags_list %}
         </div>
     </div>
