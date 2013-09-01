@@ -4,6 +4,6 @@
 {% assign categories_path = "/categories.html" %}
 {% assign tags_list = site.tags %}
 {% assign tags_path = "/tags.html" %}
-{% assign posts_list = site.tags %}
+{% assign posts_list = post.tags %}
 {% assign about_path = "/about.html" %}
 {% endcapture %}
