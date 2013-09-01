@@ -3,7 +3,7 @@ layout: post
 title: 在Jekyll中使用截断输出
 category : Jekyll
 tagline: "Supporting tagline"
-tags : [excerpt, jekyll, github]
+tags : [jekyll]
 ---
 
 因为之前一直用的是[WordPress](http://wordpress.org)，转到Jekyll后自然的就想去找一个可以识别`<!-- more -->`来截断输出的方法

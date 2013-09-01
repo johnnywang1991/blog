@@ -3,7 +3,7 @@ layout: post
 title: 开学 
 category : 随笔
 tagline: "Supporting tagline"
-tags : [null]
+tags : [有感]
 ---
 9月1日是一年一度大中小学开学的日子
 
