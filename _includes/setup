@@ -6,4 +6,5 @@
 {% assign tags_path = "/tags.html" %}
 {% assign posts_list = post.tags %}
 {% assign about_path = "/about.html" %}
+{% assign archive_path = "/archive.html" %}
 {% endcapture %}
