@@ -5,7 +5,7 @@ group: navigation
 ---
 {% include setup %}
 <div class="table-responsive">
-	<table class="table">
+	<table class="table" style="border-top:0px">
 	{% for post in site.posts %}  
 	<tr>
 		<td><span>{{ post.date | date: "%b %d, %Y" }}</span></td>
