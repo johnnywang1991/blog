@@ -10,7 +10,7 @@ category : Git
 ### 使用情景
 进行一次提交之后，马上发现代码里可能有一两行需要改动，更改之后再次提交，然后又觉得哪里不妥。。。
 
-{% highlight console %}
+{% highlight shell-session %}
 [root@addcp gitdemo]# vim test.txt
 [root@addcp gitdemo]# git commit -am 'add test.txt'
 发现一些代码需要小改动
@@ -30,7 +30,7 @@ category : Git
 
 这样多次之后，git的commit记录就会变得很乱，一堆小改动，却占用了很多次提交记录：
 
-{% highlight console %}
+{% highlight shell-session %}
 [root@addcp gitdemo]# git log
 commit abe26fe0f5b1788e8f7b1949082e1477c5337aa0
 Author: xiaocang <xiaocang@addcp.com>
@@ -64,19 +64,19 @@ Date:   Sat Sep 7 01:28:22 2013 +0800
 
 git rebase语法是这样的
 
-{% highlight console %}
+{% highlight shell-session %}
 git rebase [--interactive | -i] [-v] [--force-rebase | -f] [--no-ff] [--onto <newbase>] [<upstream>|--root] [<branch>] [--quiet | -q]
 {% endhighlight %}
 
 这里我们使用到的是`-i`选项，也就是交互的rebase
 
-{% highlight console %}
+{% highlight shell-session %}
 [root@addcp gitdemo]# git -i HEAD~3
 {% endhighlight %}
 
 其中`HEAD~3`是该分支的前三次提交。也可以在后面加`<branch>`的参数指定要衍合的分支。
 
-{% highlight text %}
+{% highlight bash %}
 pick c8bc032 update test.txt
 f c3633d5 update test.txt again
 f abe26fe update test.txt again and again
@@ -108,7 +108,7 @@ f abe26fe update test.txt again and again
 
 如上，我就会得到一个这样的日志：
 
-{% highlight console %}
+{% highlight shell-session %}
 [root@addcp gitdemo]# git log
 commit 3e5d79d149942f7dc0741a9a42ce43d98beafcd3
 Author: xiaocang <xiaocang@addcp.com>
