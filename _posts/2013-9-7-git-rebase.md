@@ -76,7 +76,7 @@ git rebase [--interactive | -i] [-v] [--force-rebase | -f] [--no-ff] [--onto <ne
 
 其中`HEAD~3`是该分支的前三次提交。也可以在后面加`<branch>`的参数指定要衍合的分支。
 
-{% highlight text linenos %}
+{% highlight text %}
 pick c8bc032 update test.txt
 f c3633d5 update test.txt again
 f abe26fe update test.txt again and again
