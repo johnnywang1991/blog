@@ -24,9 +24,11 @@ category : Git
 ...
 {% endhighlight %}
 
-这样多次之后，git的commit记录就会变得很乱，一堆小改动，却占用了很多次提交记录：
+<!-- more -->
 
 ### 问题重现
+
+这样多次之后，git的commit记录就会变得很乱，一堆小改动，却占用了很多次提交记录：
 
 {% highlight console %}
 [root@addcp gitdemo]# git log
@@ -74,7 +76,7 @@ git rebase [--interactive | -i] [-v] [--force-rebase | -f] [--no-ff] [--onto <ne
 
 其中`HEAD~3`是该分支的前三次提交。也可以在后面加`<branch>`的参数指定要衍合的分支。
 
-{% highlight text %}
+{% highlight text linenos %}
 pick c8bc032 update test.txt
 f c3633d5 update test.txt again
 f abe26fe update test.txt again and again
@@ -102,6 +104,8 @@ f abe26fe update test.txt again and again
 
 `fixup`则和`squash`不同，它会自动忽略此次日志的内容。这正是我此次commit整理中需要的
 
+### rebase成果
+
 如上，我就会得到一个这样的日志：
 
 {% highlight console %}
@@ -120,3 +124,15 @@ Date:   Sat Sep 7 01:28:22 2013 +0800
 {% endhighlight %}
 
 这样整个世界就都清净了
+
+---------------------------------------
+
+*注意*
+如果看过git的官方文档的人都应该知道
+
+> 不要对任何已上线的部分使用衍合
+
+因为这样对线上的提交纪录进行改变，对一个多人协作的项目来说，是不好的。
+项目中的其他人会因此感到困惑，因为本来存在的一个提交纪录突然不见了
+
+所以衍合主要是在提交到线上之前进行commit合并，使提交纪录变得干净的方法
