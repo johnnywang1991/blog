@@ -33,25 +33,25 @@ category : Git
 {% highlight console %}
 [root@addcp gitdemo]# git log
 commit abe26fe0f5b1788e8f7b1949082e1477c5337aa0
-Author: admin <admin@addcp.com>
+Author: xiaocang <xiaocang@addcp.com>
 Date:   Sat Sep 7 01:29:48 2013 +0800
 
     update test.txt again and again
 
 commit c3633d5153bacabeceaeaeb552484e7f9b6a2b9c
-Author: admin <admin@addcp.com>
+Author: xiaocang <xiaocang@addcp.com>
 Date:   Sat Sep 7 01:29:21 2013 +0800
 
     update test.txt again
 
 commit c8bc032daac7d0859a0e73cd83a464cee0f59625
-Author: admin <admin@addcp.com>
+Author: xiaocang <xiaocang@addcp.com>
 Date:   Sat Sep 7 01:28:51 2013 +0800
 
     update test.txt
 
 commit 0e80061e90503189dd7f189297aed809953e5e8b
-Author: admin <admin@addcp.com>
+Author: xiaocang <xiaocang@addcp.com>
 Date:   Sat Sep 7 01:28:22 2013 +0800
 
     add test.txt
@@ -111,13 +111,13 @@ f abe26fe update test.txt again and again
 {% highlight console %}
 [root@addcp gitdemo]# git log
 commit 3e5d79d149942f7dc0741a9a42ce43d98beafcd3
-Author: admin <admin@addcp.com>
+Author: xiaocang <xiaocang@addcp.com>
 Date:   Sat Sep 7 01:28:51 2013 +0800
 
     update test.txt
 
 commit 0e80061e90503189dd7f189297aed809953e5e8b
-Author: admin <admin@addcp.com>
+Author: xiaocang <xiaocang@addcp.com>
 Date:   Sat Sep 7 01:28:22 2013 +0800
 
     add test.txt
@@ -127,12 +127,14 @@ Date:   Sat Sep 7 01:28:22 2013 +0800
 
 ---------------------------------------
 
-*注意*
+**注意**
+
 如果看过git的官方文档的人都应该知道
 
 > 不要对任何已上线的部分使用衍合
 
 因为这样对线上的提交纪录进行改变，对一个多人协作的项目来说，是不好的。
+
 项目中的其他人会因此感到困惑，因为本来存在的一个提交纪录突然不见了
 
 所以衍合主要是在提交到线上之前进行commit合并，使提交纪录变得干净的方法
