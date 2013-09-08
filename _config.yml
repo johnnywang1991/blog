@@ -6,7 +6,7 @@ auto: true
 
 pygments: true
 markdown: redcarpet
-paginate: 5
+paginate: 2
 
 permalink:  /:year/:month/:title.html
 
