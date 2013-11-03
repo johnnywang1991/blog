@@ -13,7 +13,9 @@ category : Perl
 ### 什么是BerkeleyDB
 
 > [`维基百科`](http://zh.wikipedia.org/wiki/Berkeley_DB)
+
 > Berkeley DB（BDB）是一个高效的嵌入式数据库编程库，C语言、C++、Java、Perl、Python、Tcl以及其他很多语言都有其对应的API。Berkeley DB可以保存任意类型的键/值对（Key/Value Pair），而且可以为一个键保存多个数据。Berkeley DB支持让数千的并发线程同时操作数据库，支持最大256TB的数据，广泛用于各种操作系统，其中包括大多数类Unix操作系统、Windows操作系统以及实时操作系统。
+
 <!-- more -->
 
 ### 使用BerkeleyDB对url去重的好处
