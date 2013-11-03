@@ -14,21 +14,25 @@ category : Perl
 
 [`维基百科 BerkeleyDB`](http://zh.wikipedia.org/wiki/Berkeley_DB)：
 
-> Berkeley DB（BDB）是一个高效的嵌入式数据库编程库，C语言、C++、Java、Perl、Python、Tcl以及其他很多语言都有其对应的API。Berkeley DB可以保存任意类型的键/值对（Key/Value Pair），而且可以为一个键保存多个数据。Berkeley DB支持让数千的并发线程同时操作数据库，支持最大256TB的数据，广泛用于各种操作系统，其中包括大多数类Unix操作系统、Windows操作系统以及实时操作系统。
+> Berkeley DB（BDB）是一个高效的嵌入式数据库编程库，C语言、C++、Java、Perl、Python、Tcl以及其他很多语言都有其对应的API。Berkeley DB可以保存任意类型的键/值对（Key/Value Pair），而且可以为一个键保存多个数据。
+
+> Berkeley DB支持让数千的并发线程同时操作数据库，支持最大256TB的数据，广泛用于各种操作系统，其中包括大多数类Unix操作系统、Windows操作系统以及实时操作系统。
 
 <!-- more -->
 
 ### 使用BerkeleyDB对url去重的好处
 
-1. BerkeleyDB是一种放在disk上的url解决方案，相对于将url全部放进hash这种方法，不用担心内存溢出的问题，在程序意外中断后也不会丢失数据。
+1. BerkeleyDB是一种放在磁盘上的url解决方案，相对于将url全部放进hash这种方法，不用担心内存溢出的问题，在程序意外中断后也不会丢失数据。
 
-2. 相对于[Bloom Filter](http://en.wikipedia.org/wiki/Bloom_filter)，BerkeleyDB不存在失误率的问题。
+2. 虽然是放在磁盘上的解决方案，但不需要考虑进行磁盘IO操作的性能损失的，BerkeleyDB在设计的时候很好地考虑了这些问题。
 
-3. BerkeleyDB是一个key/value对的数据库，这也是使用它作为url去重的原因。
+3. 相对于[Bloom Filter](http://en.wikipedia.org/wiki/Bloom_filter)，BerkeleyDB不存在失误率的问题。
 
-4. BerkeleyDB还是一种嵌入型数据库，它是和程序跑在同一进程空间内的。相对于一般C/S的数据库，效率高了很多。
+4. BerkeleyDB是一个key/value对的数据库，这也是使用它作为url去重的原因。
 
-5. BerkeleyDB是一种NOSQL数据库，不必在解析SQL语句上消耗不必要的资源。
+5. BerkeleyDB还是一种嵌入型数据库，它是和程序跑在同一内存空间内的。其结果是，不管应用程序是运行在同一台机器上还是运行在网络上，在进行数据库操作时，它都无需进行进程间通信。相对于一般C/S的数据库，效率高了很多。
+
+6. BerkeleyDB是一种NOSQL数据库，不必在解析SQL语句上消耗不必要的资源。
 
 ### 例子
 
