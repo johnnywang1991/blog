@@ -22,7 +22,7 @@ category : Perl
 
 1. BerkeleyDB是一种放在disk上的url解决方案，相对于将url全部放进hash这种方法，不用担心内存溢出的问题，在程序意外中断后也不会丢失数据。
 
-2. 相对于[Bloom Filter](http://en.wikipedia.org/wiki/Bloom_filter)，BerkeleyDB不存在准确率的问题。
+2. 相对于[Bloom Filter](http://en.wikipedia.org/wiki/Bloom_filter)，BerkeleyDB不存在失误率的问题。
 
 3. BerkeleyDB是一个key/value对的数据库，这也是使用它作为url去重的原因。
 
@@ -57,7 +57,7 @@ my $env = new BerkeleyDB::Env
     -Flags  => DB_CREATE|DB_INIT_CDB|DB_INIT_MPOOL
         or die "can not open environment: $BerkeleyDB::Error\n";
 
-# 将%data与Berkeley绑定
+# 将%data与BerkeleyDB绑定
 my $db = tie my %data, 'BerkeleyDB::Hash',
     -Filename   => $berkeleydb_temp_file,
     -Flags      => DB_CREATE,
@@ -82,7 +82,7 @@ Mojo::IOLoop->delay(
         for (@url) {
             # url 去重
             next if $data{$_};
-
+            # 抓取网页内容
             $ua->get($_ => $delay->begin);
         }
     },
@@ -90,7 +90,8 @@ Mojo::IOLoop->delay(
         my ($delay, @result) = @_;
 
         for my $tx (@result) {
-            if ($tx->success) {
+            if (my $dom = $tx->success) {
+
                 # 使用lock保证多进程时BerkeleyDB的数据安全
                 my $lock = $db->cds_lock();
 
