@@ -94,7 +94,7 @@ Mojo::IOLoop->delay(
         my ($delay, @result) = @_;
 
         for my $tx (@result) {
-            if (my $dom = $tx->success) {
+            if (my $res = $tx->success) {
 
                 # 使用lock保证多进程时BerkeleyDB的数据安全
                 my $lock = $db->cds_lock();
