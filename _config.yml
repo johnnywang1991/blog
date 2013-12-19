@@ -1,8 +1,8 @@
 title: 呵呵
-baseurl: /
 url: http://addcp.com
+baseurl: /
 author: xiao_cang
-description: He He
+description: 呵呵
 auto: true
 
 pygments: true
