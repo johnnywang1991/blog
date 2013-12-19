@@ -20,6 +20,7 @@
                     </ul>
                 </li>
                 <li {% if page.url == archive_path %}class="active"{% endif %} ><a href="{{ archive_path }}">归档</a></li>
+                <li {% if page.url == "/feed.xml" %}class="active"{% endif %} ><a href="/feed.xml">RSS</a></li>
                 <li {% if page.url == about_path %}class="active"{% endif %} ><a href="{{ about_path }}">关于</a></li>
             </ul>
             <!--
