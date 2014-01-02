@@ -1,0 +1,20 @@
+---
+layout: default
+title: 呵呵
+---
+{% for post in paginator.posts %}
+<div class="panel panel-default">
+    <div class="panel-body">
+        <h3>
+            <a href="{{ post.url }}">{{ post.title }}</a>
+            <small class="pull-right text-muted">{{ post.date | date:"%b %e, %Y" }}</small>
+        </h3>
+        <div class="content">
+            {{ post.content | split: '<!-- more -->' | first }}
+            <p class="pull-right"><a href="{{ post.url }}">阅读全文 →</a></p>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+{% include pagination.html %}
