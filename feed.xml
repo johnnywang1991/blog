@@ -3,8 +3,8 @@
         <channel>
                 <title></title>
                 <description>呵呵</description>
-                <link>http://175.22.14.64:4000</link>
-                <atom:link href="http://175.22.14.64:4000/feed.xml" rel="self" type="application/rss+xml" />
+                <link>http://addcp.com</link>
+                <atom:link href="http://addcp.com/feed.xml" rel="self" type="application/rss+xml" />
                 
                         <item>
                                 <title>入手iP5s</title>
@@ -15,8 +15,8 @@
 
 </description>
                                 <pubDate>Wed, 25 Dec 2013 00:00:00 +0800</pubDate>
-                                <link>http://175.22.14.64:4000//2013/12/ip5s.html</link>
-                                <guid isPermaLink="true">http://175.22.14.64:4000//2013/12/ip5s.html</guid>
+                                <link>http://addcp.com//2013/12/ip5s.html</link>
+                                <guid isPermaLink="true">http://addcp.com//2013/12/ip5s.html</guid>
                         </item>
                 
                         <item>
@@ -53,8 +53,8 @@ git reset --hard origin/master
 
 </description>
                                 <pubDate>Fri, 22 Nov 2013 00:00:00 +0800</pubDate>
-                                <link>http://175.22.14.64:4000//2013/11/git-abuse.html</link>
-                                <guid isPermaLink="true">http://175.22.14.64:4000//2013/11/git-abuse.html</guid>
+                                <link>http://addcp.com//2013/11/git-abuse.html</link>
+                                <guid isPermaLink="true">http://addcp.com//2013/11/git-abuse.html</guid>
                         </item>
                 
                         <item>
@@ -173,8 +173,8 @@ Mojo::IOLoop-&gt;start unless Mojo::IOLoop-&gt;is_running;
 
 </description>
                                 <pubDate>Sat, 02 Nov 2013 00:00:00 +0800</pubDate>
-                                <link>http://175.22.14.64:4000//2013/11/perl-crawler-duplicate-remove.html</link>
-                                <guid isPermaLink="true">http://175.22.14.64:4000//2013/11/perl-crawler-duplicate-remove.html</guid>
+                                <link>http://addcp.com//2013/11/perl-crawler-duplicate-remove.html</link>
+                                <guid isPermaLink="true">http://addcp.com//2013/11/perl-crawler-duplicate-remove.html</guid>
                         </item>
                 
                         <item>
@@ -313,8 +313,8 @@ Date:   Sat Sep 7 01:28:22 2013 +0800
 所以衍合主要是在提交到线上之前进行commit合并，使提交纪录变得干净的方法
 </description>
                                 <pubDate>Sat, 07 Sep 2013 00:00:00 +0800</pubDate>
-                                <link>http://175.22.14.64:4000//2013/09/git-rebase.html</link>
-                                <guid isPermaLink="true">http://175.22.14.64:4000//2013/09/git-rebase.html</guid>
+                                <link>http://addcp.com//2013/09/git-rebase.html</link>
+                                <guid isPermaLink="true">http://addcp.com//2013/09/git-rebase.html</guid>
                         </item>
                 
                         <item>
@@ -326,8 +326,8 @@ Date:   Sat Sep 7 01:28:22 2013 +0800
 写一些感想瞎想和技术文
 </description>
                                 <pubDate>Wed, 04 Sep 2013 00:00:00 +0800</pubDate>
-                                <link>http://175.22.14.64:4000//2013/09/about-blog.html</link>
-                                <guid isPermaLink="true">http://175.22.14.64:4000//2013/09/about-blog.html</guid>
+                                <link>http://addcp.com//2013/09/about-blog.html</link>
+                                <guid isPermaLink="true">http://addcp.com//2013/09/about-blog.html</guid>
                         </item>
                 
                         <item>
@@ -339,8 +339,8 @@ Date:   Sat Sep 7 01:28:22 2013 +0800
 今年刚刚毕业的我还是会有点小伤感虽然不知道为什么
 </description>
                                 <pubDate>Sun, 01 Sep 2013 00:00:00 +0800</pubDate>
-                                <link>http://175.22.14.64:4000//2013/09/school-opens.html</link>
-                                <guid isPermaLink="true">http://175.22.14.64:4000//2013/09/school-opens.html</guid>
+                                <link>http://addcp.com//2013/09/school-opens.html</link>
+                                <guid isPermaLink="true">http://addcp.com//2013/09/school-opens.html</guid>
                         </item>
                 
                         <item>
@@ -375,8 +375,8 @@ Liquid
 这样，即使是托管在Github上的Jekyll也能截断输出了。
 </description>
                                 <pubDate>Thu, 11 Apr 2013 00:00:00 +0800</pubDate>
-                                <link>http://175.22.14.64:4000//2013/04/jekyll-excerpt.html</link>
-                                <guid isPermaLink="true">http://175.22.14.64:4000//2013/04/jekyll-excerpt.html</guid>
+                                <link>http://addcp.com//2013/04/jekyll-excerpt.html</link>
+                                <guid isPermaLink="true">http://addcp.com//2013/04/jekyll-excerpt.html</guid>
                         </item>
                 
         </channel>
