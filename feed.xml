@@ -1,1 +1,383 @@
-stage/_site/feed.xml
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+        <channel>
+                <title></title>
+                <description>呵呵</description>
+                <link>http://175.22.14.64:4000</link>
+                <atom:link href="http://175.22.14.64:4000/feed.xml" rel="self" type="application/rss+xml" />
+                
+                        <item>
+                                <title>入手iP5s</title>
+                                <description>在接近2013年末的时候，终于把手机换成了智能机，一下心情好了不少。
+
+之前连微信都没有的日子终于一去不返，不过这是一件让人惊讶的事嘛？
+
+
+</description>
+                                <pubDate>Wed, 25 Dec 2013 00:00:00 +0800</pubDate>
+                                <link>http://175.22.14.64:4000//2013/12/ip5s.html</link>
+                                <guid isPermaLink="true">http://175.22.14.64:4000//2013/12/ip5s.html</guid>
+                        </item>
+                
+                        <item>
+                                <title>关于git reset的风险</title>
+                                <description>在使用git pull origin master更新代码的时候有时会遇到有冲突无法合并的情况，而又知道在remote端的代码是对的，只要覆盖掉本地的代码就好了。
+
+之前我是这样做的：
+
+git fetch --all
+git reset --hard origin/master
+
+
+然后也会得到一个我想要的结果。
+
+可是今天当我重复同样的操作时，事故却发生了。很多有用的数据在这个操作之后被删除，而且无法找回了。
+
+
+
+我的Git环境是这样的：
+
+这是一个在线上运行的系统，会在同目录下实时生成很多历史数据，然而由于其数据量较大，就没有加到git追踪文件里。但是又没有写好.gitignore文件。又由于是多人维护的项目，不知什么时候被人执行过一句git add --all。
+
+就这样。。。珍贵的历史数据在一个不可撤消的git reset --hard操作之后被删除了。
+
+数据最后也没有找回来。。。
+
+所以在git管理项目时要注意几点：
+
+
+1 慎用git reset --hard
+2 写好.gitignore文件
+3 线上的数据要做备份
+4 不要添加不追踪的文件
+
+</description>
+                                <pubDate>Fri, 22 Nov 2013 00:00:00 +0800</pubDate>
+                                <link>http://175.22.14.64:4000//2013/11/git-abuse.html</link>
+                                <guid isPermaLink="true">http://175.22.14.64:4000//2013/11/git-abuse.html</guid>
+                        </item>
+                
+                        <item>
+                                <title>爬虫的url去重</title>
+                                <description>最近用Perl写了一些爬虫，没想到在url去重的问题上碰了钉子。
+
+之前写过一些小的爬虫，url去重的方法都是爬一条就写进数据库，然后在写之前去查询数据库。
+因为这次爬虫的规模较之前的都大，如果在去重问题上消耗太多时间和数据库连接实在不值得。
+
+在网上一搜，才发现url去重也是爬虫的难题之一。而我最终采用了不简单的URL去重这篇文章中推荐的方法：使用BerkeleyDB。
+
+什么是BerkeleyDB
+
+维基百科 BerkeleyDB：
+
+
+Berkeley DB（BDB）是一个高效的嵌入式数据库编程库，C语言、C++、Java、Perl、Python、Tcl以及其他很多语言都有其对应的API。Berkeley DB可以保存任意类型的键/值对（Key/Value Pair），而且可以为一个键保存多个数据。
+
+Berkeley DB支持让数千的并发线程同时操作数据库，支持最大256TB的数据，广泛用于各种操作系统，其中包括大多数类Unix操作系统、Windows操作系统以及实时操作系统。
+
+
+
+
+使用BerkeleyDB对url去重的好处
+
+
+BerkeleyDB是一种放在磁盘上的url解决方案，相对于将url全部放进hash这种方法，不用担心内存溢出的问题，在程序意外中断后也不会丢失数据。
+虽然是放在磁盘上的解决方案，但不需要考虑进行磁盘IO操作的性能损失的，BerkeleyDB在设计的时候很好地考虑了这些问题。
+相对于Bloom Filter，BerkeleyDB不存在失误率的问题。
+BerkeleyDB是一个key/value对的数据库，这也是使用它作为url去重的原因。
+BerkeleyDB还是一种嵌入型数据库，它是和程序跑在同一内存空间内的。其结果是，不管应用程序是运行在同一台机器上还是运行在网络上，在进行数据库操作时，它都无需进行进程间通信。相对于一般C/S的数据库，效率高了很多。
+BerkeleyDB是一种NOSQL数据库，不必在解析SQL语句上消耗不必要的资源。
+
+
+例子
+
+BerkeleyDB有Perl的接口，用法也非常简单，下面贴一段我的部分代码：
+
+use 5.010;
+use strict;
+use warnings;
+use Smart::Comments;
+use utf8;
+
+use BerkeleyDB;
+use Mojo::UserAgent;
+
+# 使用Mojo::UserAgent用于抓取网页
+my $ua = Mojo::UserAgent-&gt;new;
+
+# temp file for BerkeleyDB
+my $tmp_dir = &quot;/tmp&quot;;
+my $berkeleydb_temp_file = &quot;/tmp/tmp.berkeleydb&quot;;
+
+# 设定BerkeleyDB的环境
+my $env = new BerkeleyDB::Env
+    -Home   =&gt; $tmp_dir,
+    -Flags  =&gt; DB_CREATE|DB_INIT_CDB|DB_INIT_MPOOL
+        or die &quot;can not open environment: $BerkeleyDB::Error\n&quot;;
+
+# 将%data与BerkeleyDB绑定
+my $db = tie my %data, &#39;BerkeleyDB::Hash&#39;,
+    -Filename   =&gt; $berkeleydb_temp_file,
+    -Flags      =&gt; DB_CREATE,
+    -Env        =&gt; $env
+        or die &quot;Can not create file: $! $BerkeleyDB::Error\n&quot;;
+
+# usage: $db-&gt;db_put(&#39;apple&#39;, &#39;red&#39;);
+
+# 在页面上获取一些url
+# do some thing ...
+# ...
+# ...
+
+# 从页面上获得一些url(作为例子)
+my @url = qw/a.example.com b.example a.example/;
+
+# 使用Mojo::IOLoop作异步抓取页面
+# 详细用法见MetaCPAN的Mojo::IOLoop用法
+Mojo::IOLoop-&gt;delay(
+    sub {
+        my $delay = shift;
+        for (@url) {
+            # url 去重
+            next if $data{$_};
+            # 抓取网页内容
+            $ua-&gt;get($_ =&gt; $delay-&gt;begin);
+        }
+    },
+    sub {
+        my ($delay, @result) = @_;
+
+        for my $tx (@result) {
+            if (my $res = $tx-&gt;success) {
+
+                # 使用lock保证多进程时BerkeleyDB的数据安全
+                my $lock = $db-&gt;cds_lock();
+
+                # save to berkeleydb
+                $db-&gt;db_put($url, &#39;done&#39;);
+
+                $db-&gt;db_sync();
+                $lock-&gt;cds_unlock();
+                undef $lock;
+
+                # do something...
+            } else {
+                my ($err, $code) = $tx-&gt;error;
+                say $code ? &quot;$code response: $err&quot; : &quot;Connection error: $err&quot;;
+            }
+        }
+    }
+);
+
+Mojo::IOLoop-&gt;start unless Mojo::IOLoop-&gt;is_running;
+
+</description>
+                                <pubDate>Sat, 02 Nov 2013 00:00:00 +0800</pubDate>
+                                <link>http://175.22.14.64:4000//2013/11/perl-crawler-duplicate-remove.html</link>
+                                <guid isPermaLink="true">http://175.22.14.64:4000//2013/11/perl-crawler-duplicate-remove.html</guid>
+                        </item>
+                
+                        <item>
+                                <title>用git rebase合并commit</title>
+                                <description>最近时常用git来作版本控制和代码提交，渐渐发现了git rebase的用法和好处
+
+尤其在整理与合并git的提交记录时，git rebase使用起来十分灵活
+
+使用情景
+
+进行一次提交之后，马上发现代码里可能有一两行需要改动，更改之后再次提交，然后又觉得哪里不妥。。。
+
+[root@addcp gitdemo]# vim test.txt
+[root@addcp gitdemo]# git commit -am &#39;add test.txt&#39;
+发现一些代码需要小改动
+[root@addcp gitdemo]# vim test.txt
+[root@addcp gitdemo]# git commit -am &#39;update test.txt&#39;
+...
+...
+第N次发现
+[root@addcp gitdemo]# vim test.txt
+[root@addcp gitdemo]# git commit -am &#39;update test.txt again and again&#39;
+...
+
+
+
+
+问题重现
+
+这样多次之后，git的commit记录就会变得很乱，一堆小改动，却占用了很多次提交记录：
+
+[root@addcp gitdemo]# git log
+commit abe26fe0f5b1788e8f7b1949082e1477c5337aa0
+Author: xiaocang &lt;xiaocang@addcp.com&gt;
+Date:   Sat Sep 7 01:29:48 2013 +0800
+
+    update test.txt again and again
+
+commit c3633d5153bacabeceaeaeb552484e7f9b6a2b9c
+Author: xiaocang &lt;xiaocang@addcp.com&gt;
+Date:   Sat Sep 7 01:29:21 2013 +0800
+
+    update test.txt again
+
+commit c8bc032daac7d0859a0e73cd83a464cee0f59625
+Author: xiaocang &lt;xiaocang@addcp.com&gt;
+Date:   Sat Sep 7 01:28:51 2013 +0800
+
+    update test.txt
+
+commit 0e80061e90503189dd7f189297aed809953e5e8b
+Author: xiaocang &lt;xiaocang@addcp.com&gt;
+Date:   Sat Sep 7 01:28:22 2013 +0800
+
+    add test.txt
+......
+
+
+rebase 示例及用法
+
+这时如果使用git rebase来解决这个问题就非常容易了
+
+git rebase语法是这样的
+
+git rebase [--interactive | -i] [-v] [--force-rebase | -f] [--no-ff] [--onto &lt;newbase&gt;] [&lt;upstream&gt;|--root] [&lt;branch&gt;] [--quiet | -q]
+
+
+这里我们使用到的是-i选项，也就是交互的rebase
+
+[root@addcp gitdemo]# git -i HEAD~3
+
+
+其中HEAD~3是该分支的前三次提交。也可以在后面加&lt;branch&gt;的参数指定要衍合的分支。
+
+pick c8bc032 update test.txt
+f c3633d5 update test.txt again
+f abe26fe update test.txt again and again
+
+# Rebase 0e80061..abe26fe onto 0e80061
+#
+# Commands:
+#  p, pick = use commit
+#  r, reword = use commit, but edit the commit message
+#  e, edit = use commit, but stop for amending
+#  s, squash = use commit, but meld into previous commit
+#  f, fixup = like &quot;squash&quot;, but discard this commit&#39;s log message
+#
+# If you remove a line here THAT COMMIT WILL BE LOST.
+# However, if you remove everything, the rebase will be aborted.
+
+
+其中，pick是将该次提交原样提交
+
+reword也是提交，不过在提交之前会让你再次修改该次提交日志
+
+edit和reword差不多，但是在修改提交日志后，会等待你再次git commit --amend，也就是等待你追加一些需要提交的文件与改动。之后再使用git rebase --continue完成整个rebase
+
+squash是将该次提交合并到前一次提交里，但会将这次提交的日志内容合并到上一次里
+
+fixup则和squash不同，它会自动忽略此次日志的内容。这正是我此次commit整理中需要的
+
+rebase成果
+
+如上，我就会得到一个这样的日志：
+
+[root@addcp gitdemo]# git log
+commit 3e5d79d149942f7dc0741a9a42ce43d98beafcd3
+Author: xiaocang &lt;xiaocang@addcp.com&gt;
+Date:   Sat Sep 7 01:28:51 2013 +0800
+
+    update test.txt
+
+commit 0e80061e90503189dd7f189297aed809953e5e8b
+Author: xiaocang &lt;xiaocang@addcp.com&gt;
+Date:   Sat Sep 7 01:28:22 2013 +0800
+
+    add test.txt
+
+
+这样整个世界就都清净了
+
+
+
+注意
+
+如果看过git的官方文档的人都应该知道
+
+
+不要对任何已上线的部分使用衍合
+
+
+因为这样对线上的提交纪录进行改变，对一个多人协作的项目来说，是不好的。
+
+项目中的其他人会因此感到困惑，因为本来存在的一个提交纪录突然不见了
+
+所以衍合主要是在提交到线上之前进行commit合并，使提交纪录变得干净的方法
+</description>
+                                <pubDate>Sat, 07 Sep 2013 00:00:00 +0800</pubDate>
+                                <link>http://175.22.14.64:4000//2013/09/git-rebase.html</link>
+                                <guid isPermaLink="true">http://175.22.14.64:4000//2013/09/git-rebase.html</guid>
+                        </item>
+                
+                        <item>
+                                <title>←一个每年都换域名的博客</title>
+                                <description>这是一个每年都换域名的博客。。。（我干嘛说出来）
+
+然后打算暂定这个域名addcp.com
+
+写一些感想瞎想和技术文
+</description>
+                                <pubDate>Wed, 04 Sep 2013 00:00:00 +0800</pubDate>
+                                <link>http://175.22.14.64:4000//2013/09/about-blog.html</link>
+                                <guid isPermaLink="true">http://175.22.14.64:4000//2013/09/about-blog.html</guid>
+                        </item>
+                
+                        <item>
+                                <title>开学</title>
+                                <description>9月1日是一年一度大中小学开学的日子
+
+往年都会因为假期结束而有点小伤感
+
+今年刚刚毕业的我还是会有点小伤感虽然不知道为什么
+</description>
+                                <pubDate>Sun, 01 Sep 2013 00:00:00 +0800</pubDate>
+                                <link>http://175.22.14.64:4000//2013/09/school-opens.html</link>
+                                <guid isPermaLink="true">http://175.22.14.64:4000//2013/09/school-opens.html</guid>
+                        </item>
+                
+                        <item>
+                                <title>在Jekyll中使用截断输出</title>
+                                <description>因为之前一直用的是WordPress，转到Jekyll后自然的就想去找一个可以识别&lt;!-- more --&gt;来截断输出的方法
+
+插件
+
+Goolge了一下，果然很快就找到相关插件：
+
+
+  jekyll-only_first_p：可以只输出第一段的插件(需要Nokogiri支持)
+  excerpt.rb：可以识别&lt;!-- more --&gt;的插件
+
+
+不过如果你的Jekyll也是托管在Github上的话，那么就不能用插件的方法了。
+出于安全考虑，Github在运行Jekyll的时候用了--safe的参数，第三方插件通通无效。
+
+Liquid
+
+正当我有点小失望的时候，找到了这篇文章：Post excerpts in Jekyll
+
+
+
+只要利用Liquid模板语言中的一个filter就可以实现：
+
+{{ post.content | split: &#39;&lt;!-- more --&gt;&#39; | first }}
+
+然后在截断的文章后加上阅读全文
+&lt;p&gt;&lt;a href=&quot;#more&quot;&gt;阅读全文 →&lt;/a&gt;&lt;/p&gt;
+
+这样，即使是托管在Github上的Jekyll也能截断输出了。
+</description>
+                                <pubDate>Thu, 11 Apr 2013 00:00:00 +0800</pubDate>
+                                <link>http://175.22.14.64:4000//2013/04/jekyll-excerpt.html</link>
+                                <guid isPermaLink="true">http://175.22.14.64:4000//2013/04/jekyll-excerpt.html</guid>
+                        </item>
+                
+        </channel>
+</rss>
