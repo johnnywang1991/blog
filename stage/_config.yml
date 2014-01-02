@@ -7,6 +7,7 @@ description: 呵呵
 port: 3000
 
 exclude: [publish]
+rss_name: feed.xml
 
 pygments: true
 markdown: redcarpet

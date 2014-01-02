@@ -1,383 +1,407 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-        <channel>
-                <title>呵呵</title>
-                <description>呵呵</description>
-                <link>http://addcp.com</link>
-                <atom:link href="http://addcp.com/feed.xml" rel="self" type="application/rss+xml" />
-                
-                        <item>
-                                <title>入手iP5s</title>
-                                <description>在接近2013年末的时候，终于把手机换成了智能机，一下心情好了不少。
+<rss version="2.0"
+  xmlns:content="http://purl.org/rss/1.0/modules/content/"
+  xmlns:dc="http://purl.org/dc/elements/1.1/"
+  xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd"
+  xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/">
+  <channel>
+    <title>呵呵</title>
+    <link>http://addcp.com</link>
+    <description>呵呵</description>
+    <pubDate>Wed, 25 Dec 2013 00:00:00 +0800</pubDate>
+    <item>
+      <title>入手iP5s</title>
+      <link>http://addcp.com/2013/12/ip5s.html</link>
+      <description>&lt;p&gt;在接近2013年末的时候，终于把手机换成了智能机，一下心情好了不少。&lt;/p&gt;
 
-之前连微信都没有的日子终于一去不返，不过这是一件让人惊讶的事嘛？
+&lt;p&gt;之前连微信都没有的日子终于一去不返，不过这是一件让人惊讶的事嘛？&lt;/p&gt;
 
-
+&lt;p&gt;&lt;img src=&quot;/assets/img/ip5_wechat.jpg&quot; alt=&quot;某截图&quot;&gt;&lt;/p&gt;
 </description>
-                                <pubDate>Wed, 25 Dec 2013 00:00:00 +0800</pubDate>
-                                <link>http://addcp.com//2013/12/ip5s.html</link>
-                                <guid isPermaLink="true">http://addcp.com//2013/12/ip5s.html</guid>
-                        </item>
-                
-                        <item>
-                                <title>关于git reset的风险</title>
-                                <description>在使用git pull origin master更新代码的时候有时会遇到有冲突无法合并的情况，而又知道在remote端的代码是对的，只要覆盖掉本地的代码就好了。
+      <pubDate>Wed, 25 Dec 2013 00:00:00 +0800</pubDate>
+      <guid>http://addcp.com/2013/12/ip5s.html</guid>
+      <dc:date>2013-12-25T00:00:00+08:00</dc:date>
+    </item>
+    <item>
+      <title>关于git reset的风险</title>
+      <link>http://addcp.com/2013/11/git-abuse.html</link>
+      <description>&lt;p&gt;在使用&lt;code&gt;git pull origin master&lt;/code&gt;更新代码的时候有时会遇到有冲突无法合并的情况，而又知道在remote端的代码是对的，只要覆盖掉本地的代码就好了。&lt;/p&gt;
 
-之前我是这样做的：
+&lt;p&gt;之前我是这样做的：&lt;/p&gt;
 
-git fetch --all
+&lt;p&gt;<div class="highlight"><pre><code class="bash">git fetch --all
 git reset --hard origin/master
+</code></pre></div>&lt;/p&gt;
 
+&lt;p&gt;然后也会得到一个我想要的结果。&lt;/p&gt;
 
-然后也会得到一个我想要的结果。
+&lt;p&gt;可是今天当我重复同样的操作时，事故却发生了。很多有用的数据在这个操作之后被删除，而且无法找回了。&lt;/p&gt;
 
-可是今天当我重复同样的操作时，事故却发生了。很多有用的数据在这个操作之后被删除，而且无法找回了。
+&lt;!-- more --&gt;
 
+&lt;p&gt;我的Git环境是这样的：&lt;/p&gt;
 
+&lt;p&gt;这是一个在线上运行的系统，会在同目录下实时生成很多历史数据，然而由于其数据量较大，就没有加到git追踪文件里。但是又没有写好&lt;code&gt;.gitignore&lt;/code&gt;文件。又由于是多人维护的项目，不知什么时候被人执行过一句&lt;code&gt;git add --all&lt;/code&gt;。&lt;/p&gt;
 
-我的Git环境是这样的：
+&lt;p&gt;就这样。。。珍贵的历史数据在一个不可撤消的&lt;code&gt;git reset --hard&lt;/code&gt;操作之后被删除了。&lt;/p&gt;
 
-这是一个在线上运行的系统，会在同目录下实时生成很多历史数据，然而由于其数据量较大，就没有加到git追踪文件里。但是又没有写好.gitignore文件。又由于是多人维护的项目，不知什么时候被人执行过一句git add --all。
+&lt;p&gt;数据最后也没有找回来。。。&lt;/p&gt;
 
-就这样。。。珍贵的历史数据在一个不可撤消的git reset --hard操作之后被删除了。
+&lt;p&gt;所以在git管理项目时要注意几点：&lt;/p&gt;
 
-数据最后也没有找回来。。。
-
-所以在git管理项目时要注意几点：
-
-
-1 慎用git reset --hard
-2 写好.gitignore文件
-3 线上的数据要做备份
-4 不要添加不追踪的文件
-
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;1 慎用&lt;code&gt;git reset --hard&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;2 写好&lt;code&gt;.gitignore&lt;/code&gt;文件&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;3 线上的数据要做备份&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;4 不要添加不追踪的文件&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
 </description>
-                                <pubDate>Fri, 22 Nov 2013 00:00:00 +0800</pubDate>
-                                <link>http://addcp.com//2013/11/git-abuse.html</link>
-                                <guid isPermaLink="true">http://addcp.com//2013/11/git-abuse.html</guid>
-                        </item>
-                
-                        <item>
-                                <title>爬虫的url去重</title>
-                                <description>最近用Perl写了一些爬虫，没想到在url去重的问题上碰了钉子。
+      <pubDate>Fri, 22 Nov 2013 00:00:00 +0800</pubDate>
+      <guid>http://addcp.com/2013/11/git-abuse.html</guid>
+      <dc:date>2013-11-22T00:00:00+08:00</dc:date>
+    </item>
+    <item>
+      <title>爬虫的url去重</title>
+      <link>http://addcp.com/2013/11/perl-crawler-duplicate-remove.html</link>
+      <description>&lt;p&gt;最近用Perl写了一些爬虫，没想到在url去重的问题上碰了钉子。&lt;/p&gt;
 
-之前写过一些小的爬虫，url去重的方法都是爬一条就写进数据库，然后在写之前去查询数据库。
-因为这次爬虫的规模较之前的都大，如果在去重问题上消耗太多时间和数据库连接实在不值得。
+&lt;p&gt;之前写过一些小的爬虫，url去重的方法都是爬一条就写进数据库，然后在写之前去查询数据库。
+因为这次爬虫的规模较之前的都大，如果在去重问题上消耗太多时间和数据库连接实在不值得。&lt;/p&gt;
 
-在网上一搜，才发现url去重也是爬虫的难题之一。而我最终采用了不简单的URL去重这篇文章中推荐的方法：使用BerkeleyDB。
+&lt;p&gt;在网上一搜，才发现url去重也是爬虫的难题之一。而我最终采用了&lt;a href=&quot;http://blog.csdn.net/historyasamirror/article/details/6746217&quot;&gt;不简单的URL去重&lt;/a&gt;这篇文章中推荐的方法：&lt;strong&gt;使用BerkeleyDB&lt;/strong&gt;。&lt;/p&gt;
 
-什么是BerkeleyDB
+&lt;h3&gt;什么是BerkeleyDB&lt;/h3&gt;
 
-维基百科 BerkeleyDB：
+&lt;p&gt;&lt;a href=&quot;http://zh.wikipedia.org/wiki/Berkeley_DB&quot;&gt;&lt;code&gt;维基百科 BerkeleyDB&lt;/code&gt;&lt;/a&gt;：&lt;/p&gt;
 
+&lt;blockquote&gt;
+&lt;p&gt;Berkeley DB（BDB）是一个高效的嵌入式数据库编程库，C语言、C++、Java、Perl、Python、Tcl以及其他很多语言都有其对应的API。Berkeley DB可以保存任意类型的键/值对（Key/Value Pair），而且可以为一个键保存多个数据。&lt;/p&gt;
 
-Berkeley DB（BDB）是一个高效的嵌入式数据库编程库，C语言、C++、Java、Perl、Python、Tcl以及其他很多语言都有其对应的API。Berkeley DB可以保存任意类型的键/值对（Key/Value Pair），而且可以为一个键保存多个数据。
+&lt;p&gt;Berkeley DB支持让数千的并发线程同时操作数据库，支持最大256TB的数据，广泛用于各种操作系统，其中包括大多数类Unix操作系统、Windows操作系统以及实时操作系统。&lt;/p&gt;
+&lt;/blockquote&gt;
 
-Berkeley DB支持让数千的并发线程同时操作数据库，支持最大256TB的数据，广泛用于各种操作系统，其中包括大多数类Unix操作系统、Windows操作系统以及实时操作系统。
+&lt;!-- more --&gt;
 
+&lt;h3&gt;使用BerkeleyDB对url去重的好处&lt;/h3&gt;
 
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;BerkeleyDB是一种放在磁盘上的url解决方案，相对于将url全部放进hash这种方法，不用担心内存溢出的问题，在程序意外中断后也不会丢失数据。&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;虽然是放在磁盘上的解决方案，但不需要考虑进行磁盘IO操作的性能损失的，BerkeleyDB在设计的时候很好地考虑了这些问题。&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;相对于&lt;a href=&quot;http://en.wikipedia.org/wiki/Bloom_filter&quot;&gt;Bloom Filter&lt;/a&gt;，BerkeleyDB不存在失误率的问题。&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;BerkeleyDB是一个key/value对的数据库，这也是使用它作为url去重的原因。&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;BerkeleyDB还是一种嵌入型数据库，它是和程序跑在同一内存空间内的。其结果是，不管应用程序是运行在同一台机器上还是运行在网络上，在进行数据库操作时，它都无需进行进程间通信。相对于一般C/S的数据库，效率高了很多。&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;BerkeleyDB是一种NOSQL数据库，不必在解析SQL语句上消耗不必要的资源。&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
 
+&lt;h3&gt;例子&lt;/h3&gt;
 
-使用BerkeleyDB对url去重的好处
+&lt;p&gt;BerkeleyDB有Perl的接口，用法也非常简单，下面贴一段我的部分代码：&lt;/p&gt;
 
+&lt;p&gt;<div class="highlight"><pre><code class="pl"><span class="k">use</span> <span class="mf">5.010</span><span class="p">;</span>
+<span class="k">use</span> <span class="n">strict</span><span class="p">;</span>
+<span class="k">use</span> <span class="n">warnings</span><span class="p">;</span>
+<span class="k">use</span> <span class="nn">Smart::</span><span class="n">Comments</span><span class="p">;</span>
+<span class="k">use</span> <span class="n">utf8</span><span class="p">;</span><span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="o">/</span><span class="n">p</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span>
 
-BerkeleyDB是一种放在磁盘上的url解决方案，相对于将url全部放进hash这种方法，不用担心内存溢出的问题，在程序意外中断后也不会丢失数据。
-虽然是放在磁盘上的解决方案，但不需要考虑进行磁盘IO操作的性能损失的，BerkeleyDB在设计的时候很好地考虑了这些问题。
-相对于Bloom Filter，BerkeleyDB不存在失误率的问题。
-BerkeleyDB是一个key/value对的数据库，这也是使用它作为url去重的原因。
-BerkeleyDB还是一种嵌入型数据库，它是和程序跑在同一内存空间内的。其结果是，不管应用程序是运行在同一台机器上还是运行在网络上，在进行数据库操作时，它都无需进行进程间通信。相对于一般C/S的数据库，效率高了很多。
-BerkeleyDB是一种NOSQL数据库，不必在解析SQL语句上消耗不必要的资源。
+<span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="n">p</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span><span class="k">use</span> <span class="n">BerkeleyDB</span><span class="p">;</span>
+<span class="k">use</span> <span class="nn">Mojo::</span><span class="n">UserAgent</span><span class="p">;</span><span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="o">/</span><span class="n">p</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span>
 
+<span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="n">h1</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span><span class="err">使用</span><span class="nn">Mojo::</span><span class="n">UserAgent</span><span class="err">用于抓取网页</span><span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="o">/</span><span class="n">h1</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span>
 
-例子
+<span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="n">p</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span><span class="k">my</span> <span class="nv">$ua</span> <span class="o">=</span> <span class="nn">Mojo::</span><span class="n">UserAgent</span><span class="o">-&amp;</span><span class="n">amp</span><span class="p">;</span><span class="ow">gt</span><span class="p">;</span><span class="k">new</span><span class="p">;</span><span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="o">/</span><span class="n">p</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span>
 
-BerkeleyDB有Perl的接口，用法也非常简单，下面贴一段我的部分代码：
+<span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="n">h1</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span><span class="n">temp</span> <span class="n">file</span> <span class="k">for</span> <span class="n">BerkeleyDB</span><span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="o">/</span><span class="n">h1</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span>
 
-use 5.010;
-use strict;
-use warnings;
-use Smart::Comments;
-use utf8;
+<span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="n">p</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span><span class="k">my</span> <span class="nv">$tmp</span><span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="n">em</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span><span class="n">dir</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">quot</span><span class="p">;</span><span class="o">/</span><span class="n">tmp</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">quot</span><span class="p">;;</span>
+<span class="k">my</span> <span class="nv">$berkeleydb</span><span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="sr">/em&amp;gt;temp_file = &amp;amp;quot;/</span><span class="n">tmp</span><span class="sr">/tmp.berkeleydb&amp;amp;quot;;&amp;lt;/</span><span class="n">p</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span>
 
-use BerkeleyDB;
-use Mojo::UserAgent;
+<span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="n">h1</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span><span class="err">设定</span><span class="n">BerkeleyDB</span><span class="err">的环境</span><span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="o">/</span><span class="n">h1</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span>
 
-# 使用Mojo::UserAgent用于抓取网页
-my $ua = Mojo::UserAgent-&gt;new;
+<span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="n">p</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span><span class="k">my</span> <span class="nv">$env</span> <span class="o">=</span> <span class="k">new</span> <span class="nn">BerkeleyDB::</span><span class="n">Env</span>
+    <span class="o">-</span><span class="n">Home</span>   <span class="o">=&amp;</span><span class="n">amp</span><span class="p">;</span><span class="ow">gt</span><span class="p">;</span> <span class="nv">$tmp</span><span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="n">em</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span><span class="n">dir</span><span class="p">,</span>
+    <span class="o">-</span><span class="n">Flags</span>  <span class="o">=&amp;</span><span class="n">amp</span><span class="p">;</span><span class="ow">gt</span><span class="p">;</span> <span class="n">DB</span><span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="sr">/em&amp;gt;CREATE|DB&amp;lt;em&amp;gt;INIT&amp;lt;/</span><span class="n">em</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span><span class="n">CDB</span><span class="o">|</span><span class="n">DB</span><span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="n">em</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span><span class="k">INIT</span><span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="o">/</span><span class="n">em</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span><span class="n">MPOOL</span>
+        <span class="ow">or</span> <span class="nb">die</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">quot</span><span class="p">;</span><span class="n">can</span> <span class="ow">not</span> <span class="nb">open</span> <span class="n">environment:</span> <span class="nv">$</span><span class="nn">BerkeleyDB::</span><span class="nv">Error</span><span class="o">\</span><span class="n">n</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">quot</span><span class="p">;;</span><span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="o">/</span><span class="n">p</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span>
 
-# temp file for BerkeleyDB
-my $tmp_dir = &quot;/tmp&quot;;
-my $berkeleydb_temp_file = &quot;/tmp/tmp.berkeleydb&quot;;
+<span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="n">h1</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span><span class="err">将</span><span class="nv">%data</span><span class="err">与</span><span class="n">BerkeleyDB</span><span class="err">绑定</span><span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="o">/</span><span class="n">h1</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span>
 
-# 设定BerkeleyDB的环境
-my $env = new BerkeleyDB::Env
-    -Home   =&gt; $tmp_dir,
-    -Flags  =&gt; DB_CREATE|DB_INIT_CDB|DB_INIT_MPOOL
-        or die &quot;can not open environment: $BerkeleyDB::Error\n&quot;;
+<span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="n">p</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span><span class="k">my</span> <span class="nv">$db</span> <span class="o">=</span> <span class="nb">tie</span> <span class="k">my</span> <span class="nv">%data</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="c1">#39;BerkeleyDB::Hash&amp;amp;#39;,</span>
+    <span class="o">-</span><span class="n">Filename</span>   <span class="o">=&amp;</span><span class="n">amp</span><span class="p">;</span><span class="ow">gt</span><span class="p">;</span> <span class="nv">$berkeleydb</span><span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="n">em</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span><span class="n">temp</span><span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="o">/</span><span class="n">em</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span><span class="n">file</span><span class="p">,</span>
+    <span class="o">-</span><span class="n">Flags</span>      <span class="o">=&amp;</span><span class="n">amp</span><span class="p">;</span><span class="ow">gt</span><span class="p">;</span> <span class="n">DB_CREATE</span><span class="p">,</span>
+    <span class="o">-</span><span class="n">Env</span>        <span class="o">=&amp;</span><span class="n">amp</span><span class="p">;</span><span class="ow">gt</span><span class="p">;</span> <span class="nv">$env</span>
+        <span class="ow">or</span> <span class="nb">die</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">quot</span><span class="p">;</span><span class="n">Can</span> <span class="ow">not</span> <span class="n">create</span> <span class="n">file:</span> <span class="vg">$!</span> <span class="nv">$</span><span class="nn">BerkeleyDB::</span><span class="nv">Error</span><span class="o">\</span><span class="n">n</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">quot</span><span class="p">;;</span><span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="o">/</span><span class="n">p</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span>
 
-# 将%data与BerkeleyDB绑定
-my $db = tie my %data, &#39;BerkeleyDB::Hash&#39;,
-    -Filename   =&gt; $berkeleydb_temp_file,
-    -Flags      =&gt; DB_CREATE,
-    -Env        =&gt; $env
-        or die &quot;Can not create file: $! $BerkeleyDB::Error\n&quot;;
+<span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="n">h1</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span><span class="n">usage:</span> <span class="nv">$db</span><span class="o">-&amp;</span><span class="n">amp</span><span class="p">;</span><span class="ow">gt</span><span class="p">;</span><span class="n">db_put</span><span class="p">(</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="c1">#39;apple&amp;amp;#39;, &amp;amp;#39;red&amp;amp;#39;);&amp;lt;/h1&amp;gt;</span>
 
-# usage: $db-&gt;db_put(&#39;apple&#39;, &#39;red&#39;);
+<span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="n">h1</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span><span class="err">在页面上获取一些</span><span class="n">url</span><span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="o">/</span><span class="n">h1</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span>
 
-# 在页面上获取一些url
-# do some thing ...
-# ...
-# ...
+<span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="n">h1</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span><span class="k">do</span> <span class="n">some</span> <span class="n">thing</span> <span class="o">...&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="o">/</span><span class="n">h1</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span>
 
-# 从页面上获得一些url(作为例子)
-my @url = qw/a.example.com b.example a.example/;
+<span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="n">h1</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span><span class="o">...&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="o">/</span><span class="n">h1</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span>
 
-# 使用Mojo::IOLoop作异步抓取页面
-# 详细用法见MetaCPAN的Mojo::IOLoop用法
-Mojo::IOLoop-&gt;delay(
-    sub {
-        my $delay = shift;
-        for (@url) {
-            # url 去重
-            next if $data{$_};
-            # 抓取网页内容
-            $ua-&gt;get($_ =&gt; $delay-&gt;begin);
-        }
-    },
-    sub {
-        my ($delay, @result) = @_;
+<span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="n">h1</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span><span class="o">...&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="o">/</span><span class="n">h1</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span>
 
-        for my $tx (@result) {
-            if (my $res = $tx-&gt;success) {
+<span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="n">h1</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span><span class="err">从页面上获得一些</span><span class="n">url</span><span class="p">(</span><span class="err">作为例子</span><span class="p">)</span><span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="o">/</span><span class="n">h1</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span>
 
-                # 使用lock保证多进程时BerkeleyDB的数据安全
-                my $lock = $db-&gt;cds_lock();
+<span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="n">p</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span><span class="k">my</span> <span class="nv">@url</span> <span class="o">=</span> <span class="sx">qw/a.example.com b.example a.example/</span><span class="p">;</span><span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="o">/</span><span class="n">p</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span>
 
-                # save to berkeleydb
-                $db-&gt;db_put($url, &#39;done&#39;);
+<span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="n">h1</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span><span class="err">使用</span><span class="nn">Mojo::</span><span class="n">IOLoop</span><span class="err">作异步抓取页面</span><span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="o">/</span><span class="n">h1</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span>
 
-                $db-&gt;db_sync();
-                $lock-&gt;cds_unlock();
-                undef $lock;
+<span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="n">h1</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span><span class="err">详细用法见</span><span class="n">MetaCPAN</span><span class="err">的</span><span class="nn">Mojo::</span><span class="n">IOLoop</span><span class="err">用法</span><span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="o">/</span><span class="n">h1</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span>
 
-                # do something...
-            } else {
-                my ($err, $code) = $tx-&gt;error;
-                say $code ? &quot;$code response: $err&quot; : &quot;Connection error: $err&quot;;
-            }
-        }
-    }
-);
+<span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="n">p</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span><span class="nn">Mojo::</span><span class="n">IOLoop</span><span class="o">-&amp;</span><span class="n">amp</span><span class="p">;</span><span class="ow">gt</span><span class="p">;</span><span class="n">delay</span><span class="p">(</span>
+    <span class="k">sub </span><span class="p">{</span>
+        <span class="k">my</span> <span class="nv">$delay</span> <span class="o">=</span> <span class="nb">shift</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="nv">@url</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1"># url 去重</span>
+            <span class="k">next</span> <span class="k">if</span> <span class="nv">$data</span><span class="p">{</span><span class="nv">$</span><span class="err">&amp;</span><span class="nv">lt</span><span class="p">;</span><span class="n">em</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;};</span>
+            <span class="c1"># 抓取网页内容</span>
+            <span class="nv">$ua</span><span class="o">-&amp;</span><span class="n">amp</span><span class="p">;</span><span class="ow">gt</span><span class="p">;</span><span class="n">get</span><span class="p">(</span><span class="nv">$</span><span class="err">&amp;</span><span class="nv">lt</span><span class="p">;</span><span class="o">/</span><span class="n">em</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span> <span class="o">=&amp;</span><span class="n">amp</span><span class="p">;</span><span class="ow">gt</span><span class="p">;</span> <span class="nv">$delay</span><span class="o">-&amp;</span><span class="n">amp</span><span class="p">;</span><span class="ow">gt</span><span class="p">;</span><span class="n">begin</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="k">sub </span><span class="p">{</span>
+        <span class="k">my</span> <span class="p">(</span><span class="nv">$delay</span><span class="p">,</span> <span class="nv">@result</span><span class="p">)</span> <span class="o">=</span> <span class="nv">@_</span><span class="p">;</span><span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="o">/</span><span class="n">p</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span>
+<span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="n">div</span> <span class="n">class</span><span class="o">=&amp;</span><span class="n">quot</span><span class="p">;</span><span class="n">highlight</span><span class="o">&amp;</span><span class="n">quot</span><span class="p">;</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span><span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="n">pre</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span><span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="n">code</span> <span class="n">class</span><span class="o">=&amp;</span><span class="n">quot</span><span class="p">;</span><span class="n">text</span> <span class="n">language</span><span class="o">-</span><span class="n">text</span><span class="o">&amp;</span><span class="n">quot</span><span class="p">;</span> <span class="n">data</span><span class="o">-</span><span class="n">lang</span><span class="o">=&amp;</span><span class="n">quot</span><span class="p">;</span><span class="n">text</span><span class="o">&amp;</span><span class="n">quot</span><span class="p">;</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span>    <span class="k">for</span> <span class="k">my</span> <span class="nv">$tx</span> <span class="p">(</span><span class="nv">@result</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="k">my</span> <span class="nv">$res</span> <span class="o">=</span> <span class="nv">$tx</span><span class="o">-&amp;</span><span class="n">amp</span><span class="p">;</span><span class="ow">gt</span><span class="p">;</span><span class="n">success</span><span class="p">)</span> <span class="p">{</span>
 
-Mojo::IOLoop-&gt;start unless Mojo::IOLoop-&gt;is_running;
+            <span class="c1"># 使用lock保证多进程时BerkeleyDB的数据安全</span>
+            <span class="k">my</span> <span class="nv">$lock</span> <span class="o">=</span> <span class="nv">$db</span><span class="o">-&amp;</span><span class="n">amp</span><span class="p">;</span><span class="ow">gt</span><span class="p">;</span><span class="n">cds_lock</span><span class="p">();</span>
 
+            <span class="c1"># save to berkeleydb</span>
+            <span class="nv">$db</span><span class="o">-&amp;</span><span class="n">amp</span><span class="p">;</span><span class="ow">gt</span><span class="p">;</span><span class="n">db_put</span><span class="p">(</span><span class="nv">$url</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="c1">#39;done&amp;amp;#39;);</span>
+
+            <span class="nv">$db</span><span class="o">-&amp;</span><span class="n">amp</span><span class="p">;</span><span class="ow">gt</span><span class="p">;</span><span class="n">db_sync</span><span class="p">();</span>
+            <span class="nv">$lock</span><span class="o">-&amp;</span><span class="n">amp</span><span class="p">;</span><span class="ow">gt</span><span class="p">;</span><span class="n">cds_unlock</span><span class="p">();</span>
+            <span class="nb">undef</span> <span class="nv">$lock</span><span class="p">;</span>
+
+            <span class="c1"># do something...</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">my</span> <span class="p">(</span><span class="nv">$err</span><span class="p">,</span> <span class="nv">$code</span><span class="p">)</span> <span class="o">=</span> <span class="nv">$tx</span><span class="o">-&amp;</span><span class="n">amp</span><span class="p">;</span><span class="ow">gt</span><span class="p">;</span><span class="n">error</span><span class="p">;</span>
+            <span class="n">say</span> <span class="nv">$code</span> <span class="p">?</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">quot</span><span class="p">;</span><span class="nv">$code</span> <span class="n">response:</span> <span class="nv">$err</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">quot</span><span class="p">;</span> <span class="p">:</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">quot</span><span class="p">;</span><span class="n">Connection</span> <span class="n">error:</span> <span class="nv">$err</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">quot</span><span class="p">;;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="sr">/code&amp;gt;&amp;lt;/</span><span class="n">pre</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span><span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="o">/</span><span class="n">div</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span>
+<span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="n">p</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;);</span><span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="o">/</span><span class="n">p</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span>
+
+<span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="n">p</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span><span class="nn">Mojo::</span><span class="n">IOLoop</span><span class="o">-&amp;</span><span class="n">amp</span><span class="p">;</span><span class="ow">gt</span><span class="p">;</span><span class="n">start</span> <span class="k">unless</span> <span class="nn">Mojo::</span><span class="n">IOLoop</span><span class="o">-&amp;</span><span class="n">amp</span><span class="p">;</span><span class="ow">gt</span><span class="p">;</span><span class="n">is_running</span><span class="p">;</span>
+</code></pre></div>&lt;/p&gt;
 </description>
-                                <pubDate>Sat, 02 Nov 2013 00:00:00 +0800</pubDate>
-                                <link>http://addcp.com//2013/11/perl-crawler-duplicate-remove.html</link>
-                                <guid isPermaLink="true">http://addcp.com//2013/11/perl-crawler-duplicate-remove.html</guid>
-                        </item>
-                
-                        <item>
-                                <title>用git rebase合并commit</title>
-                                <description>最近时常用git来作版本控制和代码提交，渐渐发现了git rebase的用法和好处
+      <pubDate>Sat, 02 Nov 2013 00:00:00 +0800</pubDate>
+      <guid>http://addcp.com/2013/11/perl-crawler-duplicate-remove.html</guid>
+      <dc:date>2013-11-02T00:00:00+08:00</dc:date>
+    </item>
+    <item>
+      <title>用git rebase合并commit</title>
+      <link>http://addcp.com/2013/09/git-rebase.html</link>
+      <description>&lt;p&gt;最近时常用git来作版本控制和代码提交，渐渐发现了git rebase的用法和好处&lt;/p&gt;
 
-尤其在整理与合并git的提交记录时，git rebase使用起来十分灵活
+&lt;p&gt;尤其在整理与合并git的提交记录时，git rebase使用起来十分灵活&lt;/p&gt;
 
-使用情景
+&lt;h3&gt;使用情景&lt;/h3&gt;
 
-进行一次提交之后，马上发现代码里可能有一两行需要改动，更改之后再次提交，然后又觉得哪里不妥。。。
+&lt;p&gt;进行一次提交之后，马上发现代码里可能有一两行需要改动，更改之后再次提交，然后又觉得哪里不妥。。。&lt;/p&gt;
 
-[root@addcp gitdemo]# vim test.txt
-[root@addcp gitdemo]# git commit -am &#39;add test.txt&#39;
-发现一些代码需要小改动
-[root@addcp gitdemo]# vim test.txt
-[root@addcp gitdemo]# git commit -am &#39;update test.txt&#39;
-...
-...
-第N次发现
-[root@addcp gitdemo]# vim test.txt
-[root@addcp gitdemo]# git commit -am &#39;update test.txt again and again&#39;
-...
+&lt;p&gt;<div class="highlight"><pre><code class="shell-session"><span class="gp">[root@addcp gitdemo]#</span> vim test.txt
+<span class="gp">[root@addcp gitdemo]#</span> git commit -am <span class="p">&amp;</span>amp<span class="p">;</span><span class="c">#39;add test.txt&amp;amp;#39;</span>
+<span class="go">发现一些代码需要小改动</span>
+<span class="gp">[root@addcp gitdemo]#</span> vim test.txt
+<span class="gp">[root@addcp gitdemo]#</span> git commit -am <span class="p">&amp;</span>amp<span class="p">;</span><span class="c">#39;update test.txt&amp;amp;#39;</span>
+<span class="go">...</span>
+<span class="go">...</span>
+<span class="go">第N次发现</span>
+<span class="gp">[root@addcp gitdemo]#</span> vim test.txt
+<span class="gp">[root@addcp gitdemo]#</span> git commit -am <span class="p">&amp;</span>amp<span class="p">;</span><span class="c">#39;update test.txt again and again&amp;amp;#39;</span>
+<span class="go">...</span>
+</code></pre></div>&lt;/p&gt;
 
+&lt;!-- more --&gt;
 
+&lt;h3&gt;问题重现&lt;/h3&gt;
 
+&lt;p&gt;这样多次之后，git的commit记录就会变得很乱，一堆小改动，却占用了很多次提交记录：&lt;/p&gt;
 
-问题重现
+&lt;p&gt;<div class="highlight"><pre><code class="shell-session"><span class="gp">[root@addcp gitdemo]#</span> git log
+<span class="go">commit abe26fe0f5b1788e8f7b1949082e1477c5337aa0</span>
+<span class="go">Author: xiaocang &amp;lt;a href=&amp;quot;mailto:xiaocang@addcp.com&amp;quot;&amp;gt;xiaocang@addcp.com&amp;lt;/a&amp;gt;</span>
+<span class="go">Date:   Sat Sep 7 01:29:48 2013 +0800&amp;lt;/p&amp;gt;</span>
+<span class="go">&amp;lt;div class=&amp;quot;highlight&amp;quot;&amp;gt;&amp;lt;pre&amp;gt;&amp;lt;code class=&amp;quot;text language-text&amp;quot; data-lang=&amp;quot;text&amp;quot;&amp;gt;update test.txt again and again</span>
+<span class="go">&amp;lt;/code&amp;gt;&amp;lt;/pre&amp;gt;&amp;lt;/div&amp;gt;</span>
+<span class="go">&amp;lt;p&amp;gt;commit c3633d5153bacabeceaeaeb552484e7f9b6a2b9c</span>
+<span class="go">Author: xiaocang &amp;lt;a href=&amp;quot;mailto:xiaocang@addcp.com&amp;quot;&amp;gt;xiaocang@addcp.com&amp;lt;/a&amp;gt;</span>
+<span class="go">Date:   Sat Sep 7 01:29:21 2013 +0800&amp;lt;/p&amp;gt;</span>
+<span class="go">&amp;lt;div class=&amp;quot;highlight&amp;quot;&amp;gt;&amp;lt;pre&amp;gt;&amp;lt;code class=&amp;quot;text language-text&amp;quot; data-lang=&amp;quot;text&amp;quot;&amp;gt;update test.txt again</span>
+<span class="go">&amp;lt;/code&amp;gt;&amp;lt;/pre&amp;gt;&amp;lt;/div&amp;gt;</span>
+<span class="go">&amp;lt;p&amp;gt;commit c8bc032daac7d0859a0e73cd83a464cee0f59625</span>
+<span class="go">Author: xiaocang &amp;lt;a href=&amp;quot;mailto:xiaocang@addcp.com&amp;quot;&amp;gt;xiaocang@addcp.com&amp;lt;/a&amp;gt;</span>
+<span class="go">Date:   Sat Sep 7 01:28:51 2013 +0800&amp;lt;/p&amp;gt;</span>
+<span class="go">&amp;lt;div class=&amp;quot;highlight&amp;quot;&amp;gt;&amp;lt;pre&amp;gt;&amp;lt;code class=&amp;quot;text language-text&amp;quot; data-lang=&amp;quot;text&amp;quot;&amp;gt;update test.txt</span>
+<span class="go">&amp;lt;/code&amp;gt;&amp;lt;/pre&amp;gt;&amp;lt;/div&amp;gt;</span>
+<span class="go">&amp;lt;p&amp;gt;commit 0e80061e90503189dd7f189297aed809953e5e8b</span>
+<span class="go">Author: xiaocang &amp;lt;a href=&amp;quot;mailto:xiaocang@addcp.com&amp;quot;&amp;gt;xiaocang@addcp.com&amp;lt;/a&amp;gt;</span>
+<span class="go">Date:   Sat Sep 7 01:28:22 2013 +0800&amp;lt;/p&amp;gt;</span>
+<span class="go">&amp;lt;div class=&amp;quot;highlight&amp;quot;&amp;gt;&amp;lt;pre&amp;gt;&amp;lt;code class=&amp;quot;text language-text&amp;quot; data-lang=&amp;quot;text&amp;quot;&amp;gt;add test.txt</span>
+<span class="go">&amp;lt;/code&amp;gt;&amp;lt;/pre&amp;gt;&amp;lt;/div&amp;gt;</span>
+<span class="go">&amp;lt;p&amp;gt;......</span>
+</code></pre></div>&lt;/p&gt;
 
-这样多次之后，git的commit记录就会变得很乱，一堆小改动，却占用了很多次提交记录：
+&lt;h3&gt;rebase 示例及用法&lt;/h3&gt;
 
-[root@addcp gitdemo]# git log
-commit abe26fe0f5b1788e8f7b1949082e1477c5337aa0
-Author: xiaocang &lt;xiaocang@addcp.com&gt;
-Date:   Sat Sep 7 01:29:48 2013 +0800
+&lt;p&gt;这时如果使用git rebase来解决这个问题就非常容易了&lt;/p&gt;
 
-    update test.txt again and again
+&lt;p&gt;git rebase语法是这样的&lt;/p&gt;
 
-commit c3633d5153bacabeceaeaeb552484e7f9b6a2b9c
-Author: xiaocang &lt;xiaocang@addcp.com&gt;
-Date:   Sat Sep 7 01:29:21 2013 +0800
+&lt;p&gt;<div class="highlight"><pre><code class="shell-session"><span class="go">git rebase [--interactive | -i] [-v] [--force-rebase | -f] [--no-ff] [--onto &amp;lt;newbase&amp;gt;] [&amp;lt;upstream&amp;gt;|--root] [&amp;lt;branch&amp;gt;] [--quiet | -q]</span>
+</code></pre></div>&lt;/p&gt;
 
-    update test.txt again
+&lt;p&gt;这里我们使用到的是&lt;code&gt;-i&lt;/code&gt;选项，也就是交互的rebase&lt;/p&gt;
 
-commit c8bc032daac7d0859a0e73cd83a464cee0f59625
-Author: xiaocang &lt;xiaocang@addcp.com&gt;
-Date:   Sat Sep 7 01:28:51 2013 +0800
+&lt;p&gt;<div class="highlight"><pre><code class="shell-session"><span class="gp">[root@addcp gitdemo]#</span> git -i HEAD~3
+</code></pre></div>&lt;/p&gt;
 
-    update test.txt
+&lt;p&gt;其中&lt;code&gt;HEAD~3&lt;/code&gt;是该分支的前三次提交。也可以在后面加&lt;code&gt;&amp;lt;branch&amp;gt;&lt;/code&gt;的参数指定要衍合的分支。&lt;/p&gt;
 
-commit 0e80061e90503189dd7f189297aed809953e5e8b
-Author: xiaocang &lt;xiaocang@addcp.com&gt;
-Date:   Sat Sep 7 01:28:22 2013 +0800
-
-    add test.txt
-......
-
-
-rebase 示例及用法
-
-这时如果使用git rebase来解决这个问题就非常容易了
-
-git rebase语法是这样的
-
-git rebase [--interactive | -i] [-v] [--force-rebase | -f] [--no-ff] [--onto &lt;newbase&gt;] [&lt;upstream&gt;|--root] [&lt;branch&gt;] [--quiet | -q]
-
-
-这里我们使用到的是-i选项，也就是交互的rebase
-
-[root@addcp gitdemo]# git -i HEAD~3
-
-
-其中HEAD~3是该分支的前三次提交。也可以在后面加&lt;branch&gt;的参数指定要衍合的分支。
-
-pick c8bc032 update test.txt
+&lt;p&gt;<div class="highlight"><pre><code class="bash">pick c8bc032 update test.txt
 f c3633d5 update test.txt again
-f abe26fe update test.txt again and again
+f abe26fe update test.txt again and again<span class="p">&amp;</span>lt<span class="p">;</span>/p<span class="p">&amp;</span>gt<span class="p">;</span>
 
-# Rebase 0e80061..abe26fe onto 0e80061
-#
-# Commands:
-#  p, pick = use commit
-#  r, reword = use commit, but edit the commit message
-#  e, edit = use commit, but stop for amending
-#  s, squash = use commit, but meld into previous commit
-#  f, fixup = like &quot;squash&quot;, but discard this commit&#39;s log message
-#
-# If you remove a line here THAT COMMIT WILL BE LOST.
-# However, if you remove everything, the rebase will be aborted.
+<span class="p">&amp;</span>lt<span class="p">;</span>h1<span class="p">&amp;</span>gt<span class="p">;</span>Rebase 0e80061..abe26fe onto 0e80061<span class="p">&amp;</span>lt<span class="p">;</span>/h1<span class="p">&amp;</span>gt<span class="p">;</span>
 
+<span class="p">&amp;</span>lt<span class="p">;</span>h1<span class="p">&amp;</span>gt<span class="p">;</span>Commands:<span class="p">&amp;</span>lt<span class="p">;</span>/h1<span class="p">&amp;</span>gt<span class="p">;</span>
 
-其中，pick是将该次提交原样提交
+<span class="p">&amp;</span>lt<span class="p">;</span>h1<span class="p">&amp;</span>gt<span class="p">;</span>p, <span class="nv">pick</span> <span class="o">=</span> use commit<span class="p">&amp;</span>lt<span class="p">;</span>/h1<span class="p">&amp;</span>gt<span class="p">;</span>
 
-reword也是提交，不过在提交之前会让你再次修改该次提交日志
+<span class="p">&amp;</span>lt<span class="p">;</span>h1<span class="p">&amp;</span>gt<span class="p">;</span>r, <span class="nv">reword</span> <span class="o">=</span> use commit, but edit the commit message<span class="p">&amp;</span>lt<span class="p">;</span>/h1<span class="p">&amp;</span>gt<span class="p">;</span>
 
-edit和reword差不多，但是在修改提交日志后，会等待你再次git commit --amend，也就是等待你追加一些需要提交的文件与改动。之后再使用git rebase --continue完成整个rebase
+<span class="p">&amp;</span>lt<span class="p">;</span>h1<span class="p">&amp;</span>gt<span class="p">;</span>e, <span class="nv">edit</span> <span class="o">=</span> use commit, but stop <span class="k">for </span>amending<span class="p">&amp;</span>lt<span class="p">;</span>/h1<span class="p">&amp;</span>gt<span class="p">;</span>
 
-squash是将该次提交合并到前一次提交里，但会将这次提交的日志内容合并到上一次里
+<span class="p">&amp;</span>lt<span class="p">;</span>h1<span class="p">&amp;</span>gt<span class="p">;</span>s, <span class="nv">squash</span> <span class="o">=</span> use commit, but meld into previous commit<span class="p">&amp;</span>lt<span class="p">;</span>/h1<span class="p">&amp;</span>gt<span class="p">;</span>
 
-fixup则和squash不同，它会自动忽略此次日志的内容。这正是我此次commit整理中需要的
+<span class="p">&amp;</span>lt<span class="p">;</span>h1<span class="p">&amp;</span>gt<span class="p">;</span>f, <span class="nv">fixup</span> <span class="o">=</span> like <span class="p">&amp;</span>amp<span class="p">;</span>quot<span class="p">;</span>squash<span class="p">&amp;</span>amp<span class="p">;</span>quot<span class="p">;</span>, but discard this commit<span class="p">&amp;</span>amp<span class="p">;</span><span class="c">#39;s log message&amp;lt;/h1&amp;gt;</span>
 
-rebase成果
+<span class="p">&amp;</span>lt<span class="p">;</span>h1<span class="p">&amp;</span>gt<span class="p">;</span>If you remove a line here THAT COMMIT WILL BE LOST.<span class="p">&amp;</span>lt<span class="p">;</span>/h1<span class="p">&amp;</span>gt<span class="p">;</span>
 
-如上，我就会得到一个这样的日志：
+<span class="p">&amp;</span>lt<span class="p">;</span>h1<span class="p">&amp;</span>gt<span class="p">;</span>However, <span class="k">if </span>you remove everything, the rebase will be aborted.<span class="p">&amp;</span>lt<span class="p">;</span>/h1<span class="p">&amp;</span>gt<span class="p">;</span>
 
-[root@addcp gitdemo]# git log
-commit 3e5d79d149942f7dc0741a9a42ce43d98beafcd3
-Author: xiaocang &lt;xiaocang@addcp.com&gt;
-Date:   Sat Sep 7 01:28:51 2013 +0800
+<span class="p">&amp;</span>lt<span class="p">;</span>p<span class="p">&amp;</span>gt<span class="p">;</span>
+</code></pre></div>&lt;/p&gt;
 
-    update test.txt
+&lt;p&gt;其中，&lt;code&gt;pick&lt;/code&gt;是将该次提交原样提交&lt;/p&gt;
 
-commit 0e80061e90503189dd7f189297aed809953e5e8b
-Author: xiaocang &lt;xiaocang@addcp.com&gt;
-Date:   Sat Sep 7 01:28:22 2013 +0800
+&lt;p&gt;&lt;code&gt;reword&lt;/code&gt;也是提交，不过在提交之前会让你再次修改该次提交日志&lt;/p&gt;
 
-    add test.txt
+&lt;p&gt;&lt;code&gt;edit&lt;/code&gt;和reword差不多，但是在修改提交日志后，会等待你再次&lt;code&gt;git commit --amend&lt;/code&gt;，也就是等待你追加一些需要提交的文件与改动。之后再使用&lt;code&gt;git rebase --continue&lt;/code&gt;完成整个rebase&lt;/p&gt;
 
+&lt;p&gt;&lt;code&gt;squash&lt;/code&gt;是将该次提交合并到前一次提交里，但会将这次提交的日志内容合并到上一次里&lt;/p&gt;
 
-这样整个世界就都清净了
+&lt;p&gt;&lt;code&gt;fixup&lt;/code&gt;则和&lt;code&gt;squash&lt;/code&gt;不同，它会自动忽略此次日志的内容。这正是我此次commit整理中需要的&lt;/p&gt;
 
+&lt;h3&gt;rebase成果&lt;/h3&gt;
 
+&lt;p&gt;如上，我就会得到一个这样的日志：&lt;/p&gt;
 
-注意
+&lt;p&gt;<div class="highlight"><pre><code class="shell-session"><span class="gp">[root@addcp gitdemo]#</span> git log
+<span class="go">commit 3e5d79d149942f7dc0741a9a42ce43d98beafcd3</span>
+<span class="go">Author: xiaocang &amp;lt;a href=&amp;quot;mailto:xiaocang@addcp.com&amp;quot;&amp;gt;xiaocang@addcp.com&amp;lt;/a&amp;gt;</span>
+<span class="go">Date:   Sat Sep 7 01:28:51 2013 +0800&amp;lt;/p&amp;gt;</span>
+<span class="go">&amp;lt;div class=&amp;quot;highlight&amp;quot;&amp;gt;&amp;lt;pre&amp;gt;&amp;lt;code class=&amp;quot;text language-text&amp;quot; data-lang=&amp;quot;text&amp;quot;&amp;gt;update test.txt</span>
+<span class="go">&amp;lt;/code&amp;gt;&amp;lt;/pre&amp;gt;&amp;lt;/div&amp;gt;</span>
+<span class="go">&amp;lt;p&amp;gt;commit 0e80061e90503189dd7f189297aed809953e5e8b</span>
+<span class="go">Author: xiaocang &amp;lt;a href=&amp;quot;mailto:xiaocang@addcp.com&amp;quot;&amp;gt;xiaocang@addcp.com&amp;lt;/a&amp;gt;</span>
+<span class="go">Date:   Sat Sep 7 01:28:22 2013 +0800&amp;lt;/p&amp;gt;</span>
+<span class="go">&amp;lt;div class=&amp;quot;highlight&amp;quot;&amp;gt;&amp;lt;pre&amp;gt;&amp;lt;code class=&amp;quot;text language-text&amp;quot; data-lang=&amp;quot;text&amp;quot;&amp;gt;add test.txt</span>
+<span class="go">&amp;lt;/code&amp;gt;&amp;lt;/pre&amp;gt;&amp;lt;/div&amp;gt;</span>
+<span class="go">&amp;lt;p&amp;gt;</span>
+</code></pre></div>&lt;/p&gt;
 
-如果看过git的官方文档的人都应该知道
+&lt;p&gt;这样整个世界就都清净了&lt;/p&gt;
 
+&lt;hr&gt;
 
-不要对任何已上线的部分使用衍合
+&lt;p&gt;&lt;strong&gt;注意&lt;/strong&gt;&lt;/p&gt;
 
+&lt;p&gt;如果看过git的官方文档的人都应该知道&lt;/p&gt;
 
-因为这样对线上的提交纪录进行改变，对一个多人协作的项目来说，是不好的。
+&lt;blockquote&gt;
+&lt;p&gt;不要对任何已上线的部分使用衍合&lt;/p&gt;
+&lt;/blockquote&gt;
 
-项目中的其他人会因此感到困惑，因为本来存在的一个提交纪录突然不见了
+&lt;p&gt;因为这样对线上的提交纪录进行改变，对一个多人协作的项目来说，是不好的。&lt;/p&gt;
 
-所以衍合主要是在提交到线上之前进行commit合并，使提交纪录变得干净的方法
+&lt;p&gt;项目中的其他人会因此感到困惑，因为本来存在的一个提交纪录突然不见了&lt;/p&gt;
+
+&lt;p&gt;所以衍合主要是在提交到线上之前进行commit合并，使提交纪录变得干净的方法&lt;/p&gt;
 </description>
-                                <pubDate>Sat, 07 Sep 2013 00:00:00 +0800</pubDate>
-                                <link>http://addcp.com//2013/09/git-rebase.html</link>
-                                <guid isPermaLink="true">http://addcp.com//2013/09/git-rebase.html</guid>
-                        </item>
-                
-                        <item>
-                                <title>←一个每年都换域名的博客</title>
-                                <description>这是一个每年都换域名的博客。。。（我干嘛说出来）
+      <pubDate>Sat, 07 Sep 2013 00:00:00 +0800</pubDate>
+      <guid>http://addcp.com/2013/09/git-rebase.html</guid>
+      <dc:date>2013-09-07T00:00:00+08:00</dc:date>
+    </item>
+    <item>
+      <title>←一个每年都换域名的博客</title>
+      <link>http://addcp.com/2013/09/about-blog.html</link>
+      <description>&lt;p&gt;这是一个每年都换域名的博客。。。（我干嘛说出来）&lt;/p&gt;
 
-然后打算暂定这个域名addcp.com
+&lt;p&gt;然后打算暂定这个域名&lt;a href=&quot;http://addcp.com&quot;&gt;addcp.com&lt;/a&gt;&lt;/p&gt;
 
-写一些感想瞎想和技术文
+&lt;p&gt;写一些感想瞎想和技术文&lt;/p&gt;
 </description>
-                                <pubDate>Wed, 04 Sep 2013 00:00:00 +0800</pubDate>
-                                <link>http://addcp.com//2013/09/about-blog.html</link>
-                                <guid isPermaLink="true">http://addcp.com//2013/09/about-blog.html</guid>
-                        </item>
-                
-                        <item>
-                                <title>开学</title>
-                                <description>9月1日是一年一度大中小学开学的日子
+      <pubDate>Wed, 04 Sep 2013 00:00:00 +0800</pubDate>
+      <guid>http://addcp.com/2013/09/about-blog.html</guid>
+      <dc:date>2013-09-04T00:00:00+08:00</dc:date>
+    </item>
+    <item>
+      <title>开学</title>
+      <link>http://addcp.com/2013/09/school-opens.html</link>
+      <description>&lt;p&gt;9月1日是一年一度大中小学开学的日子&lt;/p&gt;
 
-往年都会因为假期结束而有点小伤感
+&lt;p&gt;往年都会因为假期结束而有点小伤感&lt;/p&gt;
 
-今年刚刚毕业的我还是会有点小伤感虽然不知道为什么
+&lt;p&gt;今年刚刚毕业的我还是会有点小伤感虽然不知道为什么&lt;/p&gt;
 </description>
-                                <pubDate>Sun, 01 Sep 2013 00:00:00 +0800</pubDate>
-                                <link>http://addcp.com//2013/09/school-opens.html</link>
-                                <guid isPermaLink="true">http://addcp.com//2013/09/school-opens.html</guid>
-                        </item>
-                
-                        <item>
-                                <title>在Jekyll中使用截断输出</title>
-                                <description>因为之前一直用的是WordPress，转到Jekyll后自然的就想去找一个可以识别&lt;!-- more --&gt;来截断输出的方法
+      <pubDate>Sun, 01 Sep 2013 00:00:00 +0800</pubDate>
+      <guid>http://addcp.com/2013/09/school-opens.html</guid>
+      <dc:date>2013-09-01T00:00:00+08:00</dc:date>
+    </item>
+    <item>
+      <title>在Jekyll中使用截断输出</title>
+      <link>http://addcp.com/2013/04/jekyll-excerpt.html</link>
+      <description>&lt;p&gt;因为之前一直用的是&lt;a href=&quot;http://wordpress.org&quot;&gt;WordPress&lt;/a&gt;，转到Jekyll后自然的就想去找一个可以识别&lt;code&gt;&amp;lt;!-- more --&amp;gt;&lt;/code&gt;来截断输出的方法&lt;/p&gt;
 
-插件
+&lt;h3&gt;插件&lt;/h3&gt;
 
-Goolge了一下，果然很快就找到相关插件：
+&lt;p&gt;Goolge了一下，果然很快就找到相关插件：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;  &lt;a href=&quot;https://github.com/sebcioz/jekyll-only_first_p&quot;&gt;&lt;code&gt;jekyll-only_first_p&lt;/code&gt;&lt;/a&gt;：可以只输出第一段的插件(&lt;em&gt;需要&lt;a href=&quot;http://nokogiri.org/&quot;&gt;Nokogiri&lt;/a&gt;支持&lt;/em&gt;)&lt;/li&gt;
+&lt;li&gt;  &lt;a href=&quot;https://gist.github.com/stympy/986665&quot;&gt;&lt;code&gt;excerpt.rb&lt;/code&gt;&lt;/a&gt;：可以识别&lt;code&gt;&amp;lt;!-- more --&amp;gt;&lt;/code&gt;的插件&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;不过如果你的Jekyll也是托管在Github上的话，那么就不能用插件的方法了。
+出于安全考虑，Github在运行Jekyll的时候用了&lt;code&gt;--safe&lt;/code&gt;的参数，第三方插件通通无效。&lt;/p&gt;
+
+&lt;h3&gt;Liquid&lt;/h3&gt;
+
+&lt;p&gt;正当我有点小失望的时候，找到了这篇文章：&lt;a href=&quot;http://foldl.me/2012/jekyll-excerpts/&quot;&gt;Post excerpts in Jekyll&lt;/a&gt;&lt;/p&gt;
+
+&lt;!-- more --&gt;
+
+&lt;p&gt;只要利用Liquid模板语言中的一个filter就可以实现：&lt;/p&gt;
+
+&lt;p&gt;
+
+  <pre><code>{{ post.content | split: &amp;#39;&amp;lt;!-- more --&amp;gt;&amp;#39; | first }}</code></pre>
 
 
-  jekyll-only_first_p：可以只输出第一段的插件(需要Nokogiri支持)
-  excerpt.rb：可以识别&lt;!-- more --&gt;的插件
+&lt;/p&gt;
 
-
-不过如果你的Jekyll也是托管在Github上的话，那么就不能用插件的方法了。
-出于安全考虑，Github在运行Jekyll的时候用了--safe的参数，第三方插件通通无效。
-
-Liquid
-
-正当我有点小失望的时候，找到了这篇文章：Post excerpts in Jekyll
-
-
-
-只要利用Liquid模板语言中的一个filter就可以实现：
-
-{{ post.content | split: &#39;&lt;!-- more --&gt;&#39; | first }}
-
-然后在截断的文章后加上阅读全文
-&lt;p&gt;&lt;a href=&quot;#more&quot;&gt;阅读全文 →&lt;/a&gt;&lt;/p&gt;
-
-这样，即使是托管在Github上的Jekyll也能截断输出了。
+&lt;p&gt;然后在截断的文章后加上&lt;code&gt;阅读全文&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;&amp;lt;p&amp;gt;&amp;lt;a href=&amp;quot;#more&amp;quot;&amp;gt;阅读全文 →&amp;lt;/a&amp;gt;&amp;lt;/p&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;这样，即使是托管在Github上的Jekyll也能截断输出了。&lt;/p&gt;
 </description>
-                                <pubDate>Thu, 11 Apr 2013 00:00:00 +0800</pubDate>
-                                <link>http://addcp.com//2013/04/jekyll-excerpt.html</link>
-                                <guid isPermaLink="true">http://addcp.com//2013/04/jekyll-excerpt.html</guid>
-                        </item>
-                
-        </channel>
+      <pubDate>Thu, 11 Apr 2013 00:00:00 +0800</pubDate>
+      <guid>http://addcp.com/2013/04/jekyll-excerpt.html</guid>
+      <dc:date>2013-04-11T00:00:00+08:00</dc:date>
+    </item>
+    <dc:date>2013-12-25T00:00:00+08:00</dc:date>
+  </channel>
 </rss>
