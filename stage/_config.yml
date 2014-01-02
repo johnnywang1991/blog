@@ -1,9 +1,12 @@
 title: 呵呵
+name: 呵呵
 url: http://addcp.com
 baseurl: /
 author: xiao_cang
 description: 呵呵
-auto: true
+port: 3000
+
+exclude: [publish]
 
 pygments: true
 markdown: redcarpet
