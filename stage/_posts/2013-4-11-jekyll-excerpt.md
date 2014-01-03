@@ -10,7 +10,7 @@ tags : [jekyll]
 
 ### 插件
 
-Goolge了一下，果然很快就找到相关插件：
+Google了一下，果然很快就找到相关插件：
 
 -   [`jekyll-only_first_p`](https://github.com/sebcioz/jekyll-only_first_p)：可以只输出第一段的插件(*需要[Nokogiri](http://nokogiri.org/)支持*)
 -   [`excerpt.rb`](https://gist.github.com/stympy/986665)：可以识别`<!-- more -->`的插件
