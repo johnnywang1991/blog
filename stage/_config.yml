@@ -6,12 +6,12 @@ author: xiao_cang
 description: 呵呵
 port: 3000
 
-exclude: [publish]
+exclude: [publish, index_bak.html]
 rss_name: feed.xml
 
 pygments: true
 markdown: redcarpet
-paginate: 5
+paginate: 10
 
 permalink:  /:year/:month/:title.html
 

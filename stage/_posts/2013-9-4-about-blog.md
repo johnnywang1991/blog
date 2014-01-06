@@ -1,7 +1,7 @@
 ---
 layout: post
 title: ←一个每年都换域名的博客
-category : 随笔
+category : 生活
 tagline: "Supporting tagline"
 tags : [有感]
 ---

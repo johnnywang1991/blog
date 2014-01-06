@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 开学 
-category : 随笔
+category : 生活
 tagline: "Supporting tagline"
 tags : [有感]
 ---

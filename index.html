@@ -55,8 +55,8 @@
       jekyll
       </a></li>
      
-      <li><a href="/categories.html#随笔-ref">
-      随笔
+      <li><a href="/categories.html#生活-ref">
+      生活
       </a></li>
      
       <li><a href="/categories.html#git-ref">
@@ -95,169 +95,94 @@
 
 
                     <!-- content -->
-                    
+                    <div class="panel panel-default">
+    <div class="panel-body">
+        <p>使用jekyll建站的小白</p>
+<p>全静态页面</p>
+<p>Bootstrap 3</p>
+<p><a href="https://twitter.com/xiao_cang" target="_blank">@xiao_cang</a></p>
+<p>ヾ(≧O≦)〃嗷~</p>
+
+    </div>
+</div>
 <div class="panel panel-default">
     <div class="panel-body">
-        <h3>
-            <a href="/2014/01/mojo-useragent-non-blocking.html">Mojo::UserAgent [Non-blocking requests in progress]</a>
-            <small class="pull-right text-muted">Jan  6, 2014</small>
-        </h3>
-        <div class="content">
-            <p>最近在一个<a href="http://mojolicio.us/">mojo</a>项目里，其中一个接口会去调用Mojo::UserAgent，按照官方的文档，我把这个接口做成了异步调用。</p>
-
-<div class="highlight"><pre><code class="perl"><span class="n">get</span> <span class="s">&#39;/title&#39;</span> <span class="o">=&gt;</span> <span class="k">sub </span><span class="p">{</span>
-    <span class="k">my</span> <span class="nv">$self</span> <span class="o">=</span> <span class="nb">shift</span><span class="p">;</span>
-
-    <span class="c1"># 阻塞部分</span>
-    <span class="k">my</span> <span class="nv">$result</span> <span class="o">=</span> <span class="nv">$self</span><span class="o">-&gt;</span><span class="n">ua</span><span class="o">-&gt;</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;example.com&#39;</span><span class="p">);</span>
-
-    <span class="c1"># 异步部分</span>
-    <span class="nv">$self</span><span class="o">-&gt;</span><span class="n">ua</span><span class="o">-&gt;</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;mojolicio.us&#39;</span> <span class="o">=&gt;</span> <span class="k">sub </span><span class="p">{</span>
-        <span class="k">my</span> <span class="p">(</span><span class="nv">$ua</span><span class="p">,</span> <span class="nv">$tx</span><span class="p">)</span> <span class="o">=</span> <span class="nv">@_</span><span class="p">;</span>
-        <span class="nv">$self</span><span class="o">-&gt;</span><span class="n">render</span><span class="p">(</span><span class="n">data</span> <span class="o">=&gt;</span> <span class="nv">$tx</span><span class="o">-&gt;</span><span class="n">res</span><span class="o">-&gt;</span><span class="n">dom</span><span class="o">-&gt;</span><span class="n">at</span><span class="p">(</span><span class="s">&#39;title&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">text</span><span class="p">);</span>
-    <span class="p">});</span>
-<span class="p">};</span>
-</code></pre></div>
-
-<p>在使用中却发现，一但请求比较密集，就会报<code>Non-blocking requests in progress</code>的错。</p>
-
-<p>google了一下发现<a href="https://github.com/jhthorsen">Jan Henning Thorsen</a>也发现了同样的错误。</p>
-
-<p>这个由<code>Mojo::UserAgent</code>报的错，是由于在一个Mojo应用里同时使用了<code>$self-&gt;ua / $c-&gt;ua</code>的<code>阻塞</code>和<code>异步</code>两种模式。而解决方法也很简单，就是自己用<code>Mojo::UserAgent-&gt;new</code>再构造一个User::Agent对象给非阻塞部分使用。<a href="https://github.com/marcusramberg/Mojolicious-Plugin-OAuth2/pull/8">原文</a></p>
-
-<p>代码大概像这样:</p>
-
-<div class="highlight"><pre><code class="perl"><span class="n">get</span> <span class="s">&#39;/title&#39;</span> <span class="o">=&gt;</span> <span class="k">sub </span><span class="p">{</span>
-    <span class="k">my</span> <span class="nv">$self</span> <span class="o">=</span> <span class="nb">shift</span><span class="p">;</span>
-
-    <span class="c1"># 阻塞部分改</span>
-    <span class="k">my</span> <span class="nv">$ua</span> <span class="o">=</span> <span class="nn">Mojo::</span><span class="n">UserAgent</span><span class="o">-&gt;</span><span class="k">new</span><span class="p">;</span>
-    <span class="k">my</span> <span class="nv">$result</span> <span class="o">=</span> <span class="nv">$ua</span><span class="o">-&gt;</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;example.com&#39;</span><span class="p">);</span>
-
-    <span class="c1"># 异步部分</span>
-    <span class="nv">$self</span><span class="o">-&gt;</span><span class="n">ua</span><span class="o">-&gt;</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;mojolicio.us&#39;</span> <span class="o">=&gt;</span> <span class="k">sub </span><span class="p">{</span>
-        <span class="k">my</span> <span class="p">(</span><span class="nv">$ua</span><span class="p">,</span> <span class="nv">$tx</span><span class="p">)</span> <span class="o">=</span> <span class="nv">@_</span><span class="p">;</span>
-        <span class="nv">$self</span><span class="o">-&gt;</span><span class="n">render</span><span class="p">(</span><span class="n">data</span> <span class="o">=&gt;</span> <span class="nv">$tx</span><span class="o">-&gt;</span><span class="n">res</span><span class="o">-&gt;</span><span class="n">dom</span><span class="o">-&gt;</span><span class="n">at</span><span class="p">(</span><span class="s">&#39;title&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">text</span><span class="p">);</span>
-    <span class="p">});</span>
-<span class="p">};</span>
-</code></pre></div>
-
-            <p class="pull-right"><a href="/2014/01/mojo-useragent-non-blocking.html">阅读全文 →</a></p>
+        <div class="table-responsive">
+            <h4>最近发表的文章：</h4>
+            <table class="table">
+              
+                <tr>
+                    <td style="border-top:0px">
+                        <a href="/categories.html#perl-ref">[perl]</a>
+                        <a href="/2014/01/mojo-useragent-non-blocking.html">Mojo::UserAgent [Non-blocking requests in progress]</a>
+                    </td>
+                    <td style="border-top:0px"><span>Jan 06, 2014</span></td>
+                </tr>
+              
+                <tr>
+                    <td style="border-top:0px">
+                        <a href="/categories.html#生活-ref">[生活]</a>
+                        <a href="/2013/12/ip5s.html">入手iP5s</a>
+                    </td>
+                    <td style="border-top:0px"><span>Dec 25, 2013</span></td>
+                </tr>
+              
+                <tr>
+                    <td style="border-top:0px">
+                        <a href="/categories.html#git-ref">[git]</a>
+                        <a href="/2013/11/git-abuse.html">关于git reset的风险</a>
+                    </td>
+                    <td style="border-top:0px"><span>Nov 22, 2013</span></td>
+                </tr>
+              
+                <tr>
+                    <td style="border-top:0px">
+                        <a href="/categories.html#perl-ref">[perl]</a>
+                        <a href="/2013/11/perl-crawler-duplicate-remove.html">爬虫的url去重</a>
+                    </td>
+                    <td style="border-top:0px"><span>Nov 02, 2013</span></td>
+                </tr>
+              
+                <tr>
+                    <td style="border-top:0px">
+                        <a href="/categories.html#git-ref">[git]</a>
+                        <a href="/2013/09/git-rebase.html">用git rebase合并commit</a>
+                    </td>
+                    <td style="border-top:0px"><span>Sep 07, 2013</span></td>
+                </tr>
+              
+                <tr>
+                    <td style="border-top:0px">
+                        <a href="/categories.html#生活-ref">[生活]</a>
+                        <a href="/2013/09/about-blog.html">←一个每年都换域名的博客</a>
+                    </td>
+                    <td style="border-top:0px"><span>Sep 04, 2013</span></td>
+                </tr>
+              
+                <tr>
+                    <td style="border-top:0px">
+                        <a href="/categories.html#生活-ref">[生活]</a>
+                        <a href="/2013/09/school-opens.html">开学</a>
+                    </td>
+                    <td style="border-top:0px"><span>Sep 01, 2013</span></td>
+                </tr>
+              
+                <tr>
+                    <td style="border-top:0px">
+                        <a href="/categories.html#jekyll-ref">[jekyll]</a>
+                        <a href="/2013/04/jekyll-excerpt.html">在Jekyll中使用截断输出</a>
+                    </td>
+                    <td style="border-top:0px"><span>Apr 11, 2013</span></td>
+                </tr>
+            
+            </table>
         </div>
     </div>
 </div>
-
-<div class="panel panel-default">
-    <div class="panel-body">
-        <h3>
-            <a href="/2013/12/ip5s.html">入手iP5s</a>
-            <small class="pull-right text-muted">Dec 25, 2013</small>
-        </h3>
-        <div class="content">
-            <p>在接近2013年末的时候，终于把手机换成了智能机，一下心情好了不少。</p>
-
-<p>之前连微信都没有的日子终于一去不返，不过这是一件让人惊讶的事嘛？</p>
-
-<p><img src="/assets/img/ip5_wechat.jpg" alt="某截图"></p>
-
-            <p class="pull-right"><a href="/2013/12/ip5s.html">阅读全文 →</a></p>
-        </div>
-    </div>
-</div>
-
-<div class="panel panel-default">
-    <div class="panel-body">
-        <h3>
-            <a href="/2013/11/git-abuse.html">关于git reset的风险</a>
-            <small class="pull-right text-muted">Nov 22, 2013</small>
-        </h3>
-        <div class="content">
-            <p>在使用<code>git pull origin master</code>更新代码的时候有时会遇到有冲突无法合并的情况，而又知道在remote端的代码是对的，只要覆盖掉本地的代码就好了。</p>
-
-<p>之前我是这样做的：</p>
-
-<div class="highlight"><pre><code class="bash">git fetch --all
-git reset --hard origin/master
-</code></pre></div>
-
-<p>然后也会得到一个我想要的结果。</p>
-
-<p>可是今天当我重复同样的操作时，事故却发生了。很多有用的数据在这个操作之后被删除，而且无法找回了。</p>
-
-
-            <p class="pull-right"><a href="/2013/11/git-abuse.html">阅读全文 →</a></p>
-        </div>
-    </div>
-</div>
-
-<div class="panel panel-default">
-    <div class="panel-body">
-        <h3>
-            <a href="/2013/11/perl-crawler-duplicate-remove.html">爬虫的url去重</a>
-            <small class="pull-right text-muted">Nov  2, 2013</small>
-        </h3>
-        <div class="content">
-            <p>最近用Perl写了一些爬虫，没想到在url去重的问题上碰了钉子。</p>
-
-<p>之前写过一些小的爬虫，url去重的方法都是爬一条就写进数据库，然后在写之前去查询数据库。
-因为这次爬虫的规模较之前的都大，如果在去重问题上消耗太多时间和数据库连接实在不值得。</p>
-
-<p>在网上一搜，才发现url去重也是爬虫的难题之一。而我最终采用了<a href="http://blog.csdn.net/historyasamirror/article/details/6746217">不简单的URL去重</a>这篇文章中推荐的方法：<strong>使用BerkeleyDB</strong>。</p>
-
-<h3>什么是BerkeleyDB</h3>
-
-<p><a href="http://zh.wikipedia.org/wiki/Berkeley_DB"><code>维基百科 BerkeleyDB</code></a>：</p>
-
-<blockquote>
-<p>Berkeley DB（BDB）是一个高效的嵌入式数据库编程库，C语言、C++、Java、Perl、Python、Tcl以及其他很多语言都有其对应的API。Berkeley DB可以保存任意类型的键/值对（Key/Value Pair），而且可以为一个键保存多个数据。</p>
-
-<p>Berkeley DB支持让数千的并发线程同时操作数据库，支持最大256TB的数据，广泛用于各种操作系统，其中包括大多数类Unix操作系统、Windows操作系统以及实时操作系统。</p>
-</blockquote>
-
-
-            <p class="pull-right"><a href="/2013/11/perl-crawler-duplicate-remove.html">阅读全文 →</a></p>
-        </div>
-    </div>
-</div>
-
-<div class="panel panel-default">
-    <div class="panel-body">
-        <h3>
-            <a href="/2013/09/git-rebase.html">用git rebase合并commit</a>
-            <small class="pull-right text-muted">Sep  7, 2013</small>
-        </h3>
-        <div class="content">
-            <p>最近时常用git来作版本控制和代码提交，渐渐发现了git rebase的用法和好处</p>
-
-<p>尤其在整理与合并git的提交记录时，git rebase使用起来十分灵活</p>
-
-<h3>使用情景</h3>
-
-<p>进行一次提交之后，马上发现代码里可能有一两行需要改动，更改之后再次提交，然后又觉得哪里不妥。。。</p>
-
-<div class="highlight"><pre><code class="shell-session"><span class="gp">[root@addcp gitdemo]#</span> vim test.txt
-<span class="gp">[root@addcp gitdemo]#</span> git commit -am <span class="s1">&#39;add test.txt&#39;</span>
-<span class="go">发现一些代码需要小改动</span>
-<span class="gp">[root@addcp gitdemo]#</span> vim test.txt
-<span class="gp">[root@addcp gitdemo]#</span> git commit -am <span class="s1">&#39;update test.txt&#39;</span>
-<span class="go">...</span>
-<span class="go">...</span>
-<span class="go">第N次发现</span>
-<span class="gp">[root@addcp gitdemo]#</span> vim test.txt
-<span class="gp">[root@addcp gitdemo]#</span> git commit -am <span class="s1">&#39;update test.txt again and again&#39;</span>
-<span class="go">...</span>
-</code></pre></div>
-
-
-            <p class="pull-right"><a href="/2013/09/git-rebase.html">阅读全文 →</a></p>
-        </div>
-    </div>
-</div>
-
 
 <ul class="pager">
     
-    <li class="next"><a href="/page2">下一页</a></li>
+    <li class="next disabled"><span>下一页</span></li>
     
 </ul>
 
