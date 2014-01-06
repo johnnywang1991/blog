@@ -7,9 +7,9 @@ group: navigation
 {% include breadcrumb.html %}
 
 {% for category in categories_list %}
-<div class="panel panel-success">
+<div class="panel panel-default">
     <div class="panel-heading">
-    <div class="panel-title" id="{{ category[0] }}-ref">{{ category[0] | join: "/" }}</div>
+        <div class="panel-title" id="{{ category[0] }}-ref">{{ category[0] | join: "/" }}</div>
     </div>
     <div class="panel-body">
     {% assign posts_list = category[1] %}

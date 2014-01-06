@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Mojo::UserAgent [Non-blocking requests in progress]
+title: Mojo::UserAgent： 'Non-blocking requests in progress'
 category : Perl
 ---
 最近在一个[mojo](http://mojolicio.us/)项目里，其中一个接口会去调用Mojo::UserAgent，按照官方的文档，我把这个接口做成了异步调用。

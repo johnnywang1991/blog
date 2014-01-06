@@ -10,7 +10,7 @@
     <description>呵呵</description>
     <pubDate>Mon, 06 Jan 2014 00:00:00 +0800</pubDate>
     <item>
-      <title>Mojo::UserAgent [Non-blocking requests in progress]</title>
+      <title>Mojo::UserAgent： 'Non-blocking requests in progress'</title>
       <link>http://addcp.com/2014/01/mojo-useragent-non-blocking.html</link>
       <description>&lt;p&gt;最近在一个&lt;a href=&quot;http://mojolicio.us/&quot;&gt;mojo&lt;/a&gt;项目里，其中一个接口会去调用Mojo::UserAgent，按照官方的文档，我把这个接口做成了异步调用。&lt;/p&gt;
 
