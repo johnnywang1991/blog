@@ -99,6 +99,57 @@
 <div class="panel panel-default">
     <div class="panel-body">
         <h3>
+            <a href="/2014/01/mojo-useragent-non-blocking.html">Mojo::UserAgent [Non-blocking requests in progress]</a>
+            <small class="pull-right text-muted">Jan  6, 2014</small>
+        </h3>
+        <div class="content">
+            <p>最近在一个<a href="http://mojolicio.us/">mojo</a>项目里，其中一个接口会去调用Mojo::UserAgent，按照官方的文档，我把这个接口做成了异步调用。</p>
+
+<div class="highlight"><pre><code class="perl"><span class="n">get</span> <span class="s">&#39;/title&#39;</span> <span class="o">=&gt;</span> <span class="k">sub </span><span class="p">{</span>
+    <span class="k">my</span> <span class="nv">$self</span> <span class="o">=</span> <span class="nb">shift</span><span class="p">;</span>
+
+    <span class="c1"># 阻塞部分</span>
+    <span class="k">my</span> <span class="nv">$result</span> <span class="o">=</span> <span class="nv">$self</span><span class="o">-&gt;</span><span class="n">ua</span><span class="o">-&gt;</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;example.com&#39;</span><span class="p">);</span>
+
+    <span class="c1"># 异步部分</span>
+    <span class="nv">$self</span><span class="o">-&gt;</span><span class="n">ua</span><span class="o">-&gt;</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;mojolicio.us&#39;</span> <span class="o">=&gt;</span> <span class="k">sub </span><span class="p">{</span>
+        <span class="k">my</span> <span class="p">(</span><span class="nv">$ua</span><span class="p">,</span> <span class="nv">$tx</span><span class="p">)</span> <span class="o">=</span> <span class="nv">@_</span><span class="p">;</span>
+        <span class="nv">$self</span><span class="o">-&gt;</span><span class="n">render</span><span class="p">(</span><span class="n">data</span> <span class="o">=&gt;</span> <span class="nv">$tx</span><span class="o">-&gt;</span><span class="n">res</span><span class="o">-&gt;</span><span class="n">dom</span><span class="o">-&gt;</span><span class="n">at</span><span class="p">(</span><span class="s">&#39;title&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">text</span><span class="p">);</span>
+    <span class="p">});</span>
+<span class="p">};</span>
+</code></pre></div>
+
+<p>在使用中却发现，一但请求比较密集，就会报<code>Non-blocking requests in progress</code>的错。</p>
+
+<p>google了一下发现<a href="https://github.com/jhthorsen">Jan Henning Thorsen</a>也发现了同样的错误。</p>
+
+<p>这个由<code>Mojo::UserAgent</code>报的错，是由于在一个Mojo应用里同时使用了<code>$self-&gt;ua / $c-&gt;ua</code>的<code>阻塞</code>和<code>异步</code>两种模式。而解决方法也很简单，就是自己用<code>Mojo::UserAgent-&gt;new</code>再构造一个User::Agent对象给非阻塞部分使用。<a href="https://github.com/marcusramberg/Mojolicious-Plugin-OAuth2/pull/8">原文</a></p>
+
+<p>代码大概像这样:</p>
+
+<div class="highlight"><pre><code class="perl"><span class="n">get</span> <span class="s">&#39;/title&#39;</span> <span class="o">=&gt;</span> <span class="k">sub </span><span class="p">{</span>
+    <span class="k">my</span> <span class="nv">$self</span> <span class="o">=</span> <span class="nb">shift</span><span class="p">;</span>
+
+    <span class="c1"># 阻塞部分改</span>
+    <span class="k">my</span> <span class="nv">$ua</span> <span class="o">=</span> <span class="nn">Mojo::</span><span class="n">UserAgent</span><span class="o">-&gt;</span><span class="k">new</span><span class="p">;</span>
+    <span class="k">my</span> <span class="nv">$result</span> <span class="o">=</span> <span class="nv">$ua</span><span class="o">-&gt;</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;example.com&#39;</span><span class="p">);</span>
+
+    <span class="c1"># 异步部分</span>
+    <span class="nv">$self</span><span class="o">-&gt;</span><span class="n">ua</span><span class="o">-&gt;</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;mojolicio.us&#39;</span> <span class="o">=&gt;</span> <span class="k">sub </span><span class="p">{</span>
+        <span class="k">my</span> <span class="p">(</span><span class="nv">$ua</span><span class="p">,</span> <span class="nv">$tx</span><span class="p">)</span> <span class="o">=</span> <span class="nv">@_</span><span class="p">;</span>
+        <span class="nv">$self</span><span class="o">-&gt;</span><span class="n">render</span><span class="p">(</span><span class="n">data</span> <span class="o">=&gt;</span> <span class="nv">$tx</span><span class="o">-&gt;</span><span class="n">res</span><span class="o">-&gt;</span><span class="n">dom</span><span class="o">-&gt;</span><span class="n">at</span><span class="p">(</span><span class="s">&#39;title&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">text</span><span class="p">);</span>
+    <span class="p">});</span>
+<span class="p">};</span>
+</code></pre></div>
+
+            <p class="pull-right"><a href="/2014/01/mojo-useragent-non-blocking.html">阅读全文 →</a></p>
+        </div>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-body">
+        <h3>
             <a href="/2013/12/ip5s.html">入手iP5s</a>
             <small class="pull-right text-muted">Dec 25, 2013</small>
         </h3>
@@ -199,24 +250,6 @@ git reset --hard origin/master
 
 
             <p class="pull-right"><a href="/2013/09/git-rebase.html">阅读全文 →</a></p>
-        </div>
-    </div>
-</div>
-
-<div class="panel panel-default">
-    <div class="panel-body">
-        <h3>
-            <a href="/2013/09/about-blog.html">←一个每年都换域名的博客</a>
-            <small class="pull-right text-muted">Sep  4, 2013</small>
-        </h3>
-        <div class="content">
-            <p>这是一个每年都换域名的博客。。。（我干嘛说出来）</p>
-
-<p>然后打算暂定这个域名<a href="http://addcp.com">addcp.com</a></p>
-
-<p>写一些感想瞎想和技术文</p>
-
-            <p class="pull-right"><a href="/2013/09/about-blog.html">阅读全文 →</a></p>
         </div>
     </div>
 </div>

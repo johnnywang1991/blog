@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>呵呵</title>
+        <title>Mojo::UserAgent [Non-blocking requests in progress]</title>
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -43,7 +43,7 @@
         </div>
         <div class="navbar-collapse collapse navbar-responsive-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="/">首页</a></li>
+                <li ><a href="/">首页</a></li>
                 <li class="dropdown " >
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">分类<b class="caret"></b></a>
                     <ul class="dropdown-menu">
@@ -95,15 +95,26 @@
 
 
                     <!-- content -->
-                    
+                    <!-- breadcrumbs -->
+<ul class="breadcrumb">
+    <li>
+        <a href="/"><span class="glyphicon glyphicon-home"></span></a>
+    </li>
+    
+    <li><a href="/categories.html#perl-ref">perl</a></li>
+    <li class="active">Mojo::UserAgent [Non-blocking requests in progress]</li>
+    
+</ul>
+
+
 <div class="panel panel-default">
+    <!-- content -->
     <div class="panel-body">
         <h3>
             <a href="/2014/01/mojo-useragent-non-blocking.html">Mojo::UserAgent [Non-blocking requests in progress]</a>
             <small class="pull-right text-muted">Jan  6, 2014</small>
         </h3>
-        <div class="content">
-            <p>最近在一个<a href="http://mojolicio.us/">mojo</a>项目里，其中一个接口会去调用Mojo::UserAgent，按照官方的文档，我把这个接口做成了异步调用。</p>
+        <p>最近在一个<a href="http://mojolicio.us/">mojo</a>项目里，其中一个接口会去调用Mojo::UserAgent，按照官方的文档，我把这个接口做成了异步调用。</p>
 
 <div class="highlight"><pre><code class="perl"><span class="n">get</span> <span class="s">&#39;/title&#39;</span> <span class="o">=&gt;</span> <span class="k">sub </span><span class="p">{</span>
     <span class="k">my</span> <span class="nv">$self</span> <span class="o">=</span> <span class="nb">shift</span><span class="p">;</span>
@@ -142,124 +153,23 @@
 <span class="p">};</span>
 </code></pre></div>
 
-            <p class="pull-right"><a href="/2014/01/mojo-useragent-non-blocking.html">阅读全文 →</a></p>
-        </div>
     </div>
 </div>
+<div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'xiaocang'; // required: replace example with your forum shortname
 
-<div class="panel panel-default">
-    <div class="panel-body">
-        <h3>
-            <a href="/2013/12/ip5s.html">入手iP5s</a>
-            <small class="pull-right text-muted">Dec 25, 2013</small>
-        </h3>
-        <div class="content">
-            <p>在接近2013年末的时候，终于把手机换成了智能机，一下心情好了不少。</p>
-
-<p>之前连微信都没有的日子终于一去不返，不过这是一件让人惊讶的事嘛？</p>
-
-<p><img src="/assets/img/ip5_wechat.jpg" alt="某截图"></p>
-
-            <p class="pull-right"><a href="/2013/12/ip5s.html">阅读全文 →</a></p>
-        </div>
-    </div>
-</div>
-
-<div class="panel panel-default">
-    <div class="panel-body">
-        <h3>
-            <a href="/2013/11/git-abuse.html">关于git reset的风险</a>
-            <small class="pull-right text-muted">Nov 22, 2013</small>
-        </h3>
-        <div class="content">
-            <p>在使用<code>git pull origin master</code>更新代码的时候有时会遇到有冲突无法合并的情况，而又知道在remote端的代码是对的，只要覆盖掉本地的代码就好了。</p>
-
-<p>之前我是这样做的：</p>
-
-<div class="highlight"><pre><code class="bash">git fetch --all
-git reset --hard origin/master
-</code></pre></div>
-
-<p>然后也会得到一个我想要的结果。</p>
-
-<p>可是今天当我重复同样的操作时，事故却发生了。很多有用的数据在这个操作之后被删除，而且无法找回了。</p>
-
-
-            <p class="pull-right"><a href="/2013/11/git-abuse.html">阅读全文 →</a></p>
-        </div>
-    </div>
-</div>
-
-<div class="panel panel-default">
-    <div class="panel-body">
-        <h3>
-            <a href="/2013/11/perl-crawler-duplicate-remove.html">爬虫的url去重</a>
-            <small class="pull-right text-muted">Nov  2, 2013</small>
-        </h3>
-        <div class="content">
-            <p>最近用Perl写了一些爬虫，没想到在url去重的问题上碰了钉子。</p>
-
-<p>之前写过一些小的爬虫，url去重的方法都是爬一条就写进数据库，然后在写之前去查询数据库。
-因为这次爬虫的规模较之前的都大，如果在去重问题上消耗太多时间和数据库连接实在不值得。</p>
-
-<p>在网上一搜，才发现url去重也是爬虫的难题之一。而我最终采用了<a href="http://blog.csdn.net/historyasamirror/article/details/6746217">不简单的URL去重</a>这篇文章中推荐的方法：<strong>使用BerkeleyDB</strong>。</p>
-
-<h3>什么是BerkeleyDB</h3>
-
-<p><a href="http://zh.wikipedia.org/wiki/Berkeley_DB"><code>维基百科 BerkeleyDB</code></a>：</p>
-
-<blockquote>
-<p>Berkeley DB（BDB）是一个高效的嵌入式数据库编程库，C语言、C++、Java、Perl、Python、Tcl以及其他很多语言都有其对应的API。Berkeley DB可以保存任意类型的键/值对（Key/Value Pair），而且可以为一个键保存多个数据。</p>
-
-<p>Berkeley DB支持让数千的并发线程同时操作数据库，支持最大256TB的数据，广泛用于各种操作系统，其中包括大多数类Unix操作系统、Windows操作系统以及实时操作系统。</p>
-</blockquote>
-
-
-            <p class="pull-right"><a href="/2013/11/perl-crawler-duplicate-remove.html">阅读全文 →</a></p>
-        </div>
-    </div>
-</div>
-
-<div class="panel panel-default">
-    <div class="panel-body">
-        <h3>
-            <a href="/2013/09/git-rebase.html">用git rebase合并commit</a>
-            <small class="pull-right text-muted">Sep  7, 2013</small>
-        </h3>
-        <div class="content">
-            <p>最近时常用git来作版本控制和代码提交，渐渐发现了git rebase的用法和好处</p>
-
-<p>尤其在整理与合并git的提交记录时，git rebase使用起来十分灵活</p>
-
-<h3>使用情景</h3>
-
-<p>进行一次提交之后，马上发现代码里可能有一两行需要改动，更改之后再次提交，然后又觉得哪里不妥。。。</p>
-
-<div class="highlight"><pre><code class="shell-session"><span class="gp">[root@addcp gitdemo]#</span> vim test.txt
-<span class="gp">[root@addcp gitdemo]#</span> git commit -am <span class="s1">&#39;add test.txt&#39;</span>
-<span class="go">发现一些代码需要小改动</span>
-<span class="gp">[root@addcp gitdemo]#</span> vim test.txt
-<span class="gp">[root@addcp gitdemo]#</span> git commit -am <span class="s1">&#39;update test.txt&#39;</span>
-<span class="go">...</span>
-<span class="go">...</span>
-<span class="go">第N次发现</span>
-<span class="gp">[root@addcp gitdemo]#</span> vim test.txt
-<span class="gp">[root@addcp gitdemo]#</span> git commit -am <span class="s1">&#39;update test.txt again and again&#39;</span>
-<span class="go">...</span>
-</code></pre></div>
-
-
-            <p class="pull-right"><a href="/2013/09/git-rebase.html">阅读全文 →</a></p>
-        </div>
-    </div>
-</div>
-
-
-<ul class="pager">
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
     
-    <li class="next"><a href="/page2">下一页</a></li>
-    
-</ul>
 
 
 
