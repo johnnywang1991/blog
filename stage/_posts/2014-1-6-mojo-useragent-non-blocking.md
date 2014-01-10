@@ -24,7 +24,7 @@ get '/title' => sub {
 
 google了一下发现[Jan Henning Thorsen](https://github.com/jhthorsen)也发现了同样的错误。
 
-这个由`Mojo::UserAgent`报的错，是由于在一个Mojo应用里同时使用了`$self->ua / $c->ua`的`阻塞`和`异步`两种模式。而解决方法也很简单，就是自己用`Mojo::UserAgent->new`再构造一个User::Agent对象给非阻塞部分使用。[原文](https://github.com/marcusramberg/Mojolicious-Plugin-OAuth2/pull/8)
+这个由`Mojo::UserAgent`报的错，是由于在一个Mojo应用里同时使用了`$self->ua / $c->ua`的`阻塞`和`异步`两种模式。而解决方法也很简单，就是自己用`Mojo::UserAgent->new`再构造一个Mojo::UserAgent对象给非阻塞部分使用。[原文](https://github.com/marcusramberg/Mojolicious-Plugin-OAuth2/pull/8)
 
 代码大概像这样:
 

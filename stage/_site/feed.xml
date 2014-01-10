@@ -8,7 +8,18 @@
     <title>呵呵</title>
     <link>http://addcp.com</link>
     <description>呵呵</description>
-    <pubDate>Mon, 06 Jan 2014 00:00:00 +0800</pubDate>
+    <pubDate>Fri, 10 Jan 2014 00:00:00 +0800</pubDate>
+    <item>
+      <title>关于Bootstrap</title>
+      <link>http://addcp.com/2014/01/bootstrap-recommend-website.html</link>
+      <description>&lt;p&gt;用Bootstrap写了一些界面，觉得&lt;code&gt;抄&lt;/code&gt;才是用Bootstrap的精髓。&lt;/p&gt;
+
+&lt;p&gt;于是发现了这个站：&lt;a href=&quot;http://bootsnipp.com/&quot;&gt;&lt;em&gt;bootsnipp&lt;/em&gt;&lt;/a&gt;。&lt;/p&gt;
+</description>
+      <pubDate>Fri, 10 Jan 2014 00:00:00 +0800</pubDate>
+      <guid>http://addcp.com/2014/01/bootstrap-recommend-website.html</guid>
+      <dc:date>2014-01-10T00:00:00+08:00</dc:date>
+    </item>
     <item>
       <title>Mojo::UserAgent： 'Non-blocking requests in progress'</title>
       <link>http://addcp.com/2014/01/mojo-useragent-non-blocking.html</link>
@@ -32,7 +43,7 @@
 
 &lt;p&gt;google了一下发现&lt;a href=&quot;https://github.com/jhthorsen&quot;&gt;Jan Henning Thorsen&lt;/a&gt;也发现了同样的错误。&lt;/p&gt;
 
-&lt;p&gt;这个由&lt;code&gt;Mojo::UserAgent&lt;/code&gt;报的错，是由于在一个Mojo应用里同时使用了&lt;code&gt;$self-&amp;gt;ua / $c-&amp;gt;ua&lt;/code&gt;的&lt;code&gt;阻塞&lt;/code&gt;和&lt;code&gt;异步&lt;/code&gt;两种模式。而解决方法也很简单，就是自己用&lt;code&gt;Mojo::UserAgent-&amp;gt;new&lt;/code&gt;再构造一个User::Agent对象给非阻塞部分使用。&lt;a href=&quot;https://github.com/marcusramberg/Mojolicious-Plugin-OAuth2/pull/8&quot;&gt;原文&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;这个由&lt;code&gt;Mojo::UserAgent&lt;/code&gt;报的错，是由于在一个Mojo应用里同时使用了&lt;code&gt;$self-&amp;gt;ua / $c-&amp;gt;ua&lt;/code&gt;的&lt;code&gt;阻塞&lt;/code&gt;和&lt;code&gt;异步&lt;/code&gt;两种模式。而解决方法也很简单，就是自己用&lt;code&gt;Mojo::UserAgent-&amp;gt;new&lt;/code&gt;再构造一个Mojo::UserAgent对象给非阻塞部分使用。&lt;a href=&quot;https://github.com/marcusramberg/Mojolicious-Plugin-OAuth2/pull/8&quot;&gt;原文&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;代码大概像这样:&lt;/p&gt;
 
@@ -448,6 +459,6 @@ f abe26fe update test.txt again and again<span class="p">&amp;</span>lt<span cla
       <guid>http://addcp.com/2013/04/jekyll-excerpt.html</guid>
       <dc:date>2013-04-11T00:00:00+08:00</dc:date>
     </item>
-    <dc:date>2014-01-06T00:00:00+08:00</dc:date>
+    <dc:date>2014-01-10T00:00:00+08:00</dc:date>
   </channel>
 </rss>

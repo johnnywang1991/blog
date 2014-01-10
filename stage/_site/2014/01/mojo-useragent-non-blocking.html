@@ -66,6 +66,10 @@
       <li><a href="/categories.html#perl-ref">
       perl
       </a></li>
+     
+      <li><a href="/categories.html#bootstrap-ref">
+      bootstrap
+      </a></li>
     
   
 
@@ -134,7 +138,7 @@
 
 <p>google了一下发现<a href="https://github.com/jhthorsen">Jan Henning Thorsen</a>也发现了同样的错误。</p>
 
-<p>这个由<code>Mojo::UserAgent</code>报的错，是由于在一个Mojo应用里同时使用了<code>$self-&gt;ua / $c-&gt;ua</code>的<code>阻塞</code>和<code>异步</code>两种模式。而解决方法也很简单，就是自己用<code>Mojo::UserAgent-&gt;new</code>再构造一个User::Agent对象给非阻塞部分使用。<a href="https://github.com/marcusramberg/Mojolicious-Plugin-OAuth2/pull/8">原文</a></p>
+<p>这个由<code>Mojo::UserAgent</code>报的错，是由于在一个Mojo应用里同时使用了<code>$self-&gt;ua / $c-&gt;ua</code>的<code>阻塞</code>和<code>异步</code>两种模式。而解决方法也很简单，就是自己用<code>Mojo::UserAgent-&gt;new</code>再构造一个Mojo::UserAgent对象给非阻塞部分使用。<a href="https://github.com/marcusramberg/Mojolicious-Plugin-OAuth2/pull/8">原文</a></p>
 
 <p>代码大概像这样:</p>
 
