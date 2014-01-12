@@ -8,7 +8,122 @@
     <title>呵呵</title>
     <link>http://addcp.com</link>
     <description>呵呵</description>
-    <pubDate>Fri, 10 Jan 2014 00:00:00 +0800</pubDate>
+    <pubDate>Sun, 12 Jan 2014 00:00:00 +0000</pubDate>
+    <item>
+      <title>在Windows Azure上搭建Jekyll</title>
+      <link>http://addcp.com/2014/01/windows-azure-jekyll.html</link>
+      <description>&lt;p&gt;刚刚收到Windows Azure发来的邮件&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;诚邀您参加由世纪互联运营的 Windows Azure beta 免费试用 &lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;我很幸运的得到了Windows Azure beta的试用VPS，而且也没有说多久过期，看来起码可以免费用上三个月以上了。&lt;/p&gt;
+
+&lt;p&gt;当然这个VPS是在国内的网络里，&lt;code&gt;搭梯子&lt;/code&gt;什么的当然做不到。但是还是可以搭个博客什么的。&lt;/p&gt;
+
+&lt;p&gt;于是我把在github Pages上跑的Jekyll博客也移了过来（起码写博客不用开虚拟机，直接登到VPS上就可以了）。&lt;/p&gt;
+
+&lt;h3&gt;搭建一个Jekyll环境。&lt;/h3&gt;
+
+&lt;p&gt;在Windows Azure创建虚拟机的时候我选了CentOS（主要是工作中也在用），然后下一步，下一步。。这样一个虚拟机就创建完毕。&lt;/p&gt;
+
+&lt;p&gt;然后打开一个ssh终端，输入在刚才创建虚拟机时候填的主机名、端口、用户名、密码，然后登录到虚拟机上。&lt;/p&gt;
+
+&lt;p&gt;登入之后第一件事第一件事就是编辑&lt;code&gt;/etc/yum.conf&lt;/code&gt;文件：&lt;/p&gt;
+
+&lt;p&gt;<div class="highlight"><pre><code class="bash"><span class="nv">$ </span>vim /etc/yum.conf
+</code></pre></div>&lt;/p&gt;
+
+&lt;p&gt;<div class="highlight"><pre><code class="vim">[<span class="k">main</span>]&amp;<span class="k">lt</span>;<span class="k">br</span>&amp;gt;
+cachedir<span class="p">=</span><span class="sr">/var/</span>cache<span class="sr">/yum/</span>$basearch/$releasever
+keepcache<span class="p">=</span><span class="m">0</span>
+debuglevel<span class="p">=</span><span class="m">2</span>
+logfile<span class="p">=</span><span class="sr">/var/</span>log/yum.log
+exactarch<span class="p">=</span><span class="m">1</span>
+obsoletes<span class="p">=</span><span class="m">1</span>
+gpgcheck<span class="p">=</span><span class="m">1</span>
+plugins<span class="p">=</span><span class="m">1</span>
+installonly&amp;<span class="k">lt</span>;<span class="k">em</span>&amp;gt;limit<span class="p">=</span><span class="m">5</span>
+bugtracker&amp;<span class="k">lt</span>;<span class="sr">/em&amp;gt;url=http://bugs.centos.org/</span><span class="k">set</span>&amp;<span class="k">lt</span>;<span class="k">em</span>&amp;gt;project.php?project&amp;<span class="k">lt</span>;<span class="sr">/em&amp;gt;id=16&amp;amp;amp;ref=http://bugs.centos.org/</span>bug&amp;<span class="k">lt</span>;<span class="k">em</span>&amp;gt;<span class="nb">report</span>&amp;<span class="k">lt</span>;/<span class="k">em</span>&amp;gt;page.php?category<span class="p">=</span>yum
+distroverpkg<span class="p">=</span>centos<span class="p">-</span>release&amp;<span class="k">lt</span>;/<span class="k">p</span>&amp;gt;
+
+&amp;<span class="k">lt</span>;h1&amp;gt;exclude<span class="p">=</span>kernel*&amp;<span class="k">lt</span>;/h1&amp;gt;
+
+&amp;<span class="k">lt</span>;h1&amp;gt;This <span class="k">is</span> the default<span class="p">,</span> <span class="k">if</span> you <span class="k">make</span> this bigger yum won&amp;amp;#<span class="m">39</span>;<span class="k">t</span> see <span class="k">if</span> the metadata&amp;<span class="k">lt</span>;/h1&amp;gt;
+
+&amp;<span class="k">lt</span>;h1&amp;gt;<span class="k">is</span> newer <span class="k">on</span> the remote and <span class="k">so</span> you&amp;amp;#<span class="m">39</span>;<span class="k">ll</span> &amp;amp;quot;gain&amp;amp;quot; the bandwidth of not having <span class="k">to</span>&amp;<span class="k">lt</span>;/h1&amp;gt;
+
+&amp;<span class="k">lt</span>;h1&amp;gt;download the <span class="k">new</span> metadata and &amp;amp;quot;pay&amp;amp;quot; <span class="k">for</span> it by yum not having correct&amp;<span class="k">lt</span>;/h1&amp;gt;
+
+&amp;<span class="k">lt</span>;h1&amp;gt;information.&amp;<span class="k">lt</span>;/h1&amp;gt;
+
+&amp;<span class="k">lt</span>;h1&amp;gt;It <span class="k">is</span> esp. important<span class="p">,</span> <span class="k">to</span> have correct metadata<span class="p">,</span> <span class="k">for</span> distributions like&amp;<span class="k">lt</span>;/h1&amp;gt;
+
+&amp;<span class="k">lt</span>;h1&amp;gt;Fedora which don&amp;amp;#<span class="m">39</span>;<span class="k">t</span> <span class="k">keep</span> <span class="k">old</span> packages around. If you don&amp;amp;#<span class="m">39</span>;<span class="k">t</span> like this checking&amp;<span class="k">lt</span>;/h1&amp;gt;
+
+&amp;<span class="k">lt</span>;h1&amp;gt;interupting your command line usage<span class="p">,</span> it&amp;amp;#<span class="m">39</span>;<span class="k">s</span> much better <span class="k">to</span> have something&amp;<span class="k">lt</span>;/h1&amp;gt;
+
+&amp;<span class="k">lt</span>;h1&amp;gt;manually <span class="k">check</span> the metadata once an hour <span class="p">(</span>yum<span class="p">-</span>updatesd will <span class="k">do</span> this<span class="p">)</span>.&amp;<span class="k">lt</span>;/h1&amp;gt;
+
+&amp;<span class="k">lt</span>;h1&amp;gt;metadata_expire<span class="p">=</span><span class="m">90</span>m&amp;<span class="k">lt</span>;/h1&amp;gt;
+
+&amp;<span class="k">lt</span>;h1&amp;gt;PUT YOUR REPOS HERE OR IN separate <span class="k">files</span> named <span class="k">file</span>.repo&amp;<span class="k">lt</span>;/h1&amp;gt;
+
+&amp;<span class="k">lt</span>;h1&amp;gt;<span class="k">in</span> <span class="sr">/etc/</span>yum.repos.<span class="k">d</span>&amp;<span class="k">lt</span>;/h1&amp;gt;
+
+&amp;<span class="k">lt</span>;<span class="k">p</span>&amp;gt;
+</code></pre></div>&lt;/p&gt;
+
+&lt;p&gt;把其中&lt;code&gt;exclude=kernel*&lt;/code&gt;注释掉，不然装包的时候会报错的。&lt;/p&gt;
+
+&lt;p&gt;由于Jekyll需要Ruby环境，所以在终端执行下面的命令，安装Ruby&lt;/p&gt;
+
+&lt;p&gt;<div class="highlight"><pre><code class="bash"><span class="nv">$ </span>curl -L https://get.rvm.io <span class="p">|</span> bash -s stable --ruby
+</code></pre></div>&lt;/p&gt;
+
+&lt;p&gt;Jekyll安装则按照Jekyll官方文档上说的，在终端执行：&lt;/p&gt;
+
+&lt;p&gt;<div class="highlight"><pre><code class="bash"><span class="nv">$ </span>gem install jekyll
+</code></pre></div>&lt;/p&gt;
+
+&lt;p&gt;但是我在执行这条命令时发现，gem迟迟没有反应。再执行：&lt;/p&gt;
+
+&lt;p&gt;<div class="highlight"><pre><code class="bash"><span class="nv">$ </span>gem install jekyll -V
+</code></pre></div>&lt;/p&gt;
+
+&lt;p&gt;这里发现，没有反应是因为gem的源被国内的网络环境弄的无法连接（你懂的）&lt;/p&gt;
+
+&lt;p&gt;果断按照&lt;a href=&quot;http://ruby.taobao.org/&quot;&gt;http://ruby.taobao.org/&lt;/a&gt;上的文档，删除了现在无法连接的源，更新了淘宝的源。&lt;/p&gt;
+
+&lt;p&gt;<div class="highlight"><pre><code class="bash"><span class="nv">$ </span>gem sources --remove https://rubygems.org/
+<span class="nv">$ </span>gem sources -a http://ruby.taobao.org/
+<span class="nv">$ </span>gem sources -l
+*** CURRENT SOURCES ***<span class="p">&amp;</span>lt<span class="p">;</span>/p<span class="p">&amp;</span>gt<span class="p">;</span>
+
+<span class="p">&amp;</span>lt<span class="p">;</span>p<span class="p">&amp;</span>gt<span class="p">;</span>http://ruby.taobao.org<span class="p">&amp;</span>lt<span class="p">;</span>/p<span class="p">&amp;</span>gt<span class="p">;</span>
+
+<span class="p">&amp;</span>lt<span class="p">;</span>h1<span class="p">&amp;</span>gt<span class="p">;</span>请确保只有 ruby.taobao.org<span class="p">&amp;</span>lt<span class="p">;</span>/h1<span class="p">&amp;</span>gt<span class="p">;</span>
+
+<span class="p">&amp;</span>lt<span class="p">;</span>p<span class="p">&amp;</span>gt<span class="p">;</span>
+</code></pre></div>&lt;/p&gt;
+
+&lt;p&gt;然后再执行：
+<div class="highlight"><pre><code class="bash"><span class="nv">$ </span>gem install jekyll
+</code></pre></div>&lt;/p&gt;
+
+&lt;p&gt;果然很快很顺利。^_^&lt;/p&gt;
+
+&lt;hr&gt;
+
+&lt;p&gt;&lt;strong&gt;写在后面&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;不过我现在还是不清楚，能不能把没备案的域名解析过来。。。所以我还是在用那个又长又难看又难记的&lt;code&gt;xxxxxx.chinacloudapp.cn&lt;/code&gt;。。=w=&lt;/p&gt;
+</description>
+      <pubDate>Sun, 12 Jan 2014 00:00:00 +0000</pubDate>
+      <guid>http://addcp.com/2014/01/windows-azure-jekyll.html</guid>
+      <dc:date>2014-01-12T00:00:00+00:00</dc:date>
+    </item>
     <item>
       <title>关于Bootstrap</title>
       <link>http://addcp.com/2014/01/bootstrap-recommend-website.html</link>
@@ -16,9 +131,9 @@
 
 &lt;p&gt;于是发现了这个站：&lt;a href=&quot;http://bootsnipp.com/&quot;&gt;&lt;em&gt;bootsnipp&lt;/em&gt;&lt;/a&gt;。&lt;/p&gt;
 </description>
-      <pubDate>Fri, 10 Jan 2014 00:00:00 +0800</pubDate>
+      <pubDate>Fri, 10 Jan 2014 00:00:00 +0000</pubDate>
       <guid>http://addcp.com/2014/01/bootstrap-recommend-website.html</guid>
-      <dc:date>2014-01-10T00:00:00+08:00</dc:date>
+      <dc:date>2014-01-10T00:00:00+00:00</dc:date>
     </item>
     <item>
       <title>Mojo::UserAgent： 'Non-blocking requests in progress'</title>
@@ -62,9 +177,9 @@
 <span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="n">p</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;};</span>
 </code></pre></div>&lt;/p&gt;
 </description>
-      <pubDate>Mon, 06 Jan 2014 00:00:00 +0800</pubDate>
+      <pubDate>Mon, 06 Jan 2014 00:00:00 +0000</pubDate>
       <guid>http://addcp.com/2014/01/mojo-useragent-non-blocking.html</guid>
-      <dc:date>2014-01-06T00:00:00+08:00</dc:date>
+      <dc:date>2014-01-06T00:00:00+00:00</dc:date>
     </item>
     <item>
       <title>入手iP5s</title>
@@ -75,9 +190,9 @@
 
 &lt;p&gt;&lt;img src=&quot;/assets/img/ip5_wechat.jpg&quot; alt=&quot;某截图&quot;&gt;&lt;/p&gt;
 </description>
-      <pubDate>Wed, 25 Dec 2013 00:00:00 +0800</pubDate>
+      <pubDate>Wed, 25 Dec 2013 00:00:00 +0000</pubDate>
       <guid>http://addcp.com/2013/12/ip5s.html</guid>
-      <dc:date>2013-12-25T00:00:00+08:00</dc:date>
+      <dc:date>2013-12-25T00:00:00+00:00</dc:date>
     </item>
     <item>
       <title>关于git reset的风险</title>
@@ -113,9 +228,9 @@ git reset --hard origin/master
 &lt;li&gt;&lt;p&gt;4 不要添加不追踪的文件&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
-      <pubDate>Fri, 22 Nov 2013 00:00:00 +0800</pubDate>
+      <pubDate>Fri, 22 Nov 2013 00:00:00 +0000</pubDate>
       <guid>http://addcp.com/2013/11/git-abuse.html</guid>
-      <dc:date>2013-11-22T00:00:00+08:00</dc:date>
+      <dc:date>2013-11-22T00:00:00+00:00</dc:date>
     </item>
     <item>
       <title>爬虫的url去重</title>
@@ -243,9 +358,9 @@ git reset --hard origin/master
 <span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="n">p</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span><span class="nn">Mojo::</span><span class="n">IOLoop</span><span class="o">-&amp;</span><span class="n">amp</span><span class="p">;</span><span class="ow">gt</span><span class="p">;</span><span class="n">start</span> <span class="k">unless</span> <span class="nn">Mojo::</span><span class="n">IOLoop</span><span class="o">-&amp;</span><span class="n">amp</span><span class="p">;</span><span class="ow">gt</span><span class="p">;</span><span class="n">is_running</span><span class="p">;</span>
 </code></pre></div>&lt;/p&gt;
 </description>
-      <pubDate>Sat, 02 Nov 2013 00:00:00 +0800</pubDate>
+      <pubDate>Sat, 02 Nov 2013 00:00:00 +0000</pubDate>
       <guid>http://addcp.com/2013/11/perl-crawler-duplicate-remove.html</guid>
-      <dc:date>2013-11-02T00:00:00+08:00</dc:date>
+      <dc:date>2013-11-02T00:00:00+00:00</dc:date>
     </item>
     <item>
       <title>用git rebase合并commit</title>
@@ -388,9 +503,9 @@ f abe26fe update test.txt again and again<span class="p">&amp;</span>lt<span cla
 
 &lt;p&gt;所以衍合主要是在提交到线上之前进行commit合并，使提交纪录变得干净的方法&lt;/p&gt;
 </description>
-      <pubDate>Sat, 07 Sep 2013 00:00:00 +0800</pubDate>
+      <pubDate>Sat, 07 Sep 2013 00:00:00 +0000</pubDate>
       <guid>http://addcp.com/2013/09/git-rebase.html</guid>
-      <dc:date>2013-09-07T00:00:00+08:00</dc:date>
+      <dc:date>2013-09-07T00:00:00+00:00</dc:date>
     </item>
     <item>
       <title>←一个每年都换域名的博客</title>
@@ -401,9 +516,9 @@ f abe26fe update test.txt again and again<span class="p">&amp;</span>lt<span cla
 
 &lt;p&gt;写一些感想瞎想和技术文&lt;/p&gt;
 </description>
-      <pubDate>Wed, 04 Sep 2013 00:00:00 +0800</pubDate>
+      <pubDate>Wed, 04 Sep 2013 00:00:00 +0000</pubDate>
       <guid>http://addcp.com/2013/09/about-blog.html</guid>
-      <dc:date>2013-09-04T00:00:00+08:00</dc:date>
+      <dc:date>2013-09-04T00:00:00+00:00</dc:date>
     </item>
     <item>
       <title>开学</title>
@@ -414,9 +529,9 @@ f abe26fe update test.txt again and again<span class="p">&amp;</span>lt<span cla
 
 &lt;p&gt;今年刚刚毕业的我还是会有点小伤感虽然不知道为什么&lt;/p&gt;
 </description>
-      <pubDate>Sun, 01 Sep 2013 00:00:00 +0800</pubDate>
+      <pubDate>Sun, 01 Sep 2013 00:00:00 +0000</pubDate>
       <guid>http://addcp.com/2013/09/school-opens.html</guid>
-      <dc:date>2013-09-01T00:00:00+08:00</dc:date>
+      <dc:date>2013-09-01T00:00:00+00:00</dc:date>
     </item>
     <item>
       <title>在Jekyll中使用截断输出</title>
@@ -455,10 +570,10 @@ f abe26fe update test.txt again and again<span class="p">&amp;</span>lt<span cla
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;这样，即使是托管在Github上的Jekyll也能截断输出了。&lt;/p&gt;
 </description>
-      <pubDate>Thu, 11 Apr 2013 00:00:00 +0800</pubDate>
+      <pubDate>Thu, 11 Apr 2013 00:00:00 +0000</pubDate>
       <guid>http://addcp.com/2013/04/jekyll-excerpt.html</guid>
-      <dc:date>2013-04-11T00:00:00+08:00</dc:date>
+      <dc:date>2013-04-11T00:00:00+00:00</dc:date>
     </item>
-    <dc:date>2014-01-10T00:00:00+08:00</dc:date>
+    <dc:date>2014-01-12T00:00:00+00:00</dc:date>
   </channel>
 </rss>
