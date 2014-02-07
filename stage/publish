@@ -1,2 +1,2 @@
 #!/bin/sh
-/usr/bin/rsync -avz --delete --exclude=assets/ --exclude=stage/ --exclude=.* stage/_site/ .
+/usr/bin/rsync -avz --delete --exclude=stage/ --exclude=.* stage/_site/ .
