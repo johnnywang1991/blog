@@ -136,8 +136,7 @@
 <span class="go">第N次发现</span>
 <span class="gp">[root@addcp gitdemo]#</span> vim test.txt
 <span class="gp">[root@addcp gitdemo]#</span> git commit -am <span class="s1">&#39;update test.txt again and again&#39;</span>
-<span class="go">...</span>
-</code></pre></div>
+<span class="go">...</span></code></pre></div>
 
 <!-- more -->
 
@@ -169,8 +168,7 @@
 <span class="go">Date:   Sat Sep 7 01:28:22 2013 +0800</span>
 
 <span class="go">    add test.txt</span>
-<span class="go">......</span>
-</code></pre></div>
+<span class="go">......</span></code></pre></div>
 
 <h3>rebase 示例及用法</h3>
 
@@ -178,13 +176,11 @@
 
 <p>git rebase语法是这样的</p>
 
-<div class="highlight"><pre><code class="shell-session"><span class="go">git rebase [--interactive | -i] [-v] [--force-rebase | -f] [--no-ff] [--onto &lt;newbase&gt;] [&lt;upstream&gt;|--root] [&lt;branch&gt;] [--quiet | -q]</span>
-</code></pre></div>
+<div class="highlight"><pre><code class="shell-session"><span class="go">git rebase [--interactive | -i] [-v] [--force-rebase | -f] [--no-ff] [--onto &lt;newbase&gt;] [&lt;upstream&gt;|--root] [&lt;branch&gt;] [--quiet | -q]</span></code></pre></div>
 
 <p>这里我们使用到的是<code>-i</code>选项，也就是交互的rebase</p>
 
-<div class="highlight"><pre><code class="shell-session"><span class="gp">[root@addcp gitdemo]#</span> git -i HEAD~3
-</code></pre></div>
+<div class="highlight"><pre><code class="shell-session"><span class="gp">[root@addcp gitdemo]#</span> git -i HEAD~3</code></pre></div>
 
 <p>其中<code>HEAD~3</code>是该分支的前三次提交。也可以在后面加<code>&lt;branch&gt;</code>的参数指定要衍合的分支。</p>
 
@@ -202,8 +198,7 @@ f abe26fe update test.txt again and again
 <span class="c">#  f, fixup = like &quot;squash&quot;, but discard this commit&#39;s log message</span>
 <span class="c">#</span>
 <span class="c"># If you remove a line here THAT COMMIT WILL BE LOST.</span>
-<span class="c"># However, if you remove everything, the rebase will be aborted.</span>
-</code></pre></div>
+<span class="c"># However, if you remove everything, the rebase will be aborted.</span></code></pre></div>
 
 <p>其中，<code>pick</code>是将该次提交原样提交</p>
 
@@ -230,8 +225,7 @@ f abe26fe update test.txt again and again
 <span class="go">Author: xiaocang &lt;xiaocang@addcp.com&gt;</span>
 <span class="go">Date:   Sat Sep 7 01:28:22 2013 +0800</span>
 
-<span class="go">    add test.txt</span>
-</code></pre></div>
+<span class="go">    add test.txt</span></code></pre></div>
 
 <p>这样整个世界就都清净了</p>
 

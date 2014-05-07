@@ -8,7 +8,7 @@
     <title>呵呵</title>
     <link>http://addcp.com</link>
     <description>呵呵</description>
-    <pubDate>Fri, 07 Feb 2014 00:00:00 +0000</pubDate>
+    <pubDate>Fri, 07 Feb 2014 00:00:00 +0800</pubDate>
     <item>
       <title>过年</title>
       <link>http://addcp.com/2014/02/chinese-new-year.html</link>
@@ -16,9 +16,9 @@
 
 &lt;p&gt;累。&lt;/p&gt;
 </description>
-      <pubDate>Fri, 07 Feb 2014 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 07 Feb 2014 00:00:00 +0800</pubDate>
       <guid>http://addcp.com/2014/02/chinese-new-year.html</guid>
-      <dc:date>2014-02-07T00:00:00+00:00</dc:date>
+      <dc:date>2014-02-07T00:00:00+08:00</dc:date>
     </item>
     <item>
       <title>年会</title>
@@ -29,9 +29,9 @@
 
 &lt;p&gt;End.&lt;/p&gt;
 </description>
-      <pubDate>Thu, 23 Jan 2014 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 23 Jan 2014 00:00:00 +0800</pubDate>
       <guid>http://addcp.com/2014/01/yyt-party.html</guid>
-      <dc:date>2014-01-23T00:00:00+00:00</dc:date>
+      <dc:date>2014-01-23T00:00:00+08:00</dc:date>
     </item>
     <item>
       <title>在Windows Azure上搭建Jekyll</title>
@@ -56,8 +56,7 @@
 
 &lt;p&gt;登入之后第一件事第一件事就是编辑&lt;code&gt;/etc/yum.conf&lt;/code&gt;文件：&lt;/p&gt;
 
-&lt;p&gt;<div class="highlight"><pre><code class="bash"><span class="nv">$ </span>vim /etc/yum.conf
-</code></pre></div>&lt;/p&gt;
+&lt;p&gt;<div class="highlight"><pre><code class="bash"><span class="nv">$ </span>vim /etc/yum.conf</code></pre></div>&lt;/p&gt;
 
 &lt;p&gt;<div class="highlight"><pre><code class="vim">[<span class="k">main</span>]&amp;<span class="k">lt</span>;<span class="k">br</span>&amp;gt;
 cachedir<span class="p">=</span><span class="sr">/var/</span>cache<span class="sr">/yum/</span>$basearch/$releasever
@@ -96,25 +95,21 @@ distroverpkg<span class="p">=</span>centos<span class="p">-</span>release&amp;<s
 
 &amp;<span class="k">lt</span>;h1&amp;gt;<span class="k">in</span> <span class="sr">/etc/</span>yum.repos.<span class="k">d</span>&amp;<span class="k">lt</span>;/h1&amp;gt;
 
-&amp;<span class="k">lt</span>;<span class="k">p</span>&amp;gt;
-</code></pre></div>&lt;/p&gt;
+&amp;<span class="k">lt</span>;<span class="k">p</span>&amp;gt;</code></pre></div>&lt;/p&gt;
 
 &lt;p&gt;把其中&lt;code&gt;exclude=kernel*&lt;/code&gt;注释掉，不然装包的时候会报错的。&lt;/p&gt;
 
 &lt;p&gt;由于Jekyll需要Ruby环境，所以在终端执行下面的命令，安装Ruby&lt;/p&gt;
 
-&lt;p&gt;<div class="highlight"><pre><code class="bash"><span class="nv">$ </span>curl -L https://get.rvm.io <span class="p">|</span> bash -s stable --ruby
-</code></pre></div>&lt;/p&gt;
+&lt;p&gt;<div class="highlight"><pre><code class="bash"><span class="nv">$ </span>curl -L https://get.rvm.io <span class="p">|</span> bash -s stable --ruby</code></pre></div>&lt;/p&gt;
 
 &lt;p&gt;Jekyll安装则按照Jekyll官方文档上说的，在终端执行：&lt;/p&gt;
 
-&lt;p&gt;<div class="highlight"><pre><code class="bash"><span class="nv">$ </span>gem install jekyll
-</code></pre></div>&lt;/p&gt;
+&lt;p&gt;<div class="highlight"><pre><code class="bash"><span class="nv">$ </span>gem install jekyll</code></pre></div>&lt;/p&gt;
 
 &lt;p&gt;但是我在执行这条命令时发现，gem迟迟没有反应。再执行：&lt;/p&gt;
 
-&lt;p&gt;<div class="highlight"><pre><code class="bash"><span class="nv">$ </span>gem install jekyll -V
-</code></pre></div>&lt;/p&gt;
+&lt;p&gt;<div class="highlight"><pre><code class="bash"><span class="nv">$ </span>gem install jekyll -V</code></pre></div>&lt;/p&gt;
 
 &lt;p&gt;这里发现，没有反应是因为gem的源被国内的网络环境弄的无法连接（你懂的）&lt;/p&gt;
 
@@ -129,12 +124,10 @@ distroverpkg<span class="p">=</span>centos<span class="p">-</span>release&amp;<s
 
 <span class="p">&amp;</span>lt<span class="p">;</span>h1<span class="p">&amp;</span>gt<span class="p">;</span>请确保只有 ruby.taobao.org<span class="p">&amp;</span>lt<span class="p">;</span>/h1<span class="p">&amp;</span>gt<span class="p">;</span>
 
-<span class="p">&amp;</span>lt<span class="p">;</span>p<span class="p">&amp;</span>gt<span class="p">;</span>
-</code></pre></div>&lt;/p&gt;
+<span class="p">&amp;</span>lt<span class="p">;</span>p<span class="p">&amp;</span>gt<span class="p">;</span></code></pre></div>&lt;/p&gt;
 
 &lt;p&gt;然后再执行：
-<div class="highlight"><pre><code class="bash"><span class="nv">$ </span>gem install jekyll
-</code></pre></div>&lt;/p&gt;
+<div class="highlight"><pre><code class="bash"><span class="nv">$ </span>gem install jekyll</code></pre></div>&lt;/p&gt;
 
 &lt;p&gt;果然很快很顺利。^_^&lt;/p&gt;
 
@@ -144,9 +137,9 @@ distroverpkg<span class="p">=</span>centos<span class="p">-</span>release&amp;<s
 
 &lt;p&gt;不过我现在还是不清楚，能不能把没备案的域名解析过来。。。所以我还是在用那个又长又难看又难记的&lt;code&gt;xxxxxx.chinacloudapp.cn&lt;/code&gt;。。=w=&lt;/p&gt;
 </description>
-      <pubDate>Sun, 12 Jan 2014 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 12 Jan 2014 00:00:00 +0800</pubDate>
       <guid>http://addcp.com/2014/01/windows-azure-jekyll.html</guid>
-      <dc:date>2014-01-12T00:00:00+00:00</dc:date>
+      <dc:date>2014-01-12T00:00:00+08:00</dc:date>
     </item>
     <item>
       <title>关于Bootstrap</title>
@@ -155,9 +148,9 @@ distroverpkg<span class="p">=</span>centos<span class="p">-</span>release&amp;<s
 
 &lt;p&gt;于是发现了这个站：&lt;a href=&quot;http://bootsnipp.com/&quot;&gt;&lt;em&gt;bootsnipp&lt;/em&gt;&lt;/a&gt;。&lt;/p&gt;
 </description>
-      <pubDate>Fri, 10 Jan 2014 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 10 Jan 2014 00:00:00 +0800</pubDate>
       <guid>http://addcp.com/2014/01/bootstrap-recommend-website.html</guid>
-      <dc:date>2014-01-10T00:00:00+00:00</dc:date>
+      <dc:date>2014-01-10T00:00:00+08:00</dc:date>
     </item>
     <item>
       <title>Mojo::UserAgent： 'Non-blocking requests in progress'</title>
@@ -166,7 +159,7 @@ distroverpkg<span class="p">=</span>centos<span class="p">-</span>release&amp;<s
 
 &lt;p&gt;<div class="highlight"><pre><code class="perl"><span class="n">get</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="c1">#39;/title&amp;amp;#39; =&amp;amp;gt; sub {</span>
     <span class="k">my</span> <span class="nv">$self</span> <span class="o">=</span> <span class="nb">shift</span><span class="p">;</span><span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="o">/</span><span class="n">p</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span>
-<span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="n">div</span> <span class="n">class</span><span class="o">=&amp;</span><span class="n">quot</span><span class="p">;</span><span class="n">highlight</span><span class="o">&amp;</span><span class="n">quot</span><span class="p">;</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span><span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="n">pre</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span><span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="n">code</span> <span class="n">class</span><span class="o">=&amp;</span><span class="n">quot</span><span class="p">;</span><span class="n">text</span> <span class="n">language</span><span class="o">-</span><span class="n">text</span><span class="o">&amp;</span><span class="n">quot</span><span class="p">;</span> <span class="n">data</span><span class="o">-</span><span class="n">lang</span><span class="o">=&amp;</span><span class="n">quot</span><span class="p">;</span><span class="n">text</span><span class="o">&amp;</span><span class="n">quot</span><span class="p">;</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span><span class="c1"># 阻塞部分</span>
+<span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="n">div</span> <span class="n">class</span><span class="o">=&amp;</span><span class="n">quot</span><span class="p">;</span><span class="n">highlight</span><span class="o">&amp;</span><span class="n">quot</span><span class="p">;</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span><span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="n">pre</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span><span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="n">code</span> <span class="n">class</span><span class="o">=&amp;</span><span class="n">quot</span><span class="p">;</span><span class="n">language</span><span class="o">-</span><span class="n">text</span><span class="o">&amp;</span><span class="n">quot</span><span class="p">;</span> <span class="n">data</span><span class="o">-</span><span class="n">lang</span><span class="o">=&amp;</span><span class="n">quot</span><span class="p">;</span><span class="n">text</span><span class="o">&amp;</span><span class="n">quot</span><span class="p">;</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span><span class="c1"># 阻塞部分</span>
 <span class="k">my</span> <span class="nv">$result</span> <span class="o">=</span> <span class="nv">$self</span><span class="o">-&amp;</span><span class="n">amp</span><span class="p">;</span><span class="ow">gt</span><span class="p">;</span><span class="n">ua</span><span class="o">-&amp;</span><span class="n">amp</span><span class="p">;</span><span class="ow">gt</span><span class="p">;</span><span class="n">get</span><span class="p">(</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="c1">#39;example.com&amp;amp;#39;);</span>
 
 <span class="c1"># 异步部分</span>
@@ -175,8 +168,7 @@ distroverpkg<span class="p">=</span>centos<span class="p">-</span>release&amp;<s
     <span class="nv">$self</span><span class="o">-&amp;</span><span class="n">amp</span><span class="p">;</span><span class="ow">gt</span><span class="p">;</span><span class="n">render</span><span class="p">(</span><span class="n">data</span> <span class="o">=&amp;</span><span class="n">amp</span><span class="p">;</span><span class="ow">gt</span><span class="p">;</span> <span class="nv">$tx</span><span class="o">-&amp;</span><span class="n">amp</span><span class="p">;</span><span class="ow">gt</span><span class="p">;</span><span class="n">res</span><span class="o">-&amp;</span><span class="n">amp</span><span class="p">;</span><span class="ow">gt</span><span class="p">;</span><span class="n">dom</span><span class="o">-&amp;</span><span class="n">amp</span><span class="p">;</span><span class="ow">gt</span><span class="p">;</span><span class="n">at</span><span class="p">(</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="c1">#39;title&amp;amp;#39;)-&amp;amp;gt;text);</span>
 <span class="p">});</span>
 <span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="sr">/code&amp;gt;&amp;lt;/</span><span class="n">pre</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span><span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="o">/</span><span class="n">div</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span>
-<span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="n">p</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;};</span>
-</code></pre></div>&lt;/p&gt;
+<span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="n">p</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;};</span></code></pre></div>&lt;/p&gt;
 
 &lt;p&gt;在使用中却发现，一但请求比较密集，就会报&lt;code&gt;Non-blocking requests in progress&lt;/code&gt;的错。&lt;/p&gt;
 
@@ -188,7 +180,7 @@ distroverpkg<span class="p">=</span>centos<span class="p">-</span>release&amp;<s
 
 &lt;p&gt;<div class="highlight"><pre><code class="perl"><span class="n">get</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="c1">#39;/title&amp;amp;#39; =&amp;amp;gt; sub {</span>
     <span class="k">my</span> <span class="nv">$self</span> <span class="o">=</span> <span class="nb">shift</span><span class="p">;</span><span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="o">/</span><span class="n">p</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span>
-<span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="n">div</span> <span class="n">class</span><span class="o">=&amp;</span><span class="n">quot</span><span class="p">;</span><span class="n">highlight</span><span class="o">&amp;</span><span class="n">quot</span><span class="p">;</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span><span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="n">pre</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span><span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="n">code</span> <span class="n">class</span><span class="o">=&amp;</span><span class="n">quot</span><span class="p">;</span><span class="n">text</span> <span class="n">language</span><span class="o">-</span><span class="n">text</span><span class="o">&amp;</span><span class="n">quot</span><span class="p">;</span> <span class="n">data</span><span class="o">-</span><span class="n">lang</span><span class="o">=&amp;</span><span class="n">quot</span><span class="p">;</span><span class="n">text</span><span class="o">&amp;</span><span class="n">quot</span><span class="p">;</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span><span class="c1"># 阻塞部分改</span>
+<span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="n">div</span> <span class="n">class</span><span class="o">=&amp;</span><span class="n">quot</span><span class="p">;</span><span class="n">highlight</span><span class="o">&amp;</span><span class="n">quot</span><span class="p">;</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span><span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="n">pre</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span><span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="n">code</span> <span class="n">class</span><span class="o">=&amp;</span><span class="n">quot</span><span class="p">;</span><span class="n">language</span><span class="o">-</span><span class="n">text</span><span class="o">&amp;</span><span class="n">quot</span><span class="p">;</span> <span class="n">data</span><span class="o">-</span><span class="n">lang</span><span class="o">=&amp;</span><span class="n">quot</span><span class="p">;</span><span class="n">text</span><span class="o">&amp;</span><span class="n">quot</span><span class="p">;</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span><span class="c1"># 阻塞部分改</span>
 <span class="k">my</span> <span class="nv">$ua</span> <span class="o">=</span> <span class="nn">Mojo::</span><span class="n">UserAgent</span><span class="o">-&amp;</span><span class="n">amp</span><span class="p">;</span><span class="ow">gt</span><span class="p">;</span><span class="k">new</span><span class="p">;</span>
 <span class="k">my</span> <span class="nv">$result</span> <span class="o">=</span> <span class="nv">$ua</span><span class="o">-&amp;</span><span class="n">amp</span><span class="p">;</span><span class="ow">gt</span><span class="p">;</span><span class="n">get</span><span class="p">(</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="c1">#39;example.com&amp;amp;#39;);</span>
 
@@ -198,12 +190,11 @@ distroverpkg<span class="p">=</span>centos<span class="p">-</span>release&amp;<s
     <span class="nv">$self</span><span class="o">-&amp;</span><span class="n">amp</span><span class="p">;</span><span class="ow">gt</span><span class="p">;</span><span class="n">render</span><span class="p">(</span><span class="n">data</span> <span class="o">=&amp;</span><span class="n">amp</span><span class="p">;</span><span class="ow">gt</span><span class="p">;</span> <span class="nv">$tx</span><span class="o">-&amp;</span><span class="n">amp</span><span class="p">;</span><span class="ow">gt</span><span class="p">;</span><span class="n">res</span><span class="o">-&amp;</span><span class="n">amp</span><span class="p">;</span><span class="ow">gt</span><span class="p">;</span><span class="n">dom</span><span class="o">-&amp;</span><span class="n">amp</span><span class="p">;</span><span class="ow">gt</span><span class="p">;</span><span class="n">at</span><span class="p">(</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="c1">#39;title&amp;amp;#39;)-&amp;amp;gt;text);</span>
 <span class="p">});</span>
 <span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="sr">/code&amp;gt;&amp;lt;/</span><span class="n">pre</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span><span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="o">/</span><span class="n">div</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span>
-<span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="n">p</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;};</span>
-</code></pre></div>&lt;/p&gt;
+<span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="n">p</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;};</span></code></pre></div>&lt;/p&gt;
 </description>
-      <pubDate>Mon, 06 Jan 2014 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 06 Jan 2014 00:00:00 +0800</pubDate>
       <guid>http://addcp.com/2014/01/mojo-useragent-non-blocking.html</guid>
-      <dc:date>2014-01-06T00:00:00+00:00</dc:date>
+      <dc:date>2014-01-06T00:00:00+08:00</dc:date>
     </item>
     <item>
       <title>入手iP5s</title>
@@ -214,9 +205,9 @@ distroverpkg<span class="p">=</span>centos<span class="p">-</span>release&amp;<s
 
 &lt;p&gt;&lt;img src=&quot;/assets/img/ip5_wechat.jpg&quot; alt=&quot;某截图&quot;&gt;&lt;/p&gt;
 </description>
-      <pubDate>Wed, 25 Dec 2013 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 25 Dec 2013 00:00:00 +0800</pubDate>
       <guid>http://addcp.com/2013/12/ip5s.html</guid>
-      <dc:date>2013-12-25T00:00:00+00:00</dc:date>
+      <dc:date>2013-12-25T00:00:00+08:00</dc:date>
     </item>
     <item>
       <title>关于git reset的风险</title>
@@ -226,8 +217,7 @@ distroverpkg<span class="p">=</span>centos<span class="p">-</span>release&amp;<s
 &lt;p&gt;之前我是这样做的：&lt;/p&gt;
 
 &lt;p&gt;<div class="highlight"><pre><code class="bash">git fetch --all
-git reset --hard origin/master
-</code></pre></div>&lt;/p&gt;
+git reset --hard origin/master</code></pre></div>&lt;/p&gt;
 
 &lt;p&gt;然后也会得到一个我想要的结果。&lt;/p&gt;
 
@@ -252,9 +242,9 @@ git reset --hard origin/master
 &lt;li&gt;&lt;p&gt;4 不要添加不追踪的文件&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
-      <pubDate>Fri, 22 Nov 2013 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 22 Nov 2013 00:00:00 +0800</pubDate>
       <guid>http://addcp.com/2013/11/git-abuse.html</guid>
-      <dc:date>2013-11-22T00:00:00+00:00</dc:date>
+      <dc:date>2013-11-22T00:00:00+08:00</dc:date>
     </item>
     <item>
       <title>爬虫的url去重</title>
@@ -356,7 +346,7 @@ git reset --hard origin/master
     <span class="p">},</span>
     <span class="k">sub </span><span class="p">{</span>
         <span class="k">my</span> <span class="p">(</span><span class="nv">$delay</span><span class="p">,</span> <span class="nv">@result</span><span class="p">)</span> <span class="o">=</span> <span class="nv">@_</span><span class="p">;</span><span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="o">/</span><span class="n">p</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span>
-<span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="n">div</span> <span class="n">class</span><span class="o">=&amp;</span><span class="n">quot</span><span class="p">;</span><span class="n">highlight</span><span class="o">&amp;</span><span class="n">quot</span><span class="p">;</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span><span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="n">pre</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span><span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="n">code</span> <span class="n">class</span><span class="o">=&amp;</span><span class="n">quot</span><span class="p">;</span><span class="n">text</span> <span class="n">language</span><span class="o">-</span><span class="n">text</span><span class="o">&amp;</span><span class="n">quot</span><span class="p">;</span> <span class="n">data</span><span class="o">-</span><span class="n">lang</span><span class="o">=&amp;</span><span class="n">quot</span><span class="p">;</span><span class="n">text</span><span class="o">&amp;</span><span class="n">quot</span><span class="p">;</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span>    <span class="k">for</span> <span class="k">my</span> <span class="nv">$tx</span> <span class="p">(</span><span class="nv">@result</span><span class="p">)</span> <span class="p">{</span>
+<span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="n">div</span> <span class="n">class</span><span class="o">=&amp;</span><span class="n">quot</span><span class="p">;</span><span class="n">highlight</span><span class="o">&amp;</span><span class="n">quot</span><span class="p">;</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span><span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="n">pre</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span><span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="n">code</span> <span class="n">class</span><span class="o">=&amp;</span><span class="n">quot</span><span class="p">;</span><span class="n">language</span><span class="o">-</span><span class="n">text</span><span class="o">&amp;</span><span class="n">quot</span><span class="p">;</span> <span class="n">data</span><span class="o">-</span><span class="n">lang</span><span class="o">=&amp;</span><span class="n">quot</span><span class="p">;</span><span class="n">text</span><span class="o">&amp;</span><span class="n">quot</span><span class="p">;</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span>    <span class="k">for</span> <span class="k">my</span> <span class="nv">$tx</span> <span class="p">(</span><span class="nv">@result</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">if</span> <span class="p">(</span><span class="k">my</span> <span class="nv">$res</span> <span class="o">=</span> <span class="nv">$tx</span><span class="o">-&amp;</span><span class="n">amp</span><span class="p">;</span><span class="ow">gt</span><span class="p">;</span><span class="n">success</span><span class="p">)</span> <span class="p">{</span>
 
             <span class="c1"># 使用lock保证多进程时BerkeleyDB的数据安全</span>
@@ -379,12 +369,11 @@ git reset --hard origin/master
 <span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="sr">/code&amp;gt;&amp;lt;/</span><span class="n">pre</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span><span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="o">/</span><span class="n">div</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span>
 <span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="n">p</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;);</span><span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="o">/</span><span class="n">p</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span>
 
-<span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="n">p</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span><span class="nn">Mojo::</span><span class="n">IOLoop</span><span class="o">-&amp;</span><span class="n">amp</span><span class="p">;</span><span class="ow">gt</span><span class="p">;</span><span class="n">start</span> <span class="k">unless</span> <span class="nn">Mojo::</span><span class="n">IOLoop</span><span class="o">-&amp;</span><span class="n">amp</span><span class="p">;</span><span class="ow">gt</span><span class="p">;</span><span class="n">is_running</span><span class="p">;</span>
-</code></pre></div>&lt;/p&gt;
+<span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="n">p</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span><span class="nn">Mojo::</span><span class="n">IOLoop</span><span class="o">-&amp;</span><span class="n">amp</span><span class="p">;</span><span class="ow">gt</span><span class="p">;</span><span class="n">start</span> <span class="k">unless</span> <span class="nn">Mojo::</span><span class="n">IOLoop</span><span class="o">-&amp;</span><span class="n">amp</span><span class="p">;</span><span class="ow">gt</span><span class="p">;</span><span class="n">is_running</span><span class="p">;</span></code></pre></div>&lt;/p&gt;
 </description>
-      <pubDate>Sat, 02 Nov 2013 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 02 Nov 2013 00:00:00 +0800</pubDate>
       <guid>http://addcp.com/2013/11/perl-crawler-duplicate-remove.html</guid>
-      <dc:date>2013-11-02T00:00:00+00:00</dc:date>
+      <dc:date>2013-11-02T00:00:00+08:00</dc:date>
     </item>
     <item>
       <title>用git rebase合并commit</title>
@@ -407,8 +396,7 @@ git reset --hard origin/master
 <span class="go">第N次发现</span>
 <span class="gp">[root@addcp gitdemo]#</span> vim test.txt
 <span class="gp">[root@addcp gitdemo]#</span> git commit -am <span class="p">&amp;</span>amp<span class="p">;</span><span class="c">#39;update test.txt again and again&amp;amp;#39;</span>
-<span class="go">...</span>
-</code></pre></div>&lt;/p&gt;
+<span class="go">...</span></code></pre></div>&lt;/p&gt;
 
 &lt;!-- more --&gt;
 
@@ -420,25 +408,24 @@ git reset --hard origin/master
 <span class="go">commit abe26fe0f5b1788e8f7b1949082e1477c5337aa0</span>
 <span class="go">Author: xiaocang &amp;lt;a href=&amp;quot;mailto:xiaocang@addcp.com&amp;quot;&amp;gt;xiaocang@addcp.com&amp;lt;/a&amp;gt;</span>
 <span class="go">Date:   Sat Sep 7 01:29:48 2013 +0800&amp;lt;/p&amp;gt;</span>
-<span class="go">&amp;lt;div class=&amp;quot;highlight&amp;quot;&amp;gt;&amp;lt;pre&amp;gt;&amp;lt;code class=&amp;quot;text language-text&amp;quot; data-lang=&amp;quot;text&amp;quot;&amp;gt;update test.txt again and again</span>
+<span class="go">&amp;lt;div class=&amp;quot;highlight&amp;quot;&amp;gt;&amp;lt;pre&amp;gt;&amp;lt;code class=&amp;quot;language-text&amp;quot; data-lang=&amp;quot;text&amp;quot;&amp;gt;update test.txt again and again</span>
 <span class="go">&amp;lt;/code&amp;gt;&amp;lt;/pre&amp;gt;&amp;lt;/div&amp;gt;</span>
 <span class="go">&amp;lt;p&amp;gt;commit c3633d5153bacabeceaeaeb552484e7f9b6a2b9c</span>
 <span class="go">Author: xiaocang &amp;lt;a href=&amp;quot;mailto:xiaocang@addcp.com&amp;quot;&amp;gt;xiaocang@addcp.com&amp;lt;/a&amp;gt;</span>
 <span class="go">Date:   Sat Sep 7 01:29:21 2013 +0800&amp;lt;/p&amp;gt;</span>
-<span class="go">&amp;lt;div class=&amp;quot;highlight&amp;quot;&amp;gt;&amp;lt;pre&amp;gt;&amp;lt;code class=&amp;quot;text language-text&amp;quot; data-lang=&amp;quot;text&amp;quot;&amp;gt;update test.txt again</span>
+<span class="go">&amp;lt;div class=&amp;quot;highlight&amp;quot;&amp;gt;&amp;lt;pre&amp;gt;&amp;lt;code class=&amp;quot;language-text&amp;quot; data-lang=&amp;quot;text&amp;quot;&amp;gt;update test.txt again</span>
 <span class="go">&amp;lt;/code&amp;gt;&amp;lt;/pre&amp;gt;&amp;lt;/div&amp;gt;</span>
 <span class="go">&amp;lt;p&amp;gt;commit c8bc032daac7d0859a0e73cd83a464cee0f59625</span>
 <span class="go">Author: xiaocang &amp;lt;a href=&amp;quot;mailto:xiaocang@addcp.com&amp;quot;&amp;gt;xiaocang@addcp.com&amp;lt;/a&amp;gt;</span>
 <span class="go">Date:   Sat Sep 7 01:28:51 2013 +0800&amp;lt;/p&amp;gt;</span>
-<span class="go">&amp;lt;div class=&amp;quot;highlight&amp;quot;&amp;gt;&amp;lt;pre&amp;gt;&amp;lt;code class=&amp;quot;text language-text&amp;quot; data-lang=&amp;quot;text&amp;quot;&amp;gt;update test.txt</span>
+<span class="go">&amp;lt;div class=&amp;quot;highlight&amp;quot;&amp;gt;&amp;lt;pre&amp;gt;&amp;lt;code class=&amp;quot;language-text&amp;quot; data-lang=&amp;quot;text&amp;quot;&amp;gt;update test.txt</span>
 <span class="go">&amp;lt;/code&amp;gt;&amp;lt;/pre&amp;gt;&amp;lt;/div&amp;gt;</span>
 <span class="go">&amp;lt;p&amp;gt;commit 0e80061e90503189dd7f189297aed809953e5e8b</span>
 <span class="go">Author: xiaocang &amp;lt;a href=&amp;quot;mailto:xiaocang@addcp.com&amp;quot;&amp;gt;xiaocang@addcp.com&amp;lt;/a&amp;gt;</span>
 <span class="go">Date:   Sat Sep 7 01:28:22 2013 +0800&amp;lt;/p&amp;gt;</span>
-<span class="go">&amp;lt;div class=&amp;quot;highlight&amp;quot;&amp;gt;&amp;lt;pre&amp;gt;&amp;lt;code class=&amp;quot;text language-text&amp;quot; data-lang=&amp;quot;text&amp;quot;&amp;gt;add test.txt</span>
+<span class="go">&amp;lt;div class=&amp;quot;highlight&amp;quot;&amp;gt;&amp;lt;pre&amp;gt;&amp;lt;code class=&amp;quot;language-text&amp;quot; data-lang=&amp;quot;text&amp;quot;&amp;gt;add test.txt</span>
 <span class="go">&amp;lt;/code&amp;gt;&amp;lt;/pre&amp;gt;&amp;lt;/div&amp;gt;</span>
-<span class="go">&amp;lt;p&amp;gt;......</span>
-</code></pre></div>&lt;/p&gt;
+<span class="go">&amp;lt;p&amp;gt;......</span></code></pre></div>&lt;/p&gt;
 
 &lt;h3&gt;rebase 示例及用法&lt;/h3&gt;
 
@@ -446,13 +433,11 @@ git reset --hard origin/master
 
 &lt;p&gt;git rebase语法是这样的&lt;/p&gt;
 
-&lt;p&gt;<div class="highlight"><pre><code class="shell-session"><span class="go">git rebase [--interactive | -i] [-v] [--force-rebase | -f] [--no-ff] [--onto &amp;lt;newbase&amp;gt;] [&amp;lt;upstream&amp;gt;|--root] [&amp;lt;branch&amp;gt;] [--quiet | -q]</span>
-</code></pre></div>&lt;/p&gt;
+&lt;p&gt;<div class="highlight"><pre><code class="shell-session"><span class="go">git rebase [--interactive | -i] [-v] [--force-rebase | -f] [--no-ff] [--onto &amp;lt;newbase&amp;gt;] [&amp;lt;upstream&amp;gt;|--root] [&amp;lt;branch&amp;gt;] [--quiet | -q]</span></code></pre></div>&lt;/p&gt;
 
 &lt;p&gt;这里我们使用到的是&lt;code&gt;-i&lt;/code&gt;选项，也就是交互的rebase&lt;/p&gt;
 
-&lt;p&gt;<div class="highlight"><pre><code class="shell-session"><span class="gp">[root@addcp gitdemo]#</span> git -i HEAD~3
-</code></pre></div>&lt;/p&gt;
+&lt;p&gt;<div class="highlight"><pre><code class="shell-session"><span class="gp">[root@addcp gitdemo]#</span> git -i HEAD~3</code></pre></div>&lt;/p&gt;
 
 &lt;p&gt;其中&lt;code&gt;HEAD~3&lt;/code&gt;是该分支的前三次提交。也可以在后面加&lt;code&gt;&amp;lt;branch&amp;gt;&lt;/code&gt;的参数指定要衍合的分支。&lt;/p&gt;
 
@@ -478,8 +463,7 @@ f abe26fe update test.txt again and again<span class="p">&amp;</span>lt<span cla
 
 <span class="p">&amp;</span>lt<span class="p">;</span>h1<span class="p">&amp;</span>gt<span class="p">;</span>However, <span class="k">if </span>you remove everything, the rebase will be aborted.<span class="p">&amp;</span>lt<span class="p">;</span>/h1<span class="p">&amp;</span>gt<span class="p">;</span>
 
-<span class="p">&amp;</span>lt<span class="p">;</span>p<span class="p">&amp;</span>gt<span class="p">;</span>
-</code></pre></div>&lt;/p&gt;
+<span class="p">&amp;</span>lt<span class="p">;</span>p<span class="p">&amp;</span>gt<span class="p">;</span></code></pre></div>&lt;/p&gt;
 
 &lt;p&gt;其中，&lt;code&gt;pick&lt;/code&gt;是将该次提交原样提交&lt;/p&gt;
 
@@ -499,15 +483,14 @@ f abe26fe update test.txt again and again<span class="p">&amp;</span>lt<span cla
 <span class="go">commit 3e5d79d149942f7dc0741a9a42ce43d98beafcd3</span>
 <span class="go">Author: xiaocang &amp;lt;a href=&amp;quot;mailto:xiaocang@addcp.com&amp;quot;&amp;gt;xiaocang@addcp.com&amp;lt;/a&amp;gt;</span>
 <span class="go">Date:   Sat Sep 7 01:28:51 2013 +0800&amp;lt;/p&amp;gt;</span>
-<span class="go">&amp;lt;div class=&amp;quot;highlight&amp;quot;&amp;gt;&amp;lt;pre&amp;gt;&amp;lt;code class=&amp;quot;text language-text&amp;quot; data-lang=&amp;quot;text&amp;quot;&amp;gt;update test.txt</span>
+<span class="go">&amp;lt;div class=&amp;quot;highlight&amp;quot;&amp;gt;&amp;lt;pre&amp;gt;&amp;lt;code class=&amp;quot;language-text&amp;quot; data-lang=&amp;quot;text&amp;quot;&amp;gt;update test.txt</span>
 <span class="go">&amp;lt;/code&amp;gt;&amp;lt;/pre&amp;gt;&amp;lt;/div&amp;gt;</span>
 <span class="go">&amp;lt;p&amp;gt;commit 0e80061e90503189dd7f189297aed809953e5e8b</span>
 <span class="go">Author: xiaocang &amp;lt;a href=&amp;quot;mailto:xiaocang@addcp.com&amp;quot;&amp;gt;xiaocang@addcp.com&amp;lt;/a&amp;gt;</span>
 <span class="go">Date:   Sat Sep 7 01:28:22 2013 +0800&amp;lt;/p&amp;gt;</span>
-<span class="go">&amp;lt;div class=&amp;quot;highlight&amp;quot;&amp;gt;&amp;lt;pre&amp;gt;&amp;lt;code class=&amp;quot;text language-text&amp;quot; data-lang=&amp;quot;text&amp;quot;&amp;gt;add test.txt</span>
+<span class="go">&amp;lt;div class=&amp;quot;highlight&amp;quot;&amp;gt;&amp;lt;pre&amp;gt;&amp;lt;code class=&amp;quot;language-text&amp;quot; data-lang=&amp;quot;text&amp;quot;&amp;gt;add test.txt</span>
 <span class="go">&amp;lt;/code&amp;gt;&amp;lt;/pre&amp;gt;&amp;lt;/div&amp;gt;</span>
-<span class="go">&amp;lt;p&amp;gt;</span>
-</code></pre></div>&lt;/p&gt;
+<span class="go">&amp;lt;p&amp;gt;</span></code></pre></div>&lt;/p&gt;
 
 &lt;p&gt;这样整个世界就都清净了&lt;/p&gt;
 
@@ -527,9 +510,9 @@ f abe26fe update test.txt again and again<span class="p">&amp;</span>lt<span cla
 
 &lt;p&gt;所以衍合主要是在提交到线上之前进行commit合并，使提交纪录变得干净的方法&lt;/p&gt;
 </description>
-      <pubDate>Sat, 07 Sep 2013 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 07 Sep 2013 00:00:00 +0800</pubDate>
       <guid>http://addcp.com/2013/09/git-rebase.html</guid>
-      <dc:date>2013-09-07T00:00:00+00:00</dc:date>
+      <dc:date>2013-09-07T00:00:00+08:00</dc:date>
     </item>
     <item>
       <title>←一个每年都换域名的博客</title>
@@ -540,9 +523,9 @@ f abe26fe update test.txt again and again<span class="p">&amp;</span>lt<span cla
 
 &lt;p&gt;写一些感想瞎想和技术文&lt;/p&gt;
 </description>
-      <pubDate>Wed, 04 Sep 2013 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 04 Sep 2013 00:00:00 +0800</pubDate>
       <guid>http://addcp.com/2013/09/about-blog.html</guid>
-      <dc:date>2013-09-04T00:00:00+00:00</dc:date>
+      <dc:date>2013-09-04T00:00:00+08:00</dc:date>
     </item>
     <item>
       <title>开学</title>
@@ -553,9 +536,9 @@ f abe26fe update test.txt again and again<span class="p">&amp;</span>lt<span cla
 
 &lt;p&gt;今年刚刚毕业的我还是会有点小伤感虽然不知道为什么&lt;/p&gt;
 </description>
-      <pubDate>Sun, 01 Sep 2013 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 01 Sep 2013 00:00:00 +0800</pubDate>
       <guid>http://addcp.com/2013/09/school-opens.html</guid>
-      <dc:date>2013-09-01T00:00:00+00:00</dc:date>
+      <dc:date>2013-09-01T00:00:00+08:00</dc:date>
     </item>
     <item>
       <title>在Jekyll中使用截断输出</title>
@@ -590,14 +573,14 @@ f abe26fe update test.txt again and again<span class="p">&amp;</span>lt<span cla
 &lt;/p&gt;
 
 &lt;p&gt;然后在截断的文章后加上&lt;code&gt;阅读全文&lt;/code&gt;&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;&amp;lt;p&amp;gt;&amp;lt;a href=&amp;quot;#more&amp;quot;&amp;gt;阅读全文 →&amp;lt;/a&amp;gt;&amp;lt;/p&amp;gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&amp;lt;p&amp;gt;&amp;lt;a href=&amp;quot;#more&amp;quot;&amp;gt;阅读全文 →&amp;lt;/a&amp;gt;&amp;lt;/p&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;这样，即使是托管在Github上的Jekyll也能截断输出了。&lt;/p&gt;
 </description>
-      <pubDate>Thu, 11 Apr 2013 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 11 Apr 2013 00:00:00 +0800</pubDate>
       <guid>http://addcp.com/2013/04/jekyll-excerpt.html</guid>
-      <dc:date>2013-04-11T00:00:00+00:00</dc:date>
+      <dc:date>2013-04-11T00:00:00+08:00</dc:date>
     </item>
-    <dc:date>2014-02-07T00:00:00+00:00</dc:date>
+    <dc:date>2014-02-07T00:00:00+08:00</dc:date>
   </channel>
 </rss>
