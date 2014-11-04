@@ -70,6 +70,10 @@
       <li><a href="/categories.html#bootstrap-ref">
       bootstrap
       </a></li>
+     
+      <li><a href="/categories.html#encoding-ref">
+      encoding
+      </a></li>
     
   
 
@@ -126,7 +130,7 @@
 
 <p>进行一次提交之后，马上发现代码里可能有一两行需要改动，更改之后再次提交，然后又觉得哪里不妥。。。</p>
 
-<div class="highlight"><pre><code class="shell-session"><span class="gp">[root@addcp gitdemo]#</span> vim test.txt
+<div class="highlight"><pre><code class="language-shell-session" data-lang="shell-session"><span class="gp">[root@addcp gitdemo]#</span> vim test.txt
 <span class="gp">[root@addcp gitdemo]#</span> git commit -am <span class="s1">&#39;add test.txt&#39;</span>
 <span class="go">发现一些代码需要小改动</span>
 <span class="gp">[root@addcp gitdemo]#</span> vim test.txt
@@ -144,7 +148,7 @@
 
 <p>这样多次之后，git的commit记录就会变得很乱，一堆小改动，却占用了很多次提交记录：</p>
 
-<div class="highlight"><pre><code class="shell-session"><span class="gp">[root@addcp gitdemo]#</span> git log
+<div class="highlight"><pre><code class="language-shell-session" data-lang="shell-session"><span class="gp">[root@addcp gitdemo]#</span> git log
 <span class="go">commit abe26fe0f5b1788e8f7b1949082e1477c5337aa0</span>
 <span class="go">Author: xiaocang &lt;xiaocang@addcp.com&gt;</span>
 <span class="go">Date:   Sat Sep 7 01:29:48 2013 +0800</span>
@@ -176,15 +180,15 @@
 
 <p>git rebase语法是这样的</p>
 
-<div class="highlight"><pre><code class="shell-session"><span class="go">git rebase [--interactive | -i] [-v] [--force-rebase | -f] [--no-ff] [--onto &lt;newbase&gt;] [&lt;upstream&gt;|--root] [&lt;branch&gt;] [--quiet | -q]</span></code></pre></div>
+<div class="highlight"><pre><code class="language-shell-session" data-lang="shell-session"><span class="go">git rebase [--interactive | -i] [-v] [--force-rebase | -f] [--no-ff] [--onto &lt;newbase&gt;] [&lt;upstream&gt;|--root] [&lt;branch&gt;] [--quiet | -q]</span></code></pre></div>
 
 <p>这里我们使用到的是<code>-i</code>选项，也就是交互的rebase</p>
 
-<div class="highlight"><pre><code class="shell-session"><span class="gp">[root@addcp gitdemo]#</span> git -i HEAD~3</code></pre></div>
+<div class="highlight"><pre><code class="language-shell-session" data-lang="shell-session"><span class="gp">[root@addcp gitdemo]#</span> git -i HEAD~3</code></pre></div>
 
 <p>其中<code>HEAD~3</code>是该分支的前三次提交。也可以在后面加<code>&lt;branch&gt;</code>的参数指定要衍合的分支。</p>
 
-<div class="highlight"><pre><code class="bash">pick c8bc032 update test.txt
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">pick c8bc032 update test.txt
 f c3633d5 update test.txt again
 f abe26fe update test.txt again and again
 
@@ -214,7 +218,7 @@ f abe26fe update test.txt again and again
 
 <p>如上，我就会得到一个这样的日志：</p>
 
-<div class="highlight"><pre><code class="shell-session"><span class="gp">[root@addcp gitdemo]#</span> git log
+<div class="highlight"><pre><code class="language-shell-session" data-lang="shell-session"><span class="gp">[root@addcp gitdemo]#</span> git log
 <span class="go">commit 3e5d79d149942f7dc0741a9a42ce43d98beafcd3</span>
 <span class="go">Author: xiaocang &lt;xiaocang@addcp.com&gt;</span>
 <span class="go">Date:   Sat Sep 7 01:28:51 2013 +0800</span>

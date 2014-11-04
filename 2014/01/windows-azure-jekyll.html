@@ -70,6 +70,10 @@
       <li><a href="/categories.html#bootstrap-ref">
       bootstrap
       </a></li>
+     
+      <li><a href="/categories.html#encoding-ref">
+      encoding
+      </a></li>
     
   
 
@@ -138,9 +142,9 @@
 
 <p>登入之后第一件事第一件事就是编辑<code>/etc/yum.conf</code>文件：</p>
 
-<div class="highlight"><pre><code class="bash"><span class="nv">$ </span>vim /etc/yum.conf</code></pre></div>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>vim /etc/yum.conf</code></pre></div>
 
-<div class="highlight"><pre><code class="vim">[<span class="k">main</span>]                                                                                                                                     
+<div class="highlight"><pre><code class="language-vim" data-lang="vim">[<span class="k">main</span>]                                                                                                                                     
 cachedir<span class="p">=</span><span class="sr">/var/</span>cache<span class="sr">/yum/</span>$basearch/$releasever
 keepcache<span class="p">=</span><span class="m">0</span>
 debuglevel<span class="p">=</span><span class="m">2</span>
@@ -170,21 +174,21 @@ distroverpkg<span class="p">=</span>centos<span class="p">-</span>release
 
 <p>由于Jekyll需要Ruby环境，所以在终端执行下面的命令，安装Ruby</p>
 
-<div class="highlight"><pre><code class="bash"><span class="nv">$ </span>curl -L https://get.rvm.io <span class="p">|</span> bash -s stable --ruby</code></pre></div>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>curl -L https://get.rvm.io <span class="p">|</span> bash -s stable --ruby</code></pre></div>
 
 <p>Jekyll安装则按照Jekyll官方文档上说的，在终端执行：</p>
 
-<div class="highlight"><pre><code class="bash"><span class="nv">$ </span>gem install jekyll</code></pre></div>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>gem install jekyll</code></pre></div>
 
 <p>但是我在执行这条命令时发现，gem迟迟没有反应。再执行：</p>
 
-<div class="highlight"><pre><code class="bash"><span class="nv">$ </span>gem install jekyll -V</code></pre></div>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>gem install jekyll -V</code></pre></div>
 
 <p>这里发现，没有反应是因为gem的源被国内的网络环境弄的无法连接（你懂的）</p>
 
 <p>果断按照<a href="http://ruby.taobao.org/">http://ruby.taobao.org/</a>上的文档，删除了现在无法连接的源，更新了淘宝的源。</p>
 
-<div class="highlight"><pre><code class="bash"><span class="nv">$ </span>gem sources --remove https://rubygems.org/
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>gem sources --remove https://rubygems.org/
 <span class="nv">$ </span>gem sources -a http://ruby.taobao.org/
 <span class="nv">$ </span>gem sources -l
 *** CURRENT SOURCES ***
@@ -194,7 +198,7 @@ http://ruby.taobao.org
 
 <p>然后再执行：</p>
 
-<div class="highlight"><pre><code class="bash"><span class="nv">$ </span>gem install jekyll</code></pre></div>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>gem install jekyll</code></pre></div>
 
 <p>果然很快很顺利。^_^</p>
 

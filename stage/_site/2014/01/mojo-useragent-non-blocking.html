@@ -70,6 +70,10 @@
       <li><a href="/categories.html#bootstrap-ref">
       bootstrap
       </a></li>
+     
+      <li><a href="/categories.html#encoding-ref">
+      encoding
+      </a></li>
     
   
 
@@ -120,7 +124,7 @@
         </h3>
         <p>最近在一个<a href="http://mojolicio.us/">mojo</a>项目里，其中一个接口会去调用Mojo::UserAgent，按照官方的文档，我把这个接口做成了异步调用。</p>
 
-<div class="highlight"><pre><code class="perl"><span class="n">get</span> <span class="s">&#39;/title&#39;</span> <span class="o">=&gt;</span> <span class="k">sub </span><span class="p">{</span>
+<div class="highlight"><pre><code class="language-perl" data-lang="perl"><span class="n">get</span> <span class="s">&#39;/title&#39;</span> <span class="o">=&gt;</span> <span class="k">sub </span><span class="p">{</span>
     <span class="k">my</span> <span class="nv">$self</span> <span class="o">=</span> <span class="nb">shift</span><span class="p">;</span>
 
     <span class="c1"># 阻塞部分</span>
@@ -141,7 +145,7 @@
 
 <p>代码大概像这样:</p>
 
-<div class="highlight"><pre><code class="perl"><span class="n">get</span> <span class="s">&#39;/title&#39;</span> <span class="o">=&gt;</span> <span class="k">sub </span><span class="p">{</span>
+<div class="highlight"><pre><code class="language-perl" data-lang="perl"><span class="n">get</span> <span class="s">&#39;/title&#39;</span> <span class="o">=&gt;</span> <span class="k">sub </span><span class="p">{</span>
     <span class="k">my</span> <span class="nv">$self</span> <span class="o">=</span> <span class="nb">shift</span><span class="p">;</span>
 
     <span class="c1"># 阻塞部分改</span>

@@ -8,7 +8,36 @@
     <title>呵呵</title>
     <link>http://addcp.com</link>
     <description>呵呵</description>
-    <pubDate>Fri, 07 Feb 2014 00:00:00 +0800</pubDate>
+    <pubDate>Tue, 04 Nov 2014 00:00:00 +0800</pubDate>
+    <item>
+      <title>x264 分段编码(segmented encoding)防花屏的选项</title>
+      <link>http://addcp.com/2014/11/x264-segmented-encoding.html</link>
+      <description>&lt;p&gt;最近使用x264的2pass编码对同一个文件进行分段编码，然后再合并，实现多进程转码进而可以进行分布式集群转码从而加速转码速度。&lt;/p&gt;
+
+&lt;p&gt;<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>mencoder -really-quiet /root/video/2159034.mp4 -ss <span class="m">0</span> -endpos <span class="m">60</span> -of rawvideo -ovc raw -nosound  -ofps <span class="m">23</span>  -vf-add <span class="nv">scale</span><span class="o">=</span>404:720 -vf-add <span class="nv">format</span><span class="o">=</span>i420 -vf-add hqdn3d -vf-add harddup -o - 2<span class="p">&amp;</span>amp<span class="p">;</span>gt<span class="p">;</span>/dev/null <span class="p">|</span>x264 --no-progress --preset slower --tune film --weightp <span class="m">2</span> --keyint <span class="m">250</span> --min-keyint <span class="m">25</span> --non-deterministic --bframes <span class="m">3</span> --no-fast-pskip --qcomp 0.6 --merange <span class="m">24</span> --threads auto --input-csp i420  --level 3.1 --profile high --crf <span class="m">20</span> --input-res 404x720 --fps <span class="m">23</span> - --pass <span class="m">1</span> --stats /tmp/video/1415072454<span class="p">&amp;</span>lt<span class="p">;</span>em<span class="p">&amp;</span>gt<span class="p">;</span>part1/3000/part<span class="p">&amp;</span>lt<span class="p">;</span>/em<span class="p">&amp;</span>gt<span class="p">;</span>12159034/1415072454.passLog -o /dev/null<span class="p">&amp;</span>lt<span class="p">;</span>/p<span class="p">&amp;</span>gt<span class="p">;</span>
+
+<span class="p">&amp;</span>lt<span class="p">;</span>p<span class="p">&amp;</span>gt<span class="p">;</span><span class="nv">$ </span>mencoder -really-quiet /root/video/2159034.mp4 -ss <span class="m">0</span> -endpos <span class="m">60</span> -of rawvideo -ovc raw -nosound  -ofps <span class="m">23</span>  -vf-add <span class="nv">scale</span><span class="o">=</span>404:720 -vf-add <span class="nv">format</span><span class="o">=</span>i420 -vf-add hqdn3d -vf-add harddup -o - 2<span class="p">&amp;</span>amp<span class="p">;</span>gt<span class="p">;</span>/dev/null <span class="p">|</span>x264 --no-progress --preset slower --tune film --weightp <span class="m">2</span> --keyint <span class="m">250</span> --min-keyint <span class="m">25</span> --non-deterministic --bframes <span class="m">3</span> --no-fast-pskip --qcomp 0.6 --merange <span class="m">24</span> --threads auto --input-csp i420  --level 3.1 --profile high -B <span class="m">3000</span> --input-res 404x720 --fps <span class="m">23</span> - --pass <span class="m">2</span> --stats /tmp/video/1415072454<span class="p">&amp;</span>lt<span class="p">;</span>em<span class="p">&amp;</span>gt<span class="p">;</span>part1/3000/part<span class="p">&amp;</span>lt<span class="p">;</span>/em<span class="p">&amp;</span>gt<span class="p">;</span>12159034/1415072454.passLog -o part1.264</code></pre></div>&lt;/p&gt;
+
+&lt;p&gt;但是在转码过程中遇到了问题，单独的编码输出的&lt;code&gt;.264&lt;/code&gt;文件再加上mp4的封装都可以正常播放。但是将&lt;code&gt;.264&lt;/code&gt;文件合并为一个文件之后，快进时播放就会花屏。&lt;/p&gt;
+
+&lt;p&gt;<div class="highlight"><pre><code class="language-bash" data-lang="bash">MP4Box -add part1.264#video -cat part2.264 -fps 29.97 -add video.m4a#audio -new result.mp4</code></pre></div>&lt;/p&gt;
+
+&lt;p&gt;在重新转码多次之后依然得到相同的结果，说明单纯的append file是导花屏的原因。&lt;/p&gt;
+
+&lt;p&gt;在Google之后终于发现是由于x264默认会对输出的&lt;code&gt;.264&lt;/code&gt;文件头部进行优化，导致合并&lt;code&gt;.264&lt;/code&gt;文件的时候出现错误。只要简单的加上&lt;code&gt;--stitchable&lt;/code&gt;这个选项就可以避免花屏了。&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;--stitchable        Don&amp;#39;t optimize headers based on video content
+                    Ensures ability to recombine a segmented encode
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;结果如下：&lt;/p&gt;
+
+&lt;p&gt;<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>mencoder -really-quiet /root/video/2159034.mp4 -ss <span class="m">0</span> -endpos <span class="m">60</span> -of rawvideo -ovc raw -nosound  -ofps <span class="m">23</span>  -vf-add <span class="nv">scale</span><span class="o">=</span>404:720 -vf-add <span class="nv">format</span><span class="o">=</span>i420 -vf-add hqdn3d -vf-add harddup -o - 2<span class="p">&amp;</span>amp<span class="p">;</span>gt<span class="p">;</span>/dev/null <span class="p">|</span>x264 --no-progress --stitchable --preset slower --tune film --weightp <span class="m">2</span> --keyint <span class="m">250</span> --min-keyint <span class="m">25</span> --non-deterministic --bframes <span class="m">3</span> --no-fast-pskip --qcomp 0.6 --merange <span class="m">24</span> --threads auto --input-csp i420  --level 3.1 --profile high --crf <span class="m">20</span> --input-res 404x720 --fps <span class="m">23</span> - --pass <span class="m">1</span> --stats /tmp/video/1415072454<span class="p">&amp;</span>lt<span class="p">;</span>em<span class="p">&amp;</span>gt<span class="p">;</span>part1/3000/part<span class="p">&amp;</span>lt<span class="p">;</span>/em<span class="p">&amp;</span>gt<span class="p">;</span>12159034/1415072454.passLog -o /dev/null<span class="p">&amp;</span>lt<span class="p">;</span>/p<span class="p">&amp;</span>gt<span class="p">;</span>
+
+<span class="p">&amp;</span>lt<span class="p">;</span>p<span class="p">&amp;</span>gt<span class="p">;</span><span class="nv">$ </span>mencoder -really-quiet /root/video/2159034.mp4 -ss <span class="m">0</span> -endpos <span class="m">60</span> -of rawvideo -ovc raw -nosound  -ofps <span class="m">23</span>  -vf-add <span class="nv">scale</span><span class="o">=</span>404:720 -vf-add <span class="nv">format</span><span class="o">=</span>i420 -vf-add hqdn3d -vf-add harddup -o - 2<span class="p">&amp;</span>amp<span class="p">;</span>gt<span class="p">;</span>/dev/null <span class="p">|</span>x264 --no-progress --stitchable --preset slower --tune film --weightp <span class="m">2</span> --keyint <span class="m">250</span> --min-keyint <span class="m">25</span> --non-deterministic --bframes <span class="m">3</span> --no-fast-pskip --qcomp 0.6 --merange <span class="m">24</span> --threads auto --input-csp i420  --level 3.1 --profile high -B <span class="m">3000</span> --input-res 404x720 --fps <span class="m">23</span> - --pass <span class="m">2</span> --stats /tmp/video/1415072454<span class="p">&amp;</span>lt<span class="p">;</span>em<span class="p">&amp;</span>gt<span class="p">;</span>part1/3000/part<span class="p">&amp;</span>lt<span class="p">;</span>/em<span class="p">&amp;</span>gt<span class="p">;</span>12159034/1415072454.passLog -o part1.264</code></pre></div>&lt;/p&gt;
+</description>
+      <pubDate>Tue, 04 Nov 2014 00:00:00 +0800</pubDate>
+      <guid>http://addcp.com/2014/11/x264-segmented-encoding.html</guid>
+      <dc:date>2014-11-04T00:00:00+08:00</dc:date>
+    </item>
     <item>
       <title>过年</title>
       <link>http://addcp.com/2014/02/chinese-new-year.html</link>
@@ -56,9 +85,9 @@
 
 &lt;p&gt;登入之后第一件事第一件事就是编辑&lt;code&gt;/etc/yum.conf&lt;/code&gt;文件：&lt;/p&gt;
 
-&lt;p&gt;<div class="highlight"><pre><code class="bash"><span class="nv">$ </span>vim /etc/yum.conf</code></pre></div>&lt;/p&gt;
+&lt;p&gt;<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>vim /etc/yum.conf</code></pre></div>&lt;/p&gt;
 
-&lt;p&gt;<div class="highlight"><pre><code class="vim">[<span class="k">main</span>]&amp;<span class="k">lt</span>;<span class="k">br</span>&amp;gt;
+&lt;p&gt;<div class="highlight"><pre><code class="language-vim" data-lang="vim">[<span class="k">main</span>]&amp;<span class="k">lt</span>;<span class="k">br</span>&amp;gt;
 cachedir<span class="p">=</span><span class="sr">/var/</span>cache<span class="sr">/yum/</span>$basearch/$releasever
 keepcache<span class="p">=</span><span class="m">0</span>
 debuglevel<span class="p">=</span><span class="m">2</span>
@@ -101,21 +130,21 @@ distroverpkg<span class="p">=</span>centos<span class="p">-</span>release&amp;<s
 
 &lt;p&gt;由于Jekyll需要Ruby环境，所以在终端执行下面的命令，安装Ruby&lt;/p&gt;
 
-&lt;p&gt;<div class="highlight"><pre><code class="bash"><span class="nv">$ </span>curl -L https://get.rvm.io <span class="p">|</span> bash -s stable --ruby</code></pre></div>&lt;/p&gt;
+&lt;p&gt;<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>curl -L https://get.rvm.io <span class="p">|</span> bash -s stable --ruby</code></pre></div>&lt;/p&gt;
 
 &lt;p&gt;Jekyll安装则按照Jekyll官方文档上说的，在终端执行：&lt;/p&gt;
 
-&lt;p&gt;<div class="highlight"><pre><code class="bash"><span class="nv">$ </span>gem install jekyll</code></pre></div>&lt;/p&gt;
+&lt;p&gt;<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>gem install jekyll</code></pre></div>&lt;/p&gt;
 
 &lt;p&gt;但是我在执行这条命令时发现，gem迟迟没有反应。再执行：&lt;/p&gt;
 
-&lt;p&gt;<div class="highlight"><pre><code class="bash"><span class="nv">$ </span>gem install jekyll -V</code></pre></div>&lt;/p&gt;
+&lt;p&gt;<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>gem install jekyll -V</code></pre></div>&lt;/p&gt;
 
 &lt;p&gt;这里发现，没有反应是因为gem的源被国内的网络环境弄的无法连接（你懂的）&lt;/p&gt;
 
 &lt;p&gt;果断按照&lt;a href=&quot;http://ruby.taobao.org/&quot;&gt;http://ruby.taobao.org/&lt;/a&gt;上的文档，删除了现在无法连接的源，更新了淘宝的源。&lt;/p&gt;
 
-&lt;p&gt;<div class="highlight"><pre><code class="bash"><span class="nv">$ </span>gem sources --remove https://rubygems.org/
+&lt;p&gt;<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>gem sources --remove https://rubygems.org/
 <span class="nv">$ </span>gem sources -a http://ruby.taobao.org/
 <span class="nv">$ </span>gem sources -l
 *** CURRENT SOURCES ***<span class="p">&amp;</span>lt<span class="p">;</span>/p<span class="p">&amp;</span>gt<span class="p">;</span>
@@ -127,7 +156,7 @@ distroverpkg<span class="p">=</span>centos<span class="p">-</span>release&amp;<s
 <span class="p">&amp;</span>lt<span class="p">;</span>p<span class="p">&amp;</span>gt<span class="p">;</span></code></pre></div>&lt;/p&gt;
 
 &lt;p&gt;然后再执行：
-<div class="highlight"><pre><code class="bash"><span class="nv">$ </span>gem install jekyll</code></pre></div>&lt;/p&gt;
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>gem install jekyll</code></pre></div>&lt;/p&gt;
 
 &lt;p&gt;果然很快很顺利。^_^&lt;/p&gt;
 
@@ -157,7 +186,7 @@ distroverpkg<span class="p">=</span>centos<span class="p">-</span>release&amp;<s
       <link>http://addcp.com/2014/01/mojo-useragent-non-blocking.html</link>
       <description>&lt;p&gt;最近在一个&lt;a href=&quot;http://mojolicio.us/&quot;&gt;mojo&lt;/a&gt;项目里，其中一个接口会去调用Mojo::UserAgent，按照官方的文档，我把这个接口做成了异步调用。&lt;/p&gt;
 
-&lt;p&gt;<div class="highlight"><pre><code class="perl"><span class="n">get</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="c1">#39;/title&amp;amp;#39; =&amp;amp;gt; sub {</span>
+&lt;p&gt;<div class="highlight"><pre><code class="language-perl" data-lang="perl"><span class="n">get</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="c1">#39;/title&amp;amp;#39; =&amp;amp;gt; sub {</span>
     <span class="k">my</span> <span class="nv">$self</span> <span class="o">=</span> <span class="nb">shift</span><span class="p">;</span><span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="o">/</span><span class="n">p</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span>
 <span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="n">div</span> <span class="n">class</span><span class="o">=&amp;</span><span class="n">quot</span><span class="p">;</span><span class="n">highlight</span><span class="o">&amp;</span><span class="n">quot</span><span class="p">;</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span><span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="n">pre</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span><span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="n">code</span> <span class="n">class</span><span class="o">=&amp;</span><span class="n">quot</span><span class="p">;</span><span class="n">language</span><span class="o">-</span><span class="n">text</span><span class="o">&amp;</span><span class="n">quot</span><span class="p">;</span> <span class="n">data</span><span class="o">-</span><span class="n">lang</span><span class="o">=&amp;</span><span class="n">quot</span><span class="p">;</span><span class="n">text</span><span class="o">&amp;</span><span class="n">quot</span><span class="p">;</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span><span class="c1"># 阻塞部分</span>
 <span class="k">my</span> <span class="nv">$result</span> <span class="o">=</span> <span class="nv">$self</span><span class="o">-&amp;</span><span class="n">amp</span><span class="p">;</span><span class="ow">gt</span><span class="p">;</span><span class="n">ua</span><span class="o">-&amp;</span><span class="n">amp</span><span class="p">;</span><span class="ow">gt</span><span class="p">;</span><span class="n">get</span><span class="p">(</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="c1">#39;example.com&amp;amp;#39;);</span>
@@ -178,7 +207,7 @@ distroverpkg<span class="p">=</span>centos<span class="p">-</span>release&amp;<s
 
 &lt;p&gt;代码大概像这样:&lt;/p&gt;
 
-&lt;p&gt;<div class="highlight"><pre><code class="perl"><span class="n">get</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="c1">#39;/title&amp;amp;#39; =&amp;amp;gt; sub {</span>
+&lt;p&gt;<div class="highlight"><pre><code class="language-perl" data-lang="perl"><span class="n">get</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="c1">#39;/title&amp;amp;#39; =&amp;amp;gt; sub {</span>
     <span class="k">my</span> <span class="nv">$self</span> <span class="o">=</span> <span class="nb">shift</span><span class="p">;</span><span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="o">/</span><span class="n">p</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span>
 <span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="n">div</span> <span class="n">class</span><span class="o">=&amp;</span><span class="n">quot</span><span class="p">;</span><span class="n">highlight</span><span class="o">&amp;</span><span class="n">quot</span><span class="p">;</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span><span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="n">pre</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span><span class="o">&amp;</span><span class="ow">lt</span><span class="p">;</span><span class="n">code</span> <span class="n">class</span><span class="o">=&amp;</span><span class="n">quot</span><span class="p">;</span><span class="n">language</span><span class="o">-</span><span class="n">text</span><span class="o">&amp;</span><span class="n">quot</span><span class="p">;</span> <span class="n">data</span><span class="o">-</span><span class="n">lang</span><span class="o">=&amp;</span><span class="n">quot</span><span class="p">;</span><span class="n">text</span><span class="o">&amp;</span><span class="n">quot</span><span class="p">;</span><span class="o">&amp;</span><span class="ow">gt</span><span class="p">;</span><span class="c1"># 阻塞部分改</span>
 <span class="k">my</span> <span class="nv">$ua</span> <span class="o">=</span> <span class="nn">Mojo::</span><span class="n">UserAgent</span><span class="o">-&amp;</span><span class="n">amp</span><span class="p">;</span><span class="ow">gt</span><span class="p">;</span><span class="k">new</span><span class="p">;</span>
@@ -216,7 +245,7 @@ distroverpkg<span class="p">=</span>centos<span class="p">-</span>release&amp;<s
 
 &lt;p&gt;之前我是这样做的：&lt;/p&gt;
 
-&lt;p&gt;<div class="highlight"><pre><code class="bash">git fetch --all
+&lt;p&gt;<div class="highlight"><pre><code class="language-bash" data-lang="bash">git fetch --all
 git reset --hard origin/master</code></pre></div>&lt;/p&gt;
 
 &lt;p&gt;然后也会得到一个我想要的结果。&lt;/p&gt;
@@ -283,7 +312,7 @@ git reset --hard origin/master</code></pre></div>&lt;/p&gt;
 
 &lt;p&gt;BerkeleyDB有Perl的接口，用法也非常简单，下面贴一段我的部分代码：&lt;/p&gt;
 
-&lt;p&gt;<div class="highlight"><pre><code class="pl"><span class="k">use</span> <span class="mf">5.010</span><span class="p">;</span>
+&lt;p&gt;<div class="highlight"><pre><code class="language-pl" data-lang="pl"><span class="k">use</span> <span class="mf">5.010</span><span class="p">;</span>
 <span class="k">use</span> <span class="n">strict</span><span class="p">;</span>
 <span class="k">use</span> <span class="n">warnings</span><span class="p">;</span>
 <span class="k">use</span> <span class="nn">Smart::</span><span class="n">Comments</span><span class="p">;</span>
@@ -386,7 +415,7 @@ git reset --hard origin/master</code></pre></div>&lt;/p&gt;
 
 &lt;p&gt;进行一次提交之后，马上发现代码里可能有一两行需要改动，更改之后再次提交，然后又觉得哪里不妥。。。&lt;/p&gt;
 
-&lt;p&gt;<div class="highlight"><pre><code class="shell-session"><span class="gp">[root@addcp gitdemo]#</span> vim test.txt
+&lt;p&gt;<div class="highlight"><pre><code class="language-shell-session" data-lang="shell-session"><span class="gp">[root@addcp gitdemo]#</span> vim test.txt
 <span class="gp">[root@addcp gitdemo]#</span> git commit -am <span class="p">&amp;</span>amp<span class="p">;</span><span class="c">#39;add test.txt&amp;amp;#39;</span>
 <span class="go">发现一些代码需要小改动</span>
 <span class="gp">[root@addcp gitdemo]#</span> vim test.txt
@@ -404,7 +433,7 @@ git reset --hard origin/master</code></pre></div>&lt;/p&gt;
 
 &lt;p&gt;这样多次之后，git的commit记录就会变得很乱，一堆小改动，却占用了很多次提交记录：&lt;/p&gt;
 
-&lt;p&gt;<div class="highlight"><pre><code class="shell-session"><span class="gp">[root@addcp gitdemo]#</span> git log
+&lt;p&gt;<div class="highlight"><pre><code class="language-shell-session" data-lang="shell-session"><span class="gp">[root@addcp gitdemo]#</span> git log
 <span class="go">commit abe26fe0f5b1788e8f7b1949082e1477c5337aa0</span>
 <span class="go">Author: xiaocang &amp;lt;a href=&amp;quot;mailto:xiaocang@addcp.com&amp;quot;&amp;gt;xiaocang@addcp.com&amp;lt;/a&amp;gt;</span>
 <span class="go">Date:   Sat Sep 7 01:29:48 2013 +0800&amp;lt;/p&amp;gt;</span>
@@ -433,15 +462,15 @@ git reset --hard origin/master</code></pre></div>&lt;/p&gt;
 
 &lt;p&gt;git rebase语法是这样的&lt;/p&gt;
 
-&lt;p&gt;<div class="highlight"><pre><code class="shell-session"><span class="go">git rebase [--interactive | -i] [-v] [--force-rebase | -f] [--no-ff] [--onto &amp;lt;newbase&amp;gt;] [&amp;lt;upstream&amp;gt;|--root] [&amp;lt;branch&amp;gt;] [--quiet | -q]</span></code></pre></div>&lt;/p&gt;
+&lt;p&gt;<div class="highlight"><pre><code class="language-shell-session" data-lang="shell-session"><span class="go">git rebase [--interactive | -i] [-v] [--force-rebase | -f] [--no-ff] [--onto &amp;lt;newbase&amp;gt;] [&amp;lt;upstream&amp;gt;|--root] [&amp;lt;branch&amp;gt;] [--quiet | -q]</span></code></pre></div>&lt;/p&gt;
 
 &lt;p&gt;这里我们使用到的是&lt;code&gt;-i&lt;/code&gt;选项，也就是交互的rebase&lt;/p&gt;
 
-&lt;p&gt;<div class="highlight"><pre><code class="shell-session"><span class="gp">[root@addcp gitdemo]#</span> git -i HEAD~3</code></pre></div>&lt;/p&gt;
+&lt;p&gt;<div class="highlight"><pre><code class="language-shell-session" data-lang="shell-session"><span class="gp">[root@addcp gitdemo]#</span> git -i HEAD~3</code></pre></div>&lt;/p&gt;
 
 &lt;p&gt;其中&lt;code&gt;HEAD~3&lt;/code&gt;是该分支的前三次提交。也可以在后面加&lt;code&gt;&amp;lt;branch&amp;gt;&lt;/code&gt;的参数指定要衍合的分支。&lt;/p&gt;
 
-&lt;p&gt;<div class="highlight"><pre><code class="bash">pick c8bc032 update test.txt
+&lt;p&gt;<div class="highlight"><pre><code class="language-bash" data-lang="bash">pick c8bc032 update test.txt
 f c3633d5 update test.txt again
 f abe26fe update test.txt again and again<span class="p">&amp;</span>lt<span class="p">;</span>/p<span class="p">&amp;</span>gt<span class="p">;</span>
 
@@ -453,7 +482,7 @@ f abe26fe update test.txt again and again<span class="p">&amp;</span>lt<span cla
 
 <span class="p">&amp;</span>lt<span class="p">;</span>h1<span class="p">&amp;</span>gt<span class="p">;</span>r, <span class="nv">reword</span> <span class="o">=</span> use commit, but edit the commit message<span class="p">&amp;</span>lt<span class="p">;</span>/h1<span class="p">&amp;</span>gt<span class="p">;</span>
 
-<span class="p">&amp;</span>lt<span class="p">;</span>h1<span class="p">&amp;</span>gt<span class="p">;</span>e, <span class="nv">edit</span> <span class="o">=</span> use commit, but stop <span class="k">for </span>amending<span class="p">&amp;</span>lt<span class="p">;</span>/h1<span class="p">&amp;</span>gt<span class="p">;</span>
+<span class="p">&amp;</span>lt<span class="p">;</span>h1<span class="p">&amp;</span>gt<span class="p">;</span>e, <span class="nv">edit</span> <span class="o">=</span> use commit, but stop <span class="k">for</span> amending<span class="p">&amp;</span>lt<span class="p">;</span>/h1<span class="p">&amp;</span>gt<span class="p">;</span>
 
 <span class="p">&amp;</span>lt<span class="p">;</span>h1<span class="p">&amp;</span>gt<span class="p">;</span>s, <span class="nv">squash</span> <span class="o">=</span> use commit, but meld into previous commit<span class="p">&amp;</span>lt<span class="p">;</span>/h1<span class="p">&amp;</span>gt<span class="p">;</span>
 
@@ -461,7 +490,7 @@ f abe26fe update test.txt again and again<span class="p">&amp;</span>lt<span cla
 
 <span class="p">&amp;</span>lt<span class="p">;</span>h1<span class="p">&amp;</span>gt<span class="p">;</span>If you remove a line here THAT COMMIT WILL BE LOST.<span class="p">&amp;</span>lt<span class="p">;</span>/h1<span class="p">&amp;</span>gt<span class="p">;</span>
 
-<span class="p">&amp;</span>lt<span class="p">;</span>h1<span class="p">&amp;</span>gt<span class="p">;</span>However, <span class="k">if </span>you remove everything, the rebase will be aborted.<span class="p">&amp;</span>lt<span class="p">;</span>/h1<span class="p">&amp;</span>gt<span class="p">;</span>
+<span class="p">&amp;</span>lt<span class="p">;</span>h1<span class="p">&amp;</span>gt<span class="p">;</span>However, <span class="k">if</span> you remove everything, the rebase will be aborted.<span class="p">&amp;</span>lt<span class="p">;</span>/h1<span class="p">&amp;</span>gt<span class="p">;</span>
 
 <span class="p">&amp;</span>lt<span class="p">;</span>p<span class="p">&amp;</span>gt<span class="p">;</span></code></pre></div>&lt;/p&gt;
 
@@ -479,7 +508,7 @@ f abe26fe update test.txt again and again<span class="p">&amp;</span>lt<span cla
 
 &lt;p&gt;如上，我就会得到一个这样的日志：&lt;/p&gt;
 
-&lt;p&gt;<div class="highlight"><pre><code class="shell-session"><span class="gp">[root@addcp gitdemo]#</span> git log
+&lt;p&gt;<div class="highlight"><pre><code class="language-shell-session" data-lang="shell-session"><span class="gp">[root@addcp gitdemo]#</span> git log
 <span class="go">commit 3e5d79d149942f7dc0741a9a42ce43d98beafcd3</span>
 <span class="go">Author: xiaocang &amp;lt;a href=&amp;quot;mailto:xiaocang@addcp.com&amp;quot;&amp;gt;xiaocang@addcp.com&amp;lt;/a&amp;gt;</span>
 <span class="go">Date:   Sat Sep 7 01:28:51 2013 +0800&amp;lt;/p&amp;gt;</span>
@@ -581,6 +610,6 @@ f abe26fe update test.txt again and again<span class="p">&amp;</span>lt<span cla
       <guid>http://addcp.com/2013/04/jekyll-excerpt.html</guid>
       <dc:date>2013-04-11T00:00:00+08:00</dc:date>
     </item>
-    <dc:date>2014-02-07T00:00:00+08:00</dc:date>
+    <dc:date>2014-11-04T00:00:00+08:00</dc:date>
   </channel>
 </rss>
