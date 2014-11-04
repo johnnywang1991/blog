@@ -20,7 +20,7 @@
 
 &lt;p&gt;但是在转码过程中遇到了问题，单独的编码输出的&lt;code&gt;.264&lt;/code&gt;文件再加上mp4的封装都可以正常播放。但是将&lt;code&gt;.264&lt;/code&gt;文件合并为一个文件之后，快进时播放就会花屏。&lt;/p&gt;
 
-&lt;p&gt;<div class="highlight"><pre><code class="language-bash" data-lang="bash">MP4Box -add part1.264#video -cat part2.264 -fps 29.97 -add video.m4a#audio -new result.mp4</code></pre></div>&lt;/p&gt;
+&lt;p&gt;<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>MP4Box -add part1.264#video -cat part2.264 -fps 29.97 -add video.m4a#audio -new result.mp4</code></pre></div>&lt;/p&gt;
 
 &lt;p&gt;在重新转码多次之后依然得到相同的结果，说明单纯的append file是导花屏的原因。&lt;/p&gt;
 
