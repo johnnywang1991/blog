@@ -8,7 +8,16 @@
     <title>:)</title>
     <link>http://addcp.com</link>
     <description>xiao_cang</description>
-    <pubDate>Tue, 04 Nov 2014 00:00:00 +0800</pubDate>
+    <pubDate>Sun, 14 Dec 2014 00:00:00 +0800</pubDate>
+    <item>
+      <title>Domainname Notupdate</title>
+      <link>http://addcp.com/2014/12/domainname-notupdate.html</link>
+      <description>&lt;p&gt;今年老老实实的把&lt;code&gt;addcp.com&lt;/code&gt;的域名续费了，并且没有败其它域名。于是这个博客不用迁移也不会死了。-w-&lt;/p&gt;
+</description>
+      <pubDate>Sun, 14 Dec 2014 00:00:00 +0800</pubDate>
+      <guid>http://addcp.com/2014/12/domainname-notupdate.html</guid>
+      <dc:date>2014-12-14T00:00:00+08:00</dc:date>
+    </item>
     <item>
       <title>x264 分段编码(segmented encoding)防花屏的选项</title>
       <link>http://addcp.com/2014/11/x264-segmented-encoding.html</link>
@@ -610,6 +619,6 @@ f abe26fe update test.txt again and again<span class="p">&amp;</span>lt<span cla
       <guid>http://addcp.com/2013/04/jekyll-excerpt.html</guid>
       <dc:date>2013-04-11T00:00:00+08:00</dc:date>
     </item>
-    <dc:date>2014-11-04T00:00:00+08:00</dc:date>
+    <dc:date>2014-12-14T00:00:00+08:00</dc:date>
   </channel>
 </rss>
