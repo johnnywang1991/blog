@@ -5,9 +5,9 @@
   xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd"
   xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/">
   <channel>
-    <title>呵呵</title>
+    <title>:)</title>
     <link>http://addcp.com</link>
-    <description>呵呵</description>
+    <description>xiao_cang</description>
     <pubDate>Tue, 04 Nov 2014 00:00:00 +0800</pubDate>
     <item>
       <title>x264 分段编码(segmented encoding)防花屏的选项</title>

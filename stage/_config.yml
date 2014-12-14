@@ -1,9 +1,9 @@
-title: 呵呵
-name: 呵呵
+title: :)
+name: :)
 url: http://addcp.com
 baseurl: /
 author: xiao_cang
-description: 呵呵
+description: xiao_cang
 port: 3003
 
 exclude: [publish, index_bak.html]
